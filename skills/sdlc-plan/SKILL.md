@@ -1,34 +1,40 @@
 ---
 name: sdlc-plan
 description: >-
-  Captures a new product feature or change as intent/<slug>/intent.md (problem,
-  outcome, constraints, open questions). Use when the user starts a product idea
-  or feature and the repo has no open OpenSpec change. Do not use for bugfixes,
-  refactors, or implementation.
+  Captures a product idea as intent/slug/intent.md (problem, outcome,
+  constraints, open questions). Use whenever the user describes a feature,
+  product change, or something they want built, even if they never say intent
+  or plan. Skip bugfixes, refactors, and implementation. If the repo has open
+  OpenSpec changes, use OpenSpec instead.
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.0"
+  version: "1.1"
 ---
 
 # sdlc-plan
 
-Write `intent/<slug>/intent.md` from the user's idea. Stop for accept. Do not write spec, plan, or code.
+Write `intent/<slug>/intent.md` from the user's idea. Stop so they can accept. Leave spec, plan, and code for later skills.
 
-## House rules
+The originator should see their own words in the file. A proto-spec they can correct is faster than a ticket they did not write.
 
-- If the repo has `openspec/` with open (non-archived) changes, stop and use OpenSpec (`openspec` binary, never `npx openspec`).
-- Do not commit unless the user asks.
-- Do not create `CLAUDE.md` or auto-memory. Repeated mistakes go in project `AGENTS.md` or the repo OKF bundle.
-- Beads are tickets, not these artifacts. Optional: mention a bead id in the intent body.
+## Before you start
+
+If `openspec/` has open (non-archived) changes, stop and use OpenSpec (`openspec` binary, never `npx openspec`). Mixing both trees in one change splits the audit trail.
+
+Do not commit unless the user asks. Chat accept is the gate; git is optional.
+
+Do not create `CLAUDE.md` or auto-memory. Repeated mistakes belong in project `AGENTS.md` or the repo OKF bundle.
+
+Beads are tickets. These files are the change record. A bead id in the intent body is fine.
 
 ## Steps
 
-1. If `openspec/` exists and has open changes, stop (see above).
-2. Interview until the idea is concrete: what cannot be done today, who is affected, what better looks like, constraints, out of scope. One question at a time when a missing answer would change the artifact.
-3. Derive a kebab-case `slug` from the idea. If `intent/<slug>/` already exists, pick another slug or resume with `sdlc-continue`.
-4. Copy `assets/intent.md` from this skill into `intent/<slug>/intent.md`. Fill every section. Frontmatter: `status: draft`, `slug: <slug>`.
-5. Show the file path and a short summary. Ask the user to **accept** (→ Design) or correct it.
-6. If they accept in this session, set `status: accepted`. Do not start `sdlc-design` until they ask or accept.
+1. Confirm there is no open OpenSpec change.
+2. Interview until the idea is concrete: what cannot be done today, who is affected, what better looks like, constraints, out of scope. Ask one question at a time when a missing answer would change the file.
+3. Derive a kebab-case slug. If `intent/<slug>/` already exists, pick another slug or hand off to `sdlc-continue`.
+4. Copy `assets/intent.md` into `intent/<slug>/intent.md`. Fill every section. Frontmatter: `status: draft`, `slug: <slug>`.
+5. Show the path and a short summary. Ask the user to accept (that starts Design) or to correct it.
+6. If they accept in this session, set `status: accepted`. Do not start `sdlc-design` unless they ask to keep going.
 
-After accept, the next skill is `sdlc-design`.
+Next: `sdlc-design`.

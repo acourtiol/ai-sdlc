@@ -1,18 +1,18 @@
 # ai-sdlc
 
-Skills for Anthropic's [AI-native SDLC playbook](https://claude.com/blog/the-ai-native-sdlc-playbook): Plan → Design → Build → Test, with a human gate at every handoff.
-
-No CLI. Agents write `intent/<slug>/intent.md`, `spec.md`, and `plan.md` in the product repo, then implement. Cursor, Codex, and Claude Code install the same folders.
-
-Based on the playbook. Not a fork of third-party "AI-native SDLC" repos. Not Anthropic.
-
-## Install
-
 ```bash
 npx skills add acourtiol/ai-sdlc -g -a claude-code -a cursor -a codex -s '*' -y
 ```
 
-Never `--agent '*'`.
+Name the agents. Do not pass `--agent '*'`.
+
+Cursor, Codex, and Claude Code load the same skill folders. There is no CLI. In the product repo the agent writes `intent/<slug>/intent.md`, then `spec.md`, then `plan.md`, then code. You accept or approve at each step.
+
+This follows Anthropic's [AI-native SDLC playbook](https://claude.com/blog/the-ai-native-sdlc-playbook). The Design stage is one file, `spec.md`, covering requirements and design together. There is no `design.md`. That name comes from OpenSpec.
+
+This repo is not Anthropic. It is also not a fork of other projects that use the same playbook name.
+
+## Skills
 
 | Skill | Writes | When |
 | --- | --- | --- |
@@ -22,18 +22,15 @@ Never `--agent '*'`.
 | `sdlc-verify` | evidence only | judge the running change against intent |
 | `sdlc-continue` | next gate | resume an in-progress `intent/<slug>/` |
 
-## Coexist with OpenSpec
+## If the repo still has OpenSpec
 
-If the product repo has `openspec/` with open changes, use OpenSpec (`openspec` binary, never `npx openspec`). These skills are for new work in repos without that tree, or after those changes are archived.
+If `openspec/` has open changes, use the `openspec` binary (never `npx openspec`). Use these skills for new work after that tree is archived, or in repos that never had one.
 
-## Hard rules the skills enforce
+## What the skills will not do
 
-- Gates are real: do not skip accept/approve.
-- Do not commit unless the user asks (chat approval is the gate; git is optional).
-- Do not dump `CLAUDE.md` or auto-memory. Repeated mistakes go in the project's `AGENTS.md` or its OKF bundle.
-- Ceiling is Test + review. No production deploy from these skills.
+They wait for you to accept or approve. They do not commit unless you ask. They do not write `CLAUDE.md` memory dumps. They stop at test and review; they do not deploy.
 
-## Layout in a product repo
+## Files in a product repo
 
 ```text
 intent/<slug>/intent.md
