@@ -13,7 +13,9 @@ npx skills add acourtiol/ai-sdlc -g -a claude-code -a cursor -a codex -s '*' -y
 
 A CLI, a Codex plugin, an agent-org, `CLAUDE.md` dumps, `production-gate.sh`, evals CI, or `bands.yaml`. Design stays in `spec.md`; do not add a `design.md`. Do not copy these skills into chezmoi. Install with `npx skills add`.
 
-Each `SKILL.md` has to stand alone. skills.sh copies folders independently. Templates stay in the skill that owns the artifact (`sdlc-plan` → intent, `sdlc-design` → spec, `sdlc-apply` → plan).
+Each `SKILL.md` has to stand alone. skills.sh copies folders independently. Templates stay in the skill that owns the artifact (`sdlc-plan` → intent, `sdlc-design` → spec, `sdlc-apply` → plan, `sdlc-verify` → report).
+
+Archive is `intent/archive/YYYY-MM-DD-<slug>/`, a plain `mv` by `sdlc-archive`. No `archived` status; the directory is the signal. `intent/archive/` is not a slug, so anything scanning `intent/*/` skips it. Archive keeps history only: no `specs/<capability>/` tree, no delta sections, no merge step.
 
 Deploy and Maintain plays wait until a product repo asks for a hook.
 
