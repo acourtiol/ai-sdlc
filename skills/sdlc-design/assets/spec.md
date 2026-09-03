@@ -8,7 +8,18 @@ intent: intent.md
 
 ## Requirements
 
-What the system must do. Testable. Not file paths.
+What the system must do. Testable. Not file paths. One block per requirement,
+each with at least one scenario.
+
+### Requirement: short name
+
+The system SHALL do the observable thing.
+
+#### Scenario: short name
+
+- **WHEN** the trigger
+- **THEN** the observable outcome
+- **AND** any further outcome
 
 ## Design
 
