@@ -7,7 +7,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.1"
+  version: "1.2"
 ---
 
 # sdlc-apply
@@ -34,8 +34,11 @@ Do not add `production-gate.sh` or `bands.yaml` here. Those belong in a product 
 
 1. Resolve slug. Read `intent.md` and `spec.md`.
 2. Dispatch planner (read-only): files that change, order of work, risks, proof. Someone who missed the chat should still be able to implement from the plan.
-3. Write `intent/<slug>/plan.md` from `assets/plan.md` (`status: draft`). Ask the user to approve the plan.
-4. On approve, set `status: planned`. Then dispatch coder (or implement here) against that plan. Smallest correct change. Real tests, not placeholders.
-5. After code, `sdlc-verify` is next. Do not call the work done without evidence.
+3. Write `intent/<slug>/plan.md` from `assets/plan.md` (`status: draft`). Every step under Order of work is a `- [ ]` box ending in its own `— verify:` clause. Ask the user to approve the plan.
+4. On approve, set `status: planned`. Then dispatch coder (or implement here) against that plan, starting at the first unticked box. Smallest correct change. Real tests, not placeholders.
+5. Tick a box only once you have run its verify clause and seen it pass. A step that is partially done, deferred, or narrowed stays `- [ ]`.
+6. After code, `sdlc-verify` is next. Do not call the work done without evidence.
 
 If the plan is already `planned` and the user says implement, skip to step 4.
+
+When you stop before the last box, say where the work stands as `N/M boxes ticked` and name the first unticked one. `sdlc-continue` picks up from there.
