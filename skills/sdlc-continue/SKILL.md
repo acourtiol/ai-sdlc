@@ -2,13 +2,13 @@
 name: sdlc-continue
 description: >-
   Resumes an in-progress change by reading intent/slug/ and running the next
-  unapproved gate (accept intent, approve spec, approve plan, implement, or
-  verify). Use when the user says continue, next, resume, or pick up a feature
-  that already has an intent folder.
+  unapproved gate (accept intent, approve spec, approve plan, implement, verify,
+  or archive). Use when the user says continue, next, resume, or pick up a
+  feature that already has an intent folder.
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.1"
+  version: "1.2"
 ---
 
 # sdlc-continue
@@ -23,11 +23,13 @@ If `openspec/` has open changes and there is no `intent/` work, use OpenSpec ins
 
 Do not commit unless the user asks.
 
-One slug at a time. If several exist, ask which.
+One slug at a time. If several exist, ask which. `intent/archive/` is the archive, not a slug: skip it when you list them.
+
+Say which slug you picked and how to name a different one.
 
 ## Next gate
 
-Read frontmatter `status` on the files that exist. Follow that row's skill `SKILL.md`. Stop at the next human gate unless the user already approved a later one and asked to keep going.
+Read frontmatter `status` on the files that exist, from disk rather than from anything earlier in the conversation. Follow that row's skill `SKILL.md`. Stop at the next human gate unless the user already approved a later one and asked to keep going.
 
 | State | Next |
 | --- | --- |
@@ -37,6 +39,9 @@ Read frontmatter `status` on the files that exist. Follow that row's skill `SKIL
 | `spec.md` is `draft` | ask to approve; on approve set `specified` |
 | spec `specified`, no plan | `sdlc-apply` from the plan step |
 | `plan.md` is `draft` | ask to approve the plan |
-| plan `planned`, code not done | `sdlc-apply` implement step (coder) |
-| code done, not verified | `sdlc-verify` |
+| plan `planned`, boxes unticked | `sdlc-apply` implement step (coder), from the first unticked box |
+| every box ticked, no `report.md` | `sdlc-verify` |
 | verified, statuses not `done` | ask to mark `done`; reviewer is a separate named agent |
+| `report.md` present, statuses `done` | `sdlc-archive` |
+
+Report where the work stands as `N/M boxes ticked` when `plan.md` exists.

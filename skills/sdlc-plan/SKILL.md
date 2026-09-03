@@ -9,7 +9,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.1"
+  version: "1.2"
 ---
 
 # sdlc-plan
@@ -32,7 +32,7 @@ Beads are tickets. These files are the change record. A bead id in the intent bo
 
 1. Confirm there is no open OpenSpec change.
 2. Interview until the idea is concrete: what cannot be done today, who is affected, what better looks like, constraints, out of scope. Ask one question at a time when a missing answer would change the file.
-3. Derive a kebab-case slug. If `intent/<slug>/` already exists, pick another slug or hand off to `sdlc-continue`.
+3. Derive a kebab-case slug. If `intent/<slug>/` already exists, pick another slug or hand off to `sdlc-continue`. If `intent/archive/*-<slug>/` exists, that name shipped before: say so and pick a slug that does not collide with the history. `intent/archive/` is the archive, never a slug.
 4. Copy `assets/intent.md` into `intent/<slug>/intent.md`. Fill every section. Frontmatter: `status: draft`, `slug: <slug>`.
 5. Show the path and a short summary. Ask the user to accept (that starts Design) or to correct it.
 6. If they accept in this session, set `status: accepted`. Do not start `sdlc-design` unless they ask to keep going.
