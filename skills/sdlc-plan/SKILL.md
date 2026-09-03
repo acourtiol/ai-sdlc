@@ -9,7 +9,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.2"
+  version: "1.3"
 ---
 
 # sdlc-plan
@@ -21,6 +21,8 @@ The originator should see their own words in the file. A proto-spec they can cor
 ## Before you start
 
 If `openspec/` has open (non-archived) changes, stop and use OpenSpec (`openspec` binary, never `npx openspec`). Mixing both trees in one change splits the audit trail.
+
+Triage before you write. A feasibility question is a spike: answer it, do not open an intent. One flag, one file, a bug, or a refactor of a flow already in this repo is a bounded change: make it, do not open an intent. An intent is for work that changes what the product does. When two readings are plausible, take the heavier one. If the idea is still shapeless, `sdlc-explore` first.
 
 Do not commit unless the user asks. Chat accept is the gate; git is optional.
 
