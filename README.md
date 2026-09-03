@@ -6,7 +6,7 @@ npx skills add acourtiol/ai-sdlc -g -a claude-code -a cursor -a codex -s '*' -y
 
 Name the agents. Do not pass `--agent '*'`.
 
-Cursor, Codex, and Claude Code load the same skill folders. There is no CLI. In the product repo the agent writes `intent/<slug>/intent.md`, then `spec.md`, then `plan.md`, then code, then `report.md`, then archives the folder. You accept or approve at each step.
+Cursor, Codex, and Claude Code load the same skill folders. There is no CLI. You brainstorm first if the idea needs it, then in the product repo the agent writes `intent/<slug>/intent.md`, then `spec.md`, then `plan.md`, then code, then `report.md`, then archives the folder. You accept or approve at each step.
 
 This follows Anthropic's [AI-native SDLC playbook](https://claude.com/blog/the-ai-native-sdlc-playbook). The Design stage is one file, `spec.md`, covering requirements and design together. There is no `design.md`. That name comes from OpenSpec.
 
@@ -16,6 +16,7 @@ This repo is not Anthropic. It is also not a fork of other projects that use the
 
 | Skill | Writes | When |
 | --- | --- | --- |
+| `sdlc-explore` | nothing | the idea is still half-formed, or you are not sure it needs the loop |
 | `sdlc-plan` | `intent/<slug>/intent.md` | new product feature or change |
 | `sdlc-design` | `spec.md` | accepted intent, no spec yet |
 | `sdlc-apply` | `plan.md` then code | approved spec; plan gate before code |
@@ -24,6 +25,8 @@ This repo is not Anthropic. It is also not a fork of other projects that use the
 | `sdlc-continue` | next gate | resume an in-progress `intent/<slug>/` |
 
 `report.md` and the archive are borrowed from [OpenSpec](https://github.com/Fission-AI/OpenSpec). The playbook stops at the diff and the PR review findings; those two carry the same record when there is no PR.
+
+`sdlc-explore` is the playbook's own Plan stage, where "the originator brainstorms with Claude and writes the result down as `intent.md`". Its spike / bounded / intent-worthy triage comes from [superpowers](https://github.com/obra/superpowers).
 
 ## If the repo still has OpenSpec
 
