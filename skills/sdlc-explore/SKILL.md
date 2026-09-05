@@ -20,8 +20,6 @@ The Plan stage opens with a brainstorm, not a template. An idea interviewed befo
 
 ## Before you start
 
-If `openspec/` has open changes, use `openspec-explore` instead.
-
 This skill writes no files: no `intent/`, no notes, no code. Read-only commands and searches need no permission. If the user asks you to build, say the loop starts at `sdlc-plan`, and stop.
 
 Answering a design question is not consent to write. Silence is not agreement.
@@ -63,6 +61,7 @@ Capture nothing on your own. When the shape holds, offer this and let the user d
 ## What we figured out
 
 Problem — what cannot be done today, and who feels it
+Evidence — what shows the problem is real, or not checked
 Proposed outcome — what better looks like, observable
 Affected users and systems
 Constraints — auth, PII, APIs, time, non-goals already decided

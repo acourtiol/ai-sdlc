@@ -3,7 +3,7 @@ name: sdlc-apply
 description: >-
   Writes intent/slug/plan.md, waits for plan approval, then implements. Use
   when the user is ready to build a specified intent, or says implement, apply,
-  or code this feature. Do not write code before the plan is approved.
+  build it, or code this feature. Do not write code before the plan is approved.
 license: MIT
 metadata:
   author: acourtiol
@@ -17,8 +17,6 @@ Write `intent/<slug>/plan.md`, wait for approve, then implement. Stop at test an
 A plan someone else could implement, written before the diff, is cheaper to correct than a finished PR.
 
 ## Before you start
-
-If `openspec/` has open changes, stop and use OpenSpec (`openspec` binary, never `npx openspec`).
 
 Need `intent/<slug>/spec.md` with `status: specified` (or an approve in this session).
 
@@ -35,7 +33,7 @@ Do not add `production-gate.sh` or `bands.yaml` here. Those belong in a product 
 1. Resolve slug. Read `intent.md` and `spec.md`.
 2. Dispatch planner (read-only): files that change, order of work, risks, proof. Someone who missed the chat should still be able to implement from the plan.
 3. Write `intent/<slug>/plan.md` from `assets/plan.md` (`status: draft`). Every step under Order of work is a `- [ ]` box ending in its own `— verify:` clause. Ask the user to approve the plan.
-4. On approve, set `status: planned`. Then dispatch coder (or implement here) against that plan, starting at the first unticked box. Smallest correct change. Real tests, not placeholders.
+4. On approve, set `status: planned`. Then dispatch coder (or implement here) against that plan, starting at the first unticked box. Smallest correct change. Real tests, not placeholders. If the approved plan is a bugfix, first add or extend a test that fails for the reported reason, run it, and see the fail. Only then change application code. Do not edit that test to make it pass. New behavior is not a bugfix: the failing-test-first sequence is not required.
 5. Tick a box only once you have run its verify clause and seen it pass. A step that is partially done, deferred, or narrowed stays `- [ ]`.
 6. After code, `sdlc-verify` is next. Do not call the work done without evidence.
 

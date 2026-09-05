@@ -9,6 +9,10 @@ slug: example-slug
 
 What cannot be done today, and who feels it.
 
+## Evidence
+
+What shows the problem is real, or `not checked`.
+
 ## Proposed outcome
 
 What better looks like. Observable, not a solution sketch.

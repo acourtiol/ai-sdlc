@@ -17,11 +17,9 @@ Move `intent/<slug>/` to `intent/archive/YYYY-MM-DD-<slug>/`. Nothing is deleted
 
 An archive is decision history. Six months on, the question is why this was built this way, and the answer is the folder.
 
-This is not in the Anthropic playbook, where the audit trail is git plus the PR and its review findings. It comes from OpenSpec, which archives each change under a dated directory.
+This is not in the Anthropic playbook, where the audit trail is git plus the PR and its review findings. The dated folder carries the same record when there is no PR.
 
 ## Before you start
-
-If the user wants to archive OpenSpec work, use `openspec-archive-change` (the `openspec` binary, never `npx openspec`).
 
 Do not commit unless the user asks. Plain `mv`, not `git mv`: git recognizes the rename from content when the user diffs or commits, so history survives without touching their index.
 

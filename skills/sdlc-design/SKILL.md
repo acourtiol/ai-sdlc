@@ -2,9 +2,10 @@
 name: sdlc-design
 description: >-
   Writes intent/slug/spec.md from an accepted intent: requirements and design
-  in one file. Use after the user accepts an intent, or when they ask for a
-  spec or design. The Anthropic playbook has no separate design.md. Planning
-  only; do not implement.
+  in one file. Use after the user accepts an intent, or when they ask for
+  requirements, how it should work, a spec, or a design. The playbook collapsed
+  requirements and design; there is no separate design.md. Planning only; do
+  not implement.
 license: MIT
 metadata:
   author: acourtiol
@@ -15,11 +16,9 @@ metadata:
 
 Write `intent/<slug>/spec.md` from an accepted intent. Stop so they can approve. Leave plan and code for `sdlc-apply`.
 
-Anthropic collapsed requirements and design into one session. The artifact is `spec.md`. Do not write a `design.md`. That filename is OpenSpec, not this playbook.
+The playbook collapsed requirements and design into one session. The artifact is `spec.md`. Do not write a `design.md`.
 
 ## Before you start
-
-If `openspec/` has open changes, stop and use OpenSpec (`openspec` binary, never `npx openspec`).
 
 Need `intent/<slug>/intent.md` with `status: accepted` (or an accept in this session). If it is still `draft`, go back to `sdlc-plan`.
 

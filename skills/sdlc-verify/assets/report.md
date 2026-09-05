@@ -25,7 +25,8 @@ Every box in `plan.md` ticked. Every requirement in `spec.md` has evidence.
 ### Correctness
 
 Each scenario: what you ran or drove, what you observed. The proposed outcome in
-`intent.md` is the bar, not green tests.
+`intent.md` is the bar, not green tests. A user-facing pass needs a
+human-observable moment (what was driven or shown, and what a person would see).
 
 ### Coherence
 

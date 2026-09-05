@@ -3,8 +3,8 @@ name: sdlc-continue
 description: >-
   Resumes an in-progress change by reading intent/slug/ and running the next
   unapproved gate (accept intent, approve spec, approve plan, implement, verify,
-  or archive). Use when the user says continue, next, resume, or pick up a
-  feature that already has an intent folder.
+  or archive). Use when the user says continue, next, resume, what's in flight,
+  or pick up a feature that already has an intent folder.
 license: MIT
 metadata:
   author: acourtiol
@@ -19,9 +19,9 @@ Skipping a gate looks fast and produces a spec nobody accepted.
 
 ## Before you start
 
-If `openspec/` has open changes and there is no `intent/` work, use OpenSpec instead.
-
 Do not commit unless the user asks.
+
+If `scripts/status.sh` exists next to this file, run it with the product repository as the working directory (`sh <this-skill-dir>/scripts/status.sh`). If the script is missing, list `intent/*/` yourself using the table below, skipping `intent/archive/`.
 
 One slug at a time. If several exist, ask which. `intent/archive/` is the archive, not a slug: skip it when you list them.
 
