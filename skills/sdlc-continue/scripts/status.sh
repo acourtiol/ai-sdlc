@@ -8,21 +8,23 @@ if [ ! -d intent ]; then
 	exit 0
 fi
 
-fm_status() {
-	# Print top-level status from the first YAML frontmatter block, or "missing".
+fm_field() {
+	# Print top-level YAML frontmatter field from the first --- block.
+	# Missing file → "missing". Key absent → "none".
 	_file=$1
+	_key=$2
 	if [ ! -f "$_file" ]; then
 		printf '%s\n' "missing"
 		return 0
 	fi
-	_val=$(awk '
+	_val=$(awk -v key="$_key" '
 		BEGIN { in_fm = 0 }
 		/^---[[:space:]]*$/ {
 			if (in_fm == 0) { in_fm = 1; next }
 			exit
 		}
-		in_fm && /^status:[[:space:]]*/ {
-			sub(/^status:[[:space:]]*/, "")
+		in_fm && $0 ~ ("^" key ":[[:space:]]*") {
+			sub("^" key ":[[:space:]]*", "")
 			sub(/[[:space:]]+$/, "")
 			print
 			exit
@@ -33,6 +35,24 @@ fm_status() {
 	else
 		printf '%s\n' "$_val"
 	fi
+}
+
+fm_status() {
+	fm_field "$1" "status"
+}
+
+findings_have_critical() {
+	# 0 if ## Findings contains a real CRITICAL item, else 1.
+	# Ignore the report template legend (CRITICAL — blocks done. `path/to/file.ts:42`).
+	_file=$1
+	[ -f "$_file" ] || return 1
+	awk '
+		BEGIN { on = 0; found = 0 }
+		/^## Findings[[:space:]]*$/ { on = 1; next }
+		/^## / { on = 0 }
+		on && /CRITICAL/ && $0 !~ /path\/to\/file\.ts:42/ { found = 1; exit }
+		END { exit found ? 0 : 1 }
+	' "$_file"
 }
 
 count_boxes() {
@@ -67,7 +87,7 @@ next_gate() {
 		return 0
 	fi
 	if [ "$_intent_st" = "draft" ]; then
-		printf '%s\n' "present intent; on accept set accepted"
+		printf '%s\n' "present intent; on accept set accepted, then sdlc-design"
 		return 0
 	fi
 	if [ "$_spec_st" = "missing" ]; then
@@ -75,7 +95,7 @@ next_gate() {
 		return 0
 	fi
 	if [ "$_spec_st" = "draft" ]; then
-		printf '%s\n' "approve spec; on approve set specified"
+		printf '%s\n' "approve spec; on approve set specified, then sdlc-apply (plan step)"
 		return 0
 	fi
 	if [ "$_plan_st" = "missing" ]; then
@@ -83,30 +103,38 @@ next_gate() {
 		return 0
 	fi
 	if [ "$_plan_st" = "draft" ]; then
-		printf '%s\n' "approve the plan"
+		printf '%s\n' "approve the plan; on approve set planned, then sdlc-apply implement"
 		return 0
 	fi
-	if [ "$_plan_st" = "planned" ]; then
-		if [ "$_total" -gt 0 ] && [ "$_ticked" -lt "$_total" ]; then
-			printf '%s\n' "sdlc-apply implement (${_ticked}/${_total} boxes ticked)"
-			return 0
-		fi
-		if [ ! -f "${_dir}report.md" ]; then
-			printf '%s\n' "sdlc-verify"
-			return 0
-		fi
-	fi
-	if [ -f "${_dir}report.md" ]; then
-		if [ "$_intent_st" = "done" ] &&
-			{ [ "$_spec_st" = "done" ] || [ "$_spec_st" = "missing" ]; } &&
-			{ [ "$_plan_st" = "done" ] || [ "$_plan_st" = "missing" ]; }; then
-			printf '%s\n' "sdlc-archive"
-			return 0
-		fi
-		printf '%s\n' "ask to mark done"
+	if [ "$_plan_st" = "planned" ] && [ "$_total" -gt 0 ] && [ "$_ticked" -lt "$_total" ]; then
+		printf '%s\n' "sdlc-apply implement (${_ticked}/${_total} boxes ticked)"
 		return 0
 	fi
-	printf '%s\n' "sdlc-verify"
+	if [ ! -f "${_dir}report.md" ]; then
+		printf '%s\n' "sdlc-verify"
+		return 0
+	fi
+
+	_verdict=$(fm_field "${_dir}report.md" "verdict" | tr '[:upper:]' '[:lower:]')
+	_critical=0
+	if findings_have_critical "${_dir}report.md"; then
+		_critical=1
+	fi
+	if [ "$_verdict" = "fail" ] || [ "$_critical" -eq 1 ]; then
+		printf '%s\n' "sdlc-apply (fix findings) then sdlc-verify"
+		return 0
+	fi
+	if [ "$_verdict" != "pass" ]; then
+		printf '%s\n' "sdlc-verify"
+		return 0
+	fi
+	if [ "$_intent_st" = "done" ] &&
+		{ [ "$_spec_st" = "done" ] || [ "$_spec_st" = "missing" ]; } &&
+		{ [ "$_plan_st" = "done" ] || [ "$_plan_st" = "missing" ]; }; then
+		printf '%s\n' "sdlc-archive"
+		return 0
+	fi
+	printf '%s\n' "ask to mark done"
 }
 
 found=0
@@ -130,6 +158,9 @@ for dir in intent/*/; do
 	printf '  plan: %s\n' "$plan_st"
 	if [ -f "${dir}plan.md" ]; then
 		printf '  boxes: %s/%s\n' "$TICKED" "$TOTAL"
+	fi
+	if [ -f "${dir}report.md" ]; then
+		printf '  verdict: %s\n' "$(fm_field "${dir}report.md" "verdict")"
 	fi
 	printf '  next: %s\n' "$gate"
 done

@@ -9,7 +9,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.0"
+  version: "1.1"
 ---
 
 # sdlc-explore
@@ -43,7 +43,7 @@ The ratchet runs one way. Complexity you uncover later upgrades the path, so sto
 No fixed steps. Follow the conversation.
 
 - One question at a time, and say which decision it unlocks.
-- Read the code before asking anything the code can answer.
+- Read the code before asking anything the code can answer. If you list folders, `intent/*/` is work in flight (skip `intent/archive/`); what the product already does is the code and `AGENTS.md`, not those folders.
 - Settle the blocking decision before the ones that depend on it. Outcome and scope come before API and data model.
 - Recommend a path with its tradeoff when the evidence supports one. Do not invent constraints only the user can know.
 - Decompose before refining. A request that is really four subsystems gets split first; explore the first piece.

@@ -6,7 +6,7 @@ npx skills add acourtiol/ai-sdlc -g -a claude-code -a cursor -a codex -s '*' -y
 
 Name the agents. Do not pass `--agent '*'`.
 
-Cursor, Codex, and Claude Code load the same skill folders. There is no CLI. If the idea is still half-formed, brainstorm first. In the product repo the agent writes `intent/<slug>/intent.md`, then `spec.md`, then `plan.md`, then code, then `report.md`, then archives the folder. You accept or approve at each step.
+Cursor, Codex, and Claude Code load the same skill folders. There is no CLI. If the idea is still half-formed, brainstorm first. In the product repo the agent writes `intent/<slug>/intent.md`, then `spec.md`, then `plan.md`, then code, then `report.md`, then archives the folder. You accept or approve at each step; after a yes, the same session starts the next skill unless you tell it to stop.
 
 This follows Anthropic's [AI-native SDLC playbook](https://claude.com/blog/the-ai-native-sdlc-playbook). Requirements and design go in one file, `spec.md`. Do not add a `design.md`; the playbook folded those into one session. This repo is not Anthropic, and it is not a fork of other projects that use the same playbook name.
 
@@ -15,11 +15,11 @@ This follows Anthropic's [AI-native SDLC playbook](https://claude.com/blog/the-a
 | Skill | Writes | When |
 | --- | --- | --- |
 | `sdlc-explore` | nothing | the idea is still half-formed, or you are not sure it needs the loop |
-| `sdlc-plan` | `intent/<slug>/intent.md` | new product feature or change |
-| `sdlc-design` | `spec.md` | accepted intent, no spec yet |
-| `sdlc-apply` | `plan.md` then code | approved spec; plan gate before code |
-| `sdlc-verify` | `report.md` | judge the running change against intent |
-| `sdlc-archive` | moves the folder | the change is done and you want it out of the way |
+| `sdlc-plan` | `intent/<slug>/intent.md` | new product feature or change; on accept, starts design |
+| `sdlc-design` | `spec.md` | accepted intent, no spec yet; on approve, starts the plan |
+| `sdlc-apply` | `plan.md` then code then `sdlc-verify` | approved spec; plan gate before code; verify is not optional; fail → fix → re-verify |
+| `sdlc-verify` | `report.md` | judge the running change against intent; always after apply; judgment only |
+| `sdlc-archive` | moves the folder | `report.md` with `verdict: pass`, no CRITICAL, and statuses `done` |
 | `sdlc-continue` | next gate | resume an in-progress `intent/<slug>/` |
 
 The playbook's audit trail is the diff and the PR review findings. When there is no PR, `report.md` and `intent/archive/YYYY-MM-DD-<slug>/` hold that record.
@@ -28,7 +28,7 @@ The playbook's audit trail is the diff and the PR review findings. When there is
 
 ## What the skills will not do
 
-They wait for you to accept or approve. They do not commit unless you ask. They stop at test and review; they do not deploy.
+They wait for you to accept or approve, then continue into the next skill unless you tell them to stop. They do not commit unless you ask. Apply always runs verify; a failing report goes back to apply to fix, not to archive. They do not archive without a passing `report.md` with no CRITICAL. They do not deploy.
 
 ## Files in a product repo
 

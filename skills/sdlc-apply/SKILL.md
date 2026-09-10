@@ -1,18 +1,21 @@
 ---
 name: sdlc-apply
 description: >-
-  Writes intent/slug/plan.md, waits for plan approval, then implements. Use
-  when the user is ready to build a specified intent, or says implement, apply,
-  build it, or code this feature. Do not write code before the plan is approved.
+  Writes intent/slug/plan.md, waits for plan approval, implements, then always
+  runs sdlc-verify. Apply is not finished without report.md. Use when the user
+  is ready to build a specified intent, or says implement, apply, build it, or
+  code this feature. Do not write code before the plan is approved. Do not skip
+  verify. Do not archive. On fail or CRITICAL, fix then re-verify (cap 3);
+  never skip verify to archive.
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.2"
+  version: "1.4"
 ---
 
 # sdlc-apply
 
-Write `intent/<slug>/plan.md`, wait for approve, then implement. Stop at test and review. Do not push or deploy unless the user asks.
+Write `intent/<slug>/plan.md`, wait for approve, then implement, then verify. Do not push, deploy, or archive unless the user asks.
 
 A plan someone else could implement, written before the diff, is cheaper to correct than a finished PR.
 
@@ -35,8 +38,10 @@ Do not add `production-gate.sh` or `bands.yaml` here. Those belong in a product 
 3. Write `intent/<slug>/plan.md` from `assets/plan.md` (`status: draft`). Every step under Order of work is a `- [ ]` box ending in its own `— verify:` clause. Ask the user to approve the plan.
 4. On approve, set `status: planned`. Then dispatch coder (or implement here) against that plan, starting at the first unticked box. Smallest correct change. Real tests, not placeholders. If the approved plan is a bugfix, first add or extend a test that fails for the reported reason, run it, and see the fail. Only then change application code. Do not edit that test to make it pass. New behavior is not a bugfix: the failing-test-first sequence is not required.
 5. Tick a box only once you have run its verify clause and seen it pass. A step that is partially done, deferred, or narrowed stays `- [ ]`.
-6. After code, `sdlc-verify` is next. Do not call the work done without evidence.
+6. After the last Order of work box is ticked, **immediately run `sdlc-verify`**. Prefer a named verifier or a forked agent so the verdict is a fresh context; if you cannot, run it here and `report.md` Not checked must say `verified in implementing session`. Apply is not finished without `intent/<slug>/report.md`. Do not stop at “tests passed.” Do not call the work done. Do not archive. Verify is not optional and is not a later `sdlc-continue` pick-up.
+7. After `report.md` exists: if `verdict: fail` or Findings has CRITICAL, fix those findings (smallest correct change). Leave the failing report on disk; do not rewrite it to look green. Then run `sdlc-verify` again (fresh context, same fallback). Count each `sdlc-verify` execution in this run (step 6 plus each re-run). After 3, if it still fails or still has CRITICAL: stop, show what remains, and wait. Do not archive. Do not mark `done`.
+8. If `verdict: pass` and no CRITICAL: ask before setting statuses `done`. Do not archive.
 
-If the plan is already `planned` and the user says implement, skip to step 4.
+If the plan is already `planned` and the user says implement, skip to step 4. If `report.md` already exists with `verdict: fail` or CRITICAL, skip to step 7.
 
 When you stop before the last box, say where the work stands as `N/M boxes ticked` and name the first unticked one. `sdlc-continue` picks up from there.
