@@ -2,6 +2,8 @@
 slug: example-slug
 verified: 2026-01-01
 verdict: pass
+isolation: subagent-different-model
+model: unknown
 ---
 
 # Report: short name
