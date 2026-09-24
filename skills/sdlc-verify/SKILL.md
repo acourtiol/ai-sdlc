@@ -1,8 +1,8 @@
 ---
 name: sdlc-verify
 description: >-
-  After apply, dispatch a verifier subagent with a fresh context (prefer a
-  different model) to check a built change against intent/slug/intent.md with
+  After apply, dispatch a verifier subagent with a fresh context to check a
+  built change against intent/slug/intent.md with
   evidence (commands, browser, screenshots) and write intent/slug/report.md:
   what shipped, deviations from the plan, and a pass or fail verdict. Use after
   implementation, before calling the work done, or when the user asks to
@@ -13,7 +13,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.5"
+  version: "1.6"
 ---
 
 # sdlc-verify
@@ -30,7 +30,7 @@ Do not commit unless the user asks.
 
 The named verifier subagent is judgment-only: it does not edit application source or tests. Dispatch verifier subagent with a fresh context to run the steps under **Verifier subagent** and write `intent/<slug>/report.md` from `assets/report.md`.
 
-When the host lets you set the subagent model, pick one different from the implementing session and record `isolation: subagent-different-model`. When the host cannot set the model, dispatch anyway — same model, still a subagent, still a fresh context — and record `isolation: subagent-same-model`. Set `model` to the subagent model name, or `unknown` if the host does not report it.
+Leave model selection to the host. Do not choose, prefer, or switch the verifier's model. Record `isolation: subagent`. Do not write a `model` field.
 
 If no named verifier, forked agent, or Task/subagent can be dispatched, stop without writing `report.md`. Tell the user isolated verify could not run. Do not mark statuses `done`. Do not archive. Verify in the implementing session is not valid.
 
@@ -39,13 +39,13 @@ If no named verifier, forked agent, or Task/subagent can be dispatched, stop wit
 ## Steps
 
 1. Resolve slug. Confirm `intent.md` is on disk, and `spec.md` and `plan.md` when those files exist.
-2. Dispatch verifier subagent (judgment-only, fresh context). Give it this skill, the slug, and paths to `intent.md`, `spec.md`, and `plan.md`. Instruct it to read the diff from disk (`git status`, `git diff`) rather than from the implementer's session memory, to run **Verifier subagent** below, and to write `report.md` with `isolation` and `model` frontmatter. Prefer a different model when the host supports it.
+2. Dispatch verifier subagent (judgment-only, fresh context). Give it this skill, the slug, and paths to `intent.md`, `spec.md`, and `plan.md`. Instruct it to read the diff from disk (`git status`, `git diff`) rather than from the implementer's session memory, to run **Verifier subagent** below, and to write `report.md` with `isolation: subagent` frontmatter. Leave model selection to the host. Do not write a `model` field.
 3. If the host only returns markdown, write that return to `intent/<slug>/report.md` unchanged. Do not rewrite findings or verdict.
 4. If dispatch fails or there is no report: stop, tell the user isolated verify could not run, and do not write a passing or partial `report.md`.
 5. If `verdict: fail` or Findings has CRITICAL: stop judging. Next is `sdlc-apply` (fix the findings, then this skill again — a new verifier subagent). Do not fix application source or tests here. Do not archive. Do not stay on verify.
 6. If `verdict: pass` and no CRITICAL: ask before setting intent (and spec/plan if present) `status: done`. Do not archive. The named reviewer on the diff vs spec and plan is a separate pass.
 
-`sdlc-apply` always hands off here after the last plan box, and again after each fix. `sdlc-archive` must not run without this file, `verdict: pass` with no CRITICAL, and valid isolation frontmatter (`subagent-different-model` or `subagent-same-model`).
+`sdlc-apply` always hands off here after the last plan box, and again after each fix. `sdlc-archive` must not run without this file, `verdict: pass` with no CRITICAL, and valid isolation frontmatter (`subagent`, `subagent-different-model`, or `subagent-same-model`).
 
 ## Verifier subagent
 
@@ -59,4 +59,4 @@ The dispatched agent executes this section. It does not inherit the implementing
    - **Correctness** — each `#### Scenario:` exercised: what you ran or drove, what you observed. Judge against the proposed outcome in `intent.md`. For a user-facing intent, a pass needs the human-observable moment from step 2. If that moment is missing, `verdict` is `fail` or pass is withheld, and Not checked names it.
    - **Coherence** — the diff follows the Design section of `spec.md` and the patterns already in this repo.
 5. Report each check: what you did, what you observed, pass or fail. Tag findings CRITICAL, WARNING, or SUGGESTION and pin each to a `file:line`. When severity is unclear, pick the lower one. Do not declare success without proof.
-6. Write `intent/<slug>/report.md` from `assets/report.md`, including a failing verdict. It records what you found, so it is not a gate and carries no `status`: the frontmatter `verdict` is `pass` or `fail`. Frontmatter `isolation` is `subagent-different-model` or `subagent-same-model`. Frontmatter `model` is the subagent model name or `unknown`. Name every check you skipped and why, under Not checked. Missing `spec.md` or `plan.md` narrows what you can verify; say so rather than passing by default. Do not edit this file afterwards to flip a fail to pass.
+6. Write `intent/<slug>/report.md` from `assets/report.md`, including a failing verdict. It records what you found, so it is not a gate and carries no `status`: the frontmatter `verdict` is `pass` or `fail`. Frontmatter `isolation` is `subagent`. Do not write a `model` field. Name every check you skipped and why, under Not checked. Missing `spec.md` or `plan.md` narrows what you can verify; say so rather than passing by default. Do not edit this file afterwards to flip a fail to pass.
