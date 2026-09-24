@@ -30,8 +30,6 @@ The named planner is read-only: it returns plan markdown. This session writes `p
 
 If implementation departs from the plan, update `plan.md` in the same change (same commit if they asked to commit). Later review checks the diff against the plan.
 
-Do not add `production-gate.sh` or `bands.yaml` here. Those belong in a product repo that asked for a deploy hook.
-
 ## Steps
 
 1. Resolve slug. Read `intent.md` and `spec.md`.
