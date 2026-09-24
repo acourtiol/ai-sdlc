@@ -24,11 +24,11 @@ A plan someone else could implement, written before the diff, is cheaper to corr
 
 Need `intent/<slug>/spec.md` with `status: specified` (or an approve in this session).
 
-Do not commit unless the user asks.
+Commit `intent/<slug>/plan.md` on its own when you write it, and again when a later edit changes it before implementation. During implementation, commit each finished slice on its own, including the plan box it closes. One concern per commit. The message says why. Do not push unless the user asks.
 
 The named planner is read-only: it returns plan markdown. This session writes `plan.md` after the user approves. The named coder implements only after `plan.md` is `planned`.
 
-If implementation departs from the plan, update `plan.md` in the same change (same commit if they asked to commit). Later review checks the diff against the plan.
+If implementation departs from the plan, update `plan.md` in the same commit as the code that departed. Later review checks the diff against the plan.
 
 ## Steps
 

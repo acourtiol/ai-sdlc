@@ -24,7 +24,7 @@ This is not in the Anthropic playbook, where the audit trail is git plus the PR 
 
 ## Before you start
 
-Do not commit unless the user asks. Plain `mv`, not `git mv`: git recognizes the rename from content when the user diffs or commits, so history survives without touching their index.
+After the move, commit it. Plain `mv`, not `git mv`: git recognizes the rename from content. One concern per commit. The message says why. Do not push unless the user asks.
 
 `intent/archive/` is the archive, not a slug. Skip it when you list changes.
 

@@ -22,7 +22,7 @@ The originator should see their own words in the file. A proto-spec they can cor
 
 Triage before you write. A feasibility question is a spike: answer it, do not open an intent. One flag, one file, a bug, or a refactor of a flow already in this repo is a bounded change: make it, do not open an intent. An intent is for work that changes what the product does. When two readings are plausible, take the heavier one. If the idea is still shapeless, `sdlc-explore` first. Ask what shows the problem is real, or write `not checked`, even if explore was skipped.
 
-Do not commit unless the user asks. Chat accept is the gate; git is optional.
+Commit `intent/<slug>/intent.md` on its own when you write it, and again when a later edit changes it. One concern per commit. The message says why. Chat accept is still the gate into design. Do not push unless the user asks.
 
 Do not create `CLAUDE.md` or auto-memory. Repeated mistakes belong in project `AGENTS.md` or the repo OKF bundle.
 

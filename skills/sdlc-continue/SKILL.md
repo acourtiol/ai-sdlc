@@ -23,7 +23,7 @@ Skipping a gate looks fast and produces a spec nobody accepted.
 
 ## Before you start
 
-Do not commit unless the user asks.
+This skill does not commit. The skill you run commits its own artifact. Do not push unless the user asks.
 
 If `scripts/status.sh` exists next to this file, run it with the product repository as the working directory (`sh <this-skill-dir>/scripts/status.sh`). Follow its `next:` line; if that is apply-then-verify, read `sdlc-apply` (it re-runs verify). If the script is missing, list `intent/*/` yourself using the table below, skipping `intent/archive/`. When next is verify, that means isolated `sdlc-verify` (dispatch a verifier subagent), not in-session judgment.
 

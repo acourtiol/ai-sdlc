@@ -26,7 +26,7 @@ Verify is the playbook's verifier: fresh context, report only. The feedback loop
 
 ## Before you start
 
-Do not commit unless the user asks.
+When `report.md` is on disk, commit only that file. The verifier subagent does not commit. One concern per commit. The message says why. Do not push unless the user asks.
 
 The named verifier subagent is judgment-only: it does not edit application source or tests. Dispatch verifier subagent with a fresh context to run the steps under **Verifier subagent** and write `intent/<slug>/report.md` from `assets/report.md`.
 

@@ -23,7 +23,7 @@ The playbook collapsed requirements and design into one session. The artifact is
 
 Need `intent/<slug>/intent.md` with `status: accepted` (or an accept in this session). If it is still `draft`, go back to `sdlc-plan`.
 
-Do not commit unless the user asks.
+Commit `intent/<slug>/spec.md` on its own when you write it, and again when a later edit changes it. One concern per commit. The message says why. Do not push unless the user asks.
 
 The named planner subagent is read-only. Dispatch it to research the codebase and return spec markdown. This session writes the file after the user approves. If no subagent is available, research here, still present the draft, still wait. Writing too early skips the gate.
 
