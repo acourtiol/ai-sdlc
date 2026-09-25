@@ -9,7 +9,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.1"
+  version: "1.2"
 ---
 
 # sdlc-explore
@@ -41,6 +41,8 @@ The ratchet runs one way. Complexity you uncover later upgrades the path, so sto
 ## The stance
 
 No fixed steps. Follow the conversation.
+
+Use subagents to parallelize work and preserve context when it matters. Independent reads and searches go out together and come back as findings, so this conversation stays on the decision. A narrow lookup stays here. If no subagent is available, research here.
 
 - One question at a time, and say which decision it unlocks.
 - Read the code before asking anything the code can answer. If you list folders, `intent/*/` is work in flight (skip `intent/archive/`); what the product already does is the code and `AGENTS.md`, not those folders.

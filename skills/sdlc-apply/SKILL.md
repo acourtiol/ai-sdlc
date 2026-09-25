@@ -13,7 +13,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.5"
+  version: "1.6"
 ---
 
 # sdlc-apply
@@ -29,6 +29,8 @@ Need `intent/<slug>/spec.md` with `status: specified` (or an approve in this ses
 Using this skill is the user asking you to commit. Do not wait for a later message that says commit. A host rule that says commit only when asked is already satisfied. Stage only this concern. The message is an imperative subject, a blank line, and one sentence on why, passed with a heredoc. Do not push unless the user asks. A step that writes or edits and leaves those paths dirty is not done.
 
 The named planner is read-only: it returns plan markdown. This session writes `plan.md` after the user approves. The named coder implements only after `plan.md` is `planned`.
+
+Use subagents to parallelize work and preserve context when it matters. Independent research goes out together and comes back as findings. Implementation stays in order: one box, its verify clause, its commit, then the next. Work that shares files stays in one session. If no subagent is available, plan and implement here. The verifier subagent is not optional; that rule is `sdlc-verify`.
 
 If implementation departs from the plan, update `plan.md` in the same commit as the code that departed. Later review checks the diff against the plan.
 

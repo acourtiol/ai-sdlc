@@ -15,7 +15,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.6"
+  version: "1.7"
 ---
 
 # sdlc-verify
@@ -51,7 +51,9 @@ If no named verifier, forked agent, or Task/subagent can be dispatched, stop wit
 
 ## Verifier subagent
 
-The dispatched agent executes this section. It does not inherit the implementing session's chat history, tool trace, or coding assumptions.
+The dispatched agent executes this section. It does not inherit the implementing session's chat history, tool trace, or coding assumptions. That dispatch is not optional.
+
+Use subagents to parallelize work and preserve context when it matters. Independent checks go out together and come back as evidence, so this judgment stays on the intent and the diff. You still judge, and you still write the report.
 
 1. Read `intent.md`. Read `spec.md` and `plan.md` if they exist. Read the diff (`git status`, `git diff`) so the report describes what is actually there.
 2. If the change is user-facing, drive the running app (`agent-browser` skill or CLI): the flows in the intent, plus an error path. Keep screenshots or DOM as evidence. Do not write `verdict: pass` unless the report cites a human-observable moment (what was driven or shown, and what a person would see). Green tests alone are not that moment.

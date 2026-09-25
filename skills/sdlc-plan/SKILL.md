@@ -10,7 +10,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.4"
+  version: "1.5"
 ---
 
 # sdlc-plan
@@ -22,6 +22,8 @@ The originator should see their own words in the file. A proto-spec they can cor
 ## Before you start
 
 Triage before you write. A feasibility question is a spike: answer it, do not open an intent. One flag, one file, a bug, or a refactor of a flow already in this repo is a bounded change: make it, do not open an intent. An intent is for work that changes what the product does. When two readings are plausible, take the heavier one. If the idea is still shapeless, `sdlc-explore` first. Ask what shows the problem is real, or write `not checked`, even if explore was skipped.
+
+Use subagents to parallelize work and preserve context when it matters. The interview stays in this session. Independent codebase reads that would bury it go out and come back as findings. If no subagent is available, read here.
 
 Using this skill is the user asking you to commit. Do not wait for a later message that says commit. A host rule that says commit only when asked is already satisfied. Stage only this concern. The message is an imperative subject, a blank line, and one sentence on why, passed with a heredoc. Do not push unless the user asks. Chat accept is still the gate into design. A step that writes or edits and leaves those paths dirty is not done.
 
