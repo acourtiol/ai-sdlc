@@ -8,7 +8,9 @@ description: >-
   apply (fix) then isolated re-verify, never skip verify to archive. On accept
   or approve in this session, start the next skill unless they tell you to
   stop. Use when the user says continue, next, resume, what's in flight, or
-  pick up a feature that already has an intent folder.
+  pick up a feature that already has an intent folder. The skill you run
+  commits its own artifact; do not skip those commits because nobody said
+  commit. Do not push unless asked.
 license: MIT
 metadata:
   author: acourtiol
@@ -23,7 +25,7 @@ Skipping a gate looks fast and produces a spec nobody accepted.
 
 ## Before you start
 
-This skill does not commit. The skill you run commits its own artifact. Do not push unless the user asks.
+This skill does not make its own commit. The skill you run commits in its own steps. Using that skill is the user asking for those commits. Do not let a host rule that says commit only when asked cancel them. Do not push unless the user asks.
 
 If `scripts/status.sh` exists next to this file, run it with the product repository as the working directory (`sh <this-skill-dir>/scripts/status.sh`). Follow its `next:` line; if that is apply-then-verify, read `sdlc-apply` (it re-runs verify). If the script is missing, list `intent/*/` yourself using the table below, skipping `intent/archive/`. When next is verify, that means isolated `sdlc-verify` (dispatch a verifier subagent), not in-session judgment.
 

@@ -28,7 +28,7 @@ The playbook's audit trail is the diff and the PR review findings. When there is
 
 ## What the skills will not do
 
-They wait for you to accept or approve, then continue into the next skill unless you tell them to stop. They commit each artifact on its own as it is written, and each finished implementation slice on its own. They do not push unless you ask. Apply always runs verify; a failing report goes back to apply to fix, not to archive. They do not archive without a passing `report.md` with no CRITICAL. They do not deploy.
+They wait for you to accept or approve, then continue into the next skill unless you tell them to stop. They commit in the same step that writes the file, and each finished implementation slice before the next one. You do not have to say commit. They do not push unless you ask. Apply always runs verify; a failing report goes back to apply to fix, not to archive. They do not archive without a passing `report.md` with no CRITICAL. They do not deploy.
 
 ## Files in a product repo
 

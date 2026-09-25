@@ -31,7 +31,7 @@ Name the path before your first question, so the user can correct you.
 | Path | Looks like | Where it ends |
 | --- | --- | --- |
 | Spike | can we, is it possible, quick and dirty is fine | Agree the probe in two sentences, find out, report a recommendation. Anything you build is throwaway. No intent. |
-| Bounded fix | one flag, one file, a bug, a refactor of a flow already in this repo | Say so plainly: this does not need the loop. Propose the change, get a yes, make it. No intent. |
+| Bounded fix | one flag, one file, a bug, a refactor of a flow already in this repo | Say so plainly: this does not need the loop. Propose the change, get a yes, make it, and commit that slice. Using this path is the user asking for that commit. Do not wait to be asked to commit. Do not push unless asked. No intent. |
 | Intent-worthy | a new capability or surface, something that changes what the product does | Explore it here, then `sdlc-plan`. |
 
 Bounded measures the repo, not your familiarity. If the flow you would change is not already here to read, it is not bounded.

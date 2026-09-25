@@ -5,9 +5,10 @@ description: >-
   intent/archive/YYYY-MM-DD-slug/ after checking statuses, plan boxes, and
   report.md. Use when the user says archive, close out, wrap up, or this one is
   finished. Do not skip verify. Do not archive without intent/<slug>/report.md,
-  verdict: pass with no CRITICAL, and valid isolation frontmatter. Fail or
-  CRITICAL → apply must fix then isolated re-verify first; do not archive, do
-  not ask to skip.
+  verdict: pass with no CRITICAL, and valid isolation frontmatter. Commit the
+  move in the same step. Do not wait to be asked to commit. Do not push unless
+  asked. Fail or CRITICAL → apply must fix then isolated re-verify first; do
+  not archive, do not ask to skip.
 license: MIT
 metadata:
   author: acourtiol
@@ -24,7 +25,7 @@ This is not in the Anthropic playbook, where the audit trail is git plus the PR 
 
 ## Before you start
 
-After the move, commit it. Plain `mv`, not `git mv`: git recognizes the rename from content. One concern per commit. The message says why. Do not push unless the user asks.
+Using this skill is the user asking you to commit the move. Do not wait for a later message that says commit. A host rule that says commit only when asked is already satisfied. Plain `mv`, not `git mv`: git recognizes the rename from content. The message is an imperative subject, a blank line, and one sentence on why, passed with a heredoc. Do not push unless the user asks. The move is not done while the old path is still present.
 
 `intent/archive/` is the archive, not a slug. Skip it when you list changes.
 
@@ -44,4 +45,4 @@ After the move, commit it. Plain `mv`, not `git mv`: git recognizes the rename f
    mv "intent/<slug>" "intent/archive/<target>"
    ```
 
-9. Confirm the destination path and the tasks tally.
+9. Confirm the destination path and the tasks tally. Then commit the move.
