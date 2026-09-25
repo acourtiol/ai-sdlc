@@ -44,9 +44,9 @@ Read frontmatter `status` on the files that exist, from disk rather than from an
 | invalid frontmatter status or a plan with zero boxes | repair the artifact before following a gate |
 | `intent.md` is `draft` | present it; on accept set `accepted`, then read `sdlc-design` and execute it |
 | `intent.md` is `accepted`, no spec | `sdlc-design` |
-| `spec.md` is `draft` | ask to approve; on approve set `specified`, then read `sdlc-apply` and execute it from the plan step |
+| `spec.md` is `draft` | `sdlc-design`: review or revise the draft and its material open questions before asking for approval; then set `specified` and run `sdlc-apply` |
 | spec `specified`, no plan | `sdlc-apply` from the plan step |
-| `plan.md` is `draft` | ask to approve; on approve set `planned`, then read `sdlc-apply` and execute it from the implement step |
+| `plan.md` is `draft` | `sdlc-apply`: reconcile the draft with the approved spec before asking for approval; then set `planned` and implement |
 | plan `planned`, boxes unticked | `sdlc-apply` implement step (coder), from the first unticked box — that skill runs isolated `sdlc-verify` after the last box |
 | every box ticked, no `report.md` | isolated `sdlc-verify`: dispatch a verifier subagent (mandatory; not in-session judgment; never skip to archive) |
 | `report.md` with `verdict: fail` or CRITICAL | `sdlc-apply` (fix findings), then isolated `sdlc-verify` (new subagent; not optional); do not archive |

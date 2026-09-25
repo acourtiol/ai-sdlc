@@ -27,8 +27,14 @@ How it fits the existing codebase: surfaces, data, APIs, ownership.
 
 ## Gotchas / policy flags
 
-Security, auth, PII, compatibility, contradictions the spec cannot satisfy.
+List only applicable failure cases and constraints: security, auth and permissions,
+PII, safety, persistent-data migration, external APIs, compatibility, and
+accessibility for affected user flows. Say what could fail and point to the
+requirement or scenario that covers it. Write `None.` if none apply.
 
 ## Open questions carried forward
 
-Unresolved items from intent.md, plus new ones. Each has an owner or a default.
+Unresolved items from intent.md, plus new ones. Lower-impact items may carry an
+owner or a default. A choice that could materially change architecture, safety
+behavior, or acceptance criteria needs an answer or an explicit proposed default
+called out for approval; an owner alone does not resolve it.

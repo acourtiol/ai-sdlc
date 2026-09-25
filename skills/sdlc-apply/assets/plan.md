@@ -22,7 +22,10 @@ Each box carries the check that closes it.
 
 ## Risks
 
-What could break, and the check for each.
+Carry each applicable spec Gotcha here with its concrete failure case and a
+matching check in Order of work or Proof. Include only relevant migration,
+external-API, compatibility, security, safety, or accessibility checks. Write
+`None.` if no applicable risks were identified.
 
 ## Proof
 

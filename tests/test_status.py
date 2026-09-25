@@ -85,6 +85,31 @@ class StatusRouterTests(unittest.TestCase):
         self.write("spec.md", "status: unknown\n")
         self.assertEqual(self.route(), "inspect invalid spec status (unknown)")
 
+    def test_draft_spec_routes_to_design_even_when_plan_exists(self):
+        self.write("intent.md", "status: accepted\n")
+        self.write("spec.md", "status: draft\n")
+        self.write(
+            "plan.md",
+            "status: draft\n",
+            "## Order of work\n- [ ] 1. Check — verify: test\n",
+        )
+        self.assertEqual(
+            self.route(), "sdlc-design (review draft and readiness before approval)"
+        )
+
+    def test_reopened_plan_routes_to_reconciliation(self):
+        self.write("intent.md", "status: accepted\n")
+        self.write("spec.md", "status: specified\n")
+        self.write(
+            "plan.md",
+            "status: draft\n",
+            "## Order of work\n- [ ] 1. Check — verify: test\n",
+        )
+        self.assertEqual(
+            self.route(),
+            "sdlc-apply (reconcile draft plan with approved spec before approval)",
+        )
+
     def test_context_only_resumes_exploration(self):
         (self.change / "context.md").write_text("# Context\n", encoding="utf-8")
         self.assertEqual(

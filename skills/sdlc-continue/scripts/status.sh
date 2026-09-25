@@ -102,7 +102,7 @@ next_gate() {
 		return 0
 	fi
 	if [ "$_spec_st" = "draft" ]; then
-		printf '%s\n' "approve spec; on approve set specified, then sdlc-apply (plan step)"
+		printf '%s\n' "sdlc-design (review draft and readiness before approval)"
 		return 0
 	fi
 	case "$_spec_st" in
@@ -118,7 +118,7 @@ next_gate() {
 		return 0
 	fi
 	if [ "$_plan_st" = "draft" ]; then
-		printf '%s\n' "approve the plan; on approve set planned, then sdlc-apply implement"
+		printf '%s\n' "sdlc-apply (reconcile draft plan with approved spec before approval)"
 		return 0
 	fi
 	case "$_plan_st" in

@@ -20,7 +20,7 @@ The Plan stage opens with a brainstorm, not a template. An idea interviewed befo
 
 ## Before you start
 
-Normally this skill writes no files or code. Read-only commands and searches need no permission. The narrow `context.md` exception below applies only to an intent-worthy idea. If the user asks you to build, say the loop starts at `sdlc-plan`, and stop.
+Normally this skill writes no files or code. Read-only commands and searches need no permission. The narrow `context.md` exception below applies only to an intent-worthy idea. If the user asks directly for a bounded fix, route to `sdlc-fix`; if they ask to build a new capability, route to `sdlc-plan`. Do not implement within exploration.
 
 Answering a design question is not acceptance of an intent or consent to build. Silence is not agreement.
 
@@ -31,10 +31,10 @@ Name the path before your first question, so the user can correct you.
 | Path | Looks like | Where it ends |
 | --- | --- | --- |
 | Spike | can we, is it possible, quick and dirty is fine | Agree the probe in two sentences, find out, report a recommendation. Anything you build is throwaway. No intent. |
-| Bounded fix | one flag, one file, a bug, a refactor of a flow already in this repo | Say so plainly: this does not need the loop. Propose the change, get a yes, make it, and commit that slice. Using this path is the user asking for that commit. Do not wait to be asked to commit. Do not push unless asked. No intent. |
+| Bounded fix | a bug or behavior-preserving refactor of a flow already in this repo | Explain the bounded path. If the user requests the fix, hand off to `sdlc-fix`; exploration alone is not consent to change code. No intent. |
 | Intent-worthy | a new capability or surface, something that changes what the product does | Explore it here, then `sdlc-plan`. |
 
-Bounded measures the repo, not your familiarity. If the flow you would change is not already here to read, it is not bounded.
+Bounded measures the repo, not your familiarity or the number of files. If the flow you would change is not already here to read, it is not bounded.
 
 The ratchet runs one way. Complexity you uncover later upgrades the path, so stop and say so. Nothing downgrades mid-conversation. When two paths are plausible, take the heavier one.
 
@@ -79,4 +79,4 @@ Open questions — each with an owner or a default
 
 Those are the sections of `intent.md`, in order, so `sdlc-plan` can lift the answers into the file in the user's own words.
 
-Next: `sdlc-plan`, for an intent-worthy idea. A spike ends at its recommendation, a bounded fix at the change.
+Next: `sdlc-plan`, for an intent-worthy idea. A spike ends at its recommendation; an authorized bounded fix routes to `sdlc-fix`.

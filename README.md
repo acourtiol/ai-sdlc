@@ -15,6 +15,7 @@ This follows Anthropic's [AI-native SDLC playbook](https://claude.com/blog/the-a
 | Skill | Writes | When |
 | --- | --- | --- |
 | `sdlc-explore` | optional `intent/<slug>/context.md` | the idea is still half-formed, or you are not sure it needs the loop |
+| `sdlc-fix` | code and tests, no intent folder | bounded bug or behavior-preserving refactor in an existing flow |
 | `sdlc-plan` | `intent/<slug>/intent.md` | new product feature or change; on accept, starts design |
 | `sdlc-design` | `spec.md` | accepted intent, no spec yet; on approve, starts the plan |
 | `sdlc-apply` | `plan.md` then code then `sdlc-verify` | approved spec; plan gate before code; verify is not optional; fail → fix → re-verify |
@@ -27,6 +28,8 @@ The playbook's audit trail is the diff and the PR review findings. When there is
 On plan approval, `base_commit` records the repository state before implementation. Verify checks the committed range from that commit through HEAD, plus working-tree and untracked changes, so per-slice commits remain visible.
 
 `context.md` is an optional handoff for consequential findings that are not yet in the gated artifacts or code. Explore uses it only for an intent-worthy idea; apply uses it for unfinished implementation state. It carries no status or approval, and the next agent checks it against the repo before acting.
+
+Before a spec is approved or an approved spec is planned, material choices about architecture, safety behavior, and acceptance criteria need an answer or an explicit default accepted in the spec review. Applicable spec risks carry into plan checks and verifier evidence. A bounded bug or behavior-preserving refactor uses `sdlc-fix` without an intent folder.
 
 `sdlc-explore` is the playbook Plan stage: you brainstorm, then `intent.md` gets written. Spike / bounded / intent-worthy triage decides whether that file is needed.
 

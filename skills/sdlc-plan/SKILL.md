@@ -21,7 +21,7 @@ The originator should see their own words in the file. A proto-spec they can cor
 
 ## Before you start
 
-Triage before you write. A feasibility question is a spike: answer it, do not open an intent. One flag, one file, a bug, or a refactor of a flow already in this repo is a bounded change: make it, do not open an intent. An intent is for work that changes what the product does. When two readings are plausible, take the heavier one. If the idea is still shapeless, `sdlc-explore` first. Ask what shows the problem is real, or write `not checked`, even if explore was skipped.
+Triage before you write. A feasibility question is a spike: answer it, do not open an intent. A bounded bug or behavior-preserving refactor of an existing flow goes to `sdlc-fix`, without an intent. An intent is for work that changes what the product does. File count alone does not decide the path. When two readings are plausible, take the heavier one. If the idea is still shapeless, `sdlc-explore` first. Ask what shows the problem is real, or write `not checked`, even if explore was skipped.
 
 Use subagents to parallelize work and preserve context when it matters. The interview stays in this session. Independent codebase reads that would bury it go out and come back as findings. If no subagent is available, read here.
 

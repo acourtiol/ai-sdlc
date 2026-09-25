@@ -37,7 +37,9 @@ human-observable moment (what was driven or shown, and what a person would see).
 ### Coherence
 
 Review the full change range for logic, security, regressions, error handling,
-and architectural fit against `spec.md`, `plan.md`, and existing patterns.
+and architectural fit against `spec.md`, `plan.md`, and existing patterns. For
+each applicable spec Gotcha, name the matching plan check and observed evidence;
+report missing coverage as a finding.
 
 ## Findings
 
