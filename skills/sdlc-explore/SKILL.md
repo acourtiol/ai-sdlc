@@ -1,11 +1,11 @@
 ---
 name: sdlc-explore
 description: >-
-  Read-only thinking partner for a half-formed idea: explores the problem,
+  Thinking partner for a half-formed idea: explores the problem,
   compares approaches, and works out whether the work needs an intent at all.
   Use when the user says brainstorm, explore, think this through, or I am not
-  sure what I want, or when they are circling an idea before sdlc-plan. Writes
-  no files.
+  sure what I want, or when they are circling an idea before sdlc-plan. May
+  checkpoint consequential findings for an intent-worthy idea in context.md.
 license: MIT
 metadata:
   author: acourtiol
@@ -14,15 +14,15 @@ metadata:
 
 # sdlc-explore
 
-Think with the user. Read the codebase, draw the problem, weigh the approaches. Write nothing.
+Think with the user. Read the codebase, draw the problem, weigh the approaches. Preserve consequential findings if the discussion outgrows the session.
 
 The Plan stage opens with a brainstorm, not a template. An idea interviewed before it is understood yields a tidy `intent.md` for the wrong problem.
 
 ## Before you start
 
-This skill writes no files: no `intent/`, no notes, no code. Read-only commands and searches need no permission. If the user asks you to build, say the loop starts at `sdlc-plan`, and stop.
+Normally this skill writes no files or code. Read-only commands and searches need no permission. The narrow `context.md` exception below applies only to an intent-worthy idea. If the user asks you to build, say the loop starts at `sdlc-plan`, and stop.
 
-Answering a design question is not consent to write. Silence is not agreement.
+Answering a design question is not acceptance of an intent or consent to build. Silence is not agreement.
 
 ## Triage first
 
@@ -55,9 +55,15 @@ Use subagents to parallelize work and preserve context when it matters. Independ
 
 Stop when the user has enough clarity. Not every branch needs exhausting, and some conversations are worth having without producing anything.
 
+## Keep the thread across compaction
+
+For an intent-worthy idea, write consequential findings as they emerge, before a long investigation or handoff can bury them. If `intent/<slug>/intent.md` exists, read it first; route settled corrections through its owning gate instead of editing an approved artifact during exploration. For findings not yet ready for the intent, use `intent/<slug>/context.md`. If there is no intent yet, choose a provisional slug and create that file only when there is information worth preserving. It has no status or approval meaning. Do not create it for a spike, a bounded fix, or a conversation with no consequential findings.
+
+Keep `context.md` short and current: verified findings with source paths or commands, decisions and their reasons, assumptions labeled as such, unresolved questions, and the next decision. Record only what is absent from other files. Do not paste chat history or repeat an existing artifact. Commit each checkpoint, staging only this concern; do not push unless asked. On resuming, read it and check its claims against the repo before relying on them. Move settled content into `intent.md` through `sdlc-plan`, then remove entries that are represented there.
+
 ## Ending
 
-Capture nothing on your own. When the shape holds, offer this and let the user decide what happens to it:
+Do not turn exploration into an approved intent on your own. When the shape holds, offer this and let the user decide what happens to it:
 
 ```text
 ## What we figured out

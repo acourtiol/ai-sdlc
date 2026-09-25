@@ -34,9 +34,15 @@ Use subagents to parallelize work and preserve context when it matters. Independ
 
 If implementation departs from the plan, update `plan.md` in the same commit as the code that departed. Later review checks the diff against the plan.
 
+## Keep the thread across compaction
+
+`intent.md`, `spec.md`, `plan.md`, the code, and tests are the source of truth. Update `plan.md` for implementation decisions and deviations under its existing rule; do not use a handoff file to bypass the approved plan. For consequential work in progress that belongs in none of them, use optional `intent/<slug>/context.md`: verified findings with paths or commands, assumptions marked as such, a blocker or failed approach and why, and the exact next action for the first unticked box. Do not repeat the plan, paste chat history, or claim a box is complete before its verify clause passes.
+
+Checkpoint as a finding or decision emerges, before a long tool call or handoff, and before ending an unfinished turn; a compaction warning may come too late. Commit a standalone context update if no implementation slice is ready, staging only that file. Otherwise commit it with the slice. Do not push unless asked. On starting or resuming, read `context.md` if present, compare it with the current files and git state, and remove stale or transferred entries. `context.md` is a handoff aid, not an approval, a task ledger, or verification evidence.
+
 ## Steps
 
-1. Resolve slug. Read `intent.md` and `spec.md`.
+1. Resolve slug. Read `intent.md`, `spec.md`, and `context.md` if present; reconcile the latter with current files and git state.
 2. Dispatch planner (read-only): files that change, order of work, risks, proof. Someone who missed the chat should still be able to implement from the plan.
 3. Write `intent/<slug>/plan.md` from `assets/plan.md` (`status: draft`). Every step under Order of work is a `- [ ]` box ending in its own `— verify:` clause. Commit that file. Then ask the user to approve the plan.
 4. On approve, set `status: planned` and commit that edit. Then dispatch coder (or implement here) against that plan, starting at the first unticked box. Smallest correct change. Real tests, not placeholders. If the approved plan is a bugfix, first add or extend a test that fails for the reported reason, run it, and see the fail. Only then change application code. Do not edit that test to make it pass. New behavior is not a bugfix: the failing-test-first sequence is not required.

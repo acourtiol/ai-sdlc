@@ -27,7 +27,7 @@ Skipping a gate looks fast and produces a spec nobody accepted.
 
 This skill does not make its own commit. The skill you run commits in its own steps. Using that skill is the user asking for those commits. Do not let a host rule that says commit only when asked cancel them. Do not push unless the user asks.
 
-If `scripts/status.sh` exists next to this file, run it with the product repository as the working directory (`sh <this-skill-dir>/scripts/status.sh`). Follow its `next:` line; if that is apply-then-verify, read `sdlc-apply` (it re-runs verify). If the script is missing, list `intent/*/` yourself using the table below, skipping `intent/archive/`. When next is verify, that means isolated `sdlc-verify` (dispatch a verifier subagent), not in-session judgment.
+If `scripts/status.sh` exists next to this file, run it with the product repository as the working directory (`sh <this-skill-dir>/scripts/status.sh`). Follow its `next:` line; if that is apply-then-verify, read `sdlc-apply` (it re-runs verify). If the script is missing, list `intent/*/` yourself using the table below, skipping `intent/archive/`. When next is verify, that means isolated `sdlc-verify` (dispatch a verifier subagent), not in-session judgment. Read any `context.md` for the chosen slug and check its claims against current files before acting; it never overrides the gated artifacts or git state.
 
 One slug at a time. If several exist, ask which. `intent/archive/` is the archive, not a slug: skip it when you list them.
 
@@ -40,6 +40,7 @@ Read frontmatter `status` on the files that exist, from disk rather than from an
 | State | Next |
 | --- | --- |
 | no `intent/<slug>/` | `sdlc-plan` (wrong skill unless they named a new idea) |
+| only `context.md`, no `intent.md` | `sdlc-explore` to resume the idea, then `sdlc-plan` when ready |
 | `intent.md` is `draft` | present it; on accept set `accepted`, then read `sdlc-design` and execute it |
 | `intent.md` is `accepted`, no spec | `sdlc-design` |
 | `spec.md` is `draft` | ask to approve; on approve set `specified`, then read `sdlc-apply` and execute it from the plan step |

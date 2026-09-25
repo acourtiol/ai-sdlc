@@ -83,7 +83,11 @@ next_gate() {
 	_total=$6
 
 	if [ ! -f "${_dir}intent.md" ]; then
-		printf '%s\n' "sdlc-plan (no intent.md)"
+		if [ -f "${_dir}context.md" ]; then
+			printf '%s\n' "sdlc-explore (context.md only), then sdlc-plan when ready"
+		else
+			printf '%s\n' "sdlc-plan (no intent.md)"
+		fi
 		return 0
 	fi
 	if [ "$_intent_st" = "draft" ]; then

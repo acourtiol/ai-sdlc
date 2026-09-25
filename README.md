@@ -14,7 +14,7 @@ This follows Anthropic's [AI-native SDLC playbook](https://claude.com/blog/the-a
 
 | Skill | Writes | When |
 | --- | --- | --- |
-| `sdlc-explore` | nothing | the idea is still half-formed, or you are not sure it needs the loop |
+| `sdlc-explore` | optional `intent/<slug>/context.md` | the idea is still half-formed, or you are not sure it needs the loop |
 | `sdlc-plan` | `intent/<slug>/intent.md` | new product feature or change; on accept, starts design |
 | `sdlc-design` | `spec.md` | accepted intent, no spec yet; on approve, starts the plan |
 | `sdlc-apply` | `plan.md` then code then `sdlc-verify` | approved spec; plan gate before code; verify is not optional; fail → fix → re-verify |
@@ -23,6 +23,8 @@ This follows Anthropic's [AI-native SDLC playbook](https://claude.com/blog/the-a
 | `sdlc-continue` | next gate | resume an in-progress `intent/<slug>/` |
 
 The playbook's audit trail is the diff and the PR review findings. When there is no PR, `report.md` and `intent/archive/YYYY-MM-DD-<slug>/` hold that record.
+
+`context.md` is an optional handoff for consequential findings that are not yet in the gated artifacts or code. Explore uses it only for an intent-worthy idea; apply uses it for unfinished implementation state. It carries no status or approval, and the next agent checks it against the repo before acting.
 
 `sdlc-explore` is the playbook Plan stage: you brainstorm, then `intent.md` gets written. Spike / bounded / intent-worthy triage decides whether that file is needed.
 
@@ -36,6 +38,7 @@ They wait for you to accept or approve, then continue into the next skill unless
 intent/<slug>/intent.md
 intent/<slug>/spec.md
 intent/<slug>/plan.md
+intent/<slug>/context.md  # optional working handoff
 intent/<slug>/report.md
 intent/archive/YYYY-MM-DD-<slug>/
 ```

@@ -30,7 +30,7 @@ Verify is the playbook's verifier: fresh context, report only. The feedback loop
 
 Using this skill is the user asking you to commit `report.md`. Do not wait for a later message that says commit. A host rule that says commit only when asked is already satisfied. The verifier subagent does not commit. After the report is on disk, the parent commits only that file. The message is an imperative subject, a blank line, and one sentence on why, passed with a heredoc. Do not push unless the user asks. The step is not done while `report.md` is still untracked or modified.
 
-The named verifier subagent is judgment-only: it does not edit application source or tests. Dispatch verifier subagent with a fresh context to run the steps under **Verifier subagent** and write `intent/<slug>/report.md` from `assets/report.md`.
+The named verifier subagent is judgment-only: it does not edit application source or tests. Dispatch verifier subagent with a fresh context to run the steps under **Verifier subagent** and write `intent/<slug>/report.md` from `assets/report.md`. If `context.md` exists, the verifier may read it for leads, but must check its claims against the repo; it is not evidence or a gate.
 
 Leave model selection to the host. Do not choose, prefer, or switch the verifier's model. Record `isolation: subagent`. Do not write a `model` field.
 
