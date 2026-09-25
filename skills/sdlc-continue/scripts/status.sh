@@ -42,15 +42,14 @@ fm_status() {
 }
 
 findings_have_critical() {
-	# 0 if ## Findings contains a real CRITICAL item, else 1.
-	# Ignore the report template legend (CRITICAL — blocks done. `path/to/file.ts:42`).
+	# 0 if ## Findings contains a CRITICAL finding entry, else 1.
 	_file=$1
 	[ -f "$_file" ] || return 1
 	awk '
 		BEGIN { on = 0; found = 0 }
 		/^## Findings[[:space:]]*$/ { on = 1; next }
 		/^## / { on = 0 }
-		on && /CRITICAL/ && $0 !~ /path\/to\/file\.ts:42/ { found = 1; exit }
+		on && /^[[:space:]]*[-*][[:space:]]+(\*\*)?CRITICAL(\*\*)?([[:space:]:]|$)/ { found = 1; exit }
 		END { exit found ? 0 : 1 }
 	' "$_file"
 }
@@ -94,6 +93,10 @@ next_gate() {
 		printf '%s\n' "present intent; on accept set accepted, then sdlc-design"
 		return 0
 	fi
+	case "$_intent_st" in
+		accepted|done) ;;
+		*) printf '%s\n' "inspect invalid intent status ($_intent_st)"; return 0 ;;
+	esac
 	if [ "$_spec_st" = "missing" ]; then
 		printf '%s\n' "sdlc-design"
 		return 0
@@ -102,15 +105,31 @@ next_gate() {
 		printf '%s\n' "approve spec; on approve set specified, then sdlc-apply (plan step)"
 		return 0
 	fi
+	case "$_spec_st" in
+		specified|done) ;;
+		*) printf '%s\n' "inspect invalid spec status ($_spec_st)"; return 0 ;;
+	esac
 	if [ "$_plan_st" = "missing" ]; then
 		printf '%s\n' "sdlc-apply (plan step)"
+		return 0
+	fi
+	if [ "$_total" -eq 0 ]; then
+		printf '%s\n' "repair plan (0 boxes)"
 		return 0
 	fi
 	if [ "$_plan_st" = "draft" ]; then
 		printf '%s\n' "approve the plan; on approve set planned, then sdlc-apply implement"
 		return 0
 	fi
-	if [ "$_plan_st" = "planned" ] && [ "$_total" -gt 0 ] && [ "$_ticked" -lt "$_total" ]; then
+	case "$_plan_st" in
+		planned|done) ;;
+		*) printf '%s\n' "inspect invalid plan status ($_plan_st)"; return 0 ;;
+	esac
+	if [ "$_plan_st" = "done" ] && [ "$_ticked" -lt "$_total" ]; then
+		printf '%s\n' "repair inconsistent plan (done with unticked boxes)"
+		return 0
+	fi
+	if [ "$_ticked" -lt "$_total" ]; then
 		printf '%s\n' "sdlc-apply implement (${_ticked}/${_total} boxes ticked)"
 		return 0
 	fi
@@ -132,6 +151,11 @@ next_gate() {
 		printf '%s\n' "sdlc-verify"
 		return 0
 	fi
+	_isolation=$(fm_field "${_dir}report.md" "isolation")
+	case "$_isolation" in
+		subagent|subagent-different-model|subagent-same-model) ;;
+		*) printf '%s\n' "sdlc-verify (invalid isolation)"; return 0 ;;
+	esac
 	if [ "$_intent_st" = "done" ] &&
 		{ [ "$_spec_st" = "done" ] || [ "$_spec_st" = "missing" ]; } &&
 		{ [ "$_plan_st" = "done" ] || [ "$_plan_st" = "missing" ]; }; then

@@ -1,11 +1,16 @@
 ---
 slug: example-slug
-verified: 2026-01-01
-verdict: pass
-isolation: subagent
+verified: pending
+verdict: pending
+isolation: pending
 ---
 
 # Report: short name
+
+## Change inspected
+
+Base commit, HEAD, committed change range, working-tree and untracked paths.
+State how a base was derived for an older plan.
 
 ## What shipped
 
@@ -31,17 +36,13 @@ human-observable moment (what was driven or shown, and what a person would see).
 
 ### Coherence
 
-The diff follows the Design section of `spec.md` and the patterns already in this
-repo.
+Review the full change range for logic, security, regressions, error handling,
+and architectural fit against `spec.md`, `plan.md`, and existing patterns.
 
 ## Findings
 
-Each one tagged and pinned to a location. When you are unsure of severity, pick
-the lower one.
-
-- CRITICAL — blocks done. `path/to/file.ts:42`
-- WARNING — should fix. `path/to/file.ts:88`
-- SUGGESTION — worth fixing. `path/to/file.ts:120`
+Write `None.` or list each finding as `- CRITICAL`, `- WARNING`, or
+`- SUGGESTION`, pinned to a `file:line`. State what would settle uncertain impact.
 
 ## Not checked
 

@@ -24,6 +24,8 @@ This follows Anthropic's [AI-native SDLC playbook](https://claude.com/blog/the-a
 
 The playbook's audit trail is the diff and the PR review findings. When there is no PR, `report.md` and `intent/archive/YYYY-MM-DD-<slug>/` hold that record.
 
+On plan approval, `base_commit` records the repository state before implementation. Verify checks the committed range from that commit through HEAD, plus working-tree and untracked changes, so per-slice commits remain visible.
+
 `context.md` is an optional handoff for consequential findings that are not yet in the gated artifacts or code. Explore uses it only for an intent-worthy idea; apply uses it for unfinished implementation state. It carries no status or approval, and the next agent checks it against the repo before acting.
 
 `sdlc-explore` is the playbook Plan stage: you brainstorm, then `intent.md` gets written. Spike / bounded / intent-worthy triage decides whether that file is needed.

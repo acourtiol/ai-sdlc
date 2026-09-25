@@ -41,6 +41,7 @@ Read frontmatter `status` on the files that exist, from disk rather than from an
 | --- | --- |
 | no `intent/<slug>/` | `sdlc-plan` (wrong skill unless they named a new idea) |
 | only `context.md`, no `intent.md` | `sdlc-explore` to resume the idea, then `sdlc-plan` when ready |
+| invalid frontmatter status or a plan with zero boxes | repair the artifact before following a gate |
 | `intent.md` is `draft` | present it; on accept set `accepted`, then read `sdlc-design` and execute it |
 | `intent.md` is `accepted`, no spec | `sdlc-design` |
 | `spec.md` is `draft` | ask to approve; on approve set `specified`, then read `sdlc-apply` and execute it from the plan step |
@@ -49,7 +50,8 @@ Read frontmatter `status` on the files that exist, from disk rather than from an
 | plan `planned`, boxes unticked | `sdlc-apply` implement step (coder), from the first unticked box — that skill runs isolated `sdlc-verify` after the last box |
 | every box ticked, no `report.md` | isolated `sdlc-verify`: dispatch a verifier subagent (mandatory; not in-session judgment; never skip to archive) |
 | `report.md` with `verdict: fail` or CRITICAL | `sdlc-apply` (fix findings), then isolated `sdlc-verify` (new subagent; not optional); do not archive |
-| `verdict: pass`, no CRITICAL, statuses not `done` | ask to mark `done`; reviewer is a separate named agent |
-| `report.md` `verdict: pass`, no CRITICAL, statuses `done` | `sdlc-archive` |
+| `verdict: pass`, no CRITICAL, invalid isolation | isolated `sdlc-verify` |
+| `verdict: pass`, no CRITICAL, valid isolation, statuses not `done` | ask to mark `done`; verification includes review of the full implementation diff |
+| `report.md` `verdict: pass`, no CRITICAL, valid isolation, statuses `done` | `sdlc-archive` |
 
 Report where the work stands as `N/M boxes ticked` when `plan.md` exists.

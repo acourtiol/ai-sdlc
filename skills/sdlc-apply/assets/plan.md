@@ -2,6 +2,7 @@
 status: draft
 slug: example-slug
 spec: spec.md
+base_commit: pending
 ---
 
 # Plan: short name

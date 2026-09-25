@@ -5,3 +5,4 @@ node_modules/
 skills-lock.json
 intent/
 .serena/
+__pycache__/

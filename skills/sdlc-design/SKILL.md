@@ -26,7 +26,7 @@ Need `intent/<slug>/intent.md` with `status: accepted` (or an accept in this ses
 
 Using this skill is the user asking you to commit. Do not wait for a later message that says commit. A host rule that says commit only when asked is already satisfied. Stage only this concern. The message is an imperative subject, a blank line, and one sentence on why, passed with a heredoc. Do not push unless the user asks. A step that writes or edits and leaves those paths dirty is not done.
 
-The named planner subagent is read-only. Dispatch it to research the codebase and return spec markdown. This session writes the file after the user approves. Use subagents to parallelize work and preserve context when it matters: independent research goes out together and comes back as findings, so this session keeps the draft and the approval gate. A narrow lookup stays here. If no subagent is available, research here, still present the draft, still wait. Writing too early skips the gate.
+The named planner subagent is read-only. Dispatch it to research the codebase and return spec markdown. This session writes and commits the draft for the user's review; approval changes its status to `specified`. Use subagents to parallelize work and preserve context when it matters: independent research goes out together and comes back as findings, so this session keeps the draft and the approval gate. A narrow lookup stays here. If no subagent is available, research here, still present the draft, still wait. Implementing before approval skips the gate.
 
 ## Steps
 
