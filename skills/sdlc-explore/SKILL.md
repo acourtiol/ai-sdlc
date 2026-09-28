@@ -9,7 +9,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.3"
+  version: "1.4"
 ---
 
 # sdlc-explore
@@ -31,7 +31,7 @@ Name the path before your first question, so the user can correct you.
 | Path | Looks like | Where it ends |
 | --- | --- | --- |
 | Spike | can we, is it possible, quick and dirty is fine | Agree the probe in two sentences, find out, report a recommendation. Anything you build is throwaway. No intent. |
-| Bounded fix | a bug or behavior-preserving refactor of a flow already in this repo | Explain the bounded path. If the user requests the fix, hand off to `sdlc-fix`; exploration alone is not consent to change code. No intent. |
+| Bounded fix | a bug or behavior-preserving refactor of a flow already in the product repository | Explain the bounded path. If the user requests the fix, hand off to `sdlc-fix`; exploration alone is not consent to change code. No intent. |
 | Intent-worthy | a new capability or surface, something that changes what the product does | Explore it here, then `sdlc-plan`. |
 
 Bounded measures the repo, not your familiarity or the number of files. If the flow you would change is not already here to read, it is not bounded.
@@ -45,7 +45,7 @@ No fixed steps. Follow the conversation.
 Use subagents to parallelize work and preserve context when it matters. Independent reads and searches go out together and come back as findings, so this conversation stays on the decision. A narrow lookup stays here. If no subagent is available, research here.
 
 - One question at a time, and say which decision it unlocks.
-- Read the code before asking anything the code can answer. If you list folders, `intent/*/` is work in flight (skip `intent/archive/`); what the product already does is the code and `AGENTS.md`, not those folders.
+- Read the code before asking anything the code can answer. If you list folders, `intent/*/` is work in flight (skip `intent/archive/`); use the code and applicable repository instructions to understand what the product already does.
 - Settle the blocking decision before the ones that depend on it. Outcome and scope come before API and data model.
 - Recommend a path with its tradeoff when the evidence supports one. Do not invent constraints only the user can know.
 - Decompose before refining. A request that is really four subsystems gets split first; explore the first piece.

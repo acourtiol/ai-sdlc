@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.0"
+  version: "2.1"
 ---
 
 # sdlc-archive
@@ -14,8 +14,6 @@ metadata:
 Move `intent/<slug>/` to `intent/archive/YYYY-MM-DD-<slug>/`. Nothing is deleted and nothing is rewritten: the folder keeps the intent, the spec, the plan, and the report exactly as they were.
 
 An archive is decision history. Six months on, the question is why this was built this way, and the answer is the folder.
-
-This is not in the Anthropic playbook, where the audit trail is git plus the PR and its review findings. The dated folder carries the same record when there is no PR.
 
 ## Before you start
 

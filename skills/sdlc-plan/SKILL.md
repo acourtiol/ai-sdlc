@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.0"
+  version: "2.1"
 ---
 
 # sdlc-plan
@@ -25,13 +25,9 @@ Use subagents to parallelize work and preserve context when it matters. The inte
 
 Invoking this workflow normally authorizes commits for its own artifacts, subject to explicit user restrictions and host policy. Before the first write, record the repository, branch, HEAD, staged paths, and working-tree/untracked paths. If an affected file contains someone else's work or the index has unrelated staged changes, use a clean isolated worktree when feasible; otherwise stop the commit and explain the ownership conflict. Never reset, stash, or absorb that work. Stage only this concern. Use an imperative commit subject, a blank line, and one sentence on why. Do not push unless asked. A step that writes or edits and leaves those paths dirty is not done.
 
-Do not create `CLAUDE.md` or auto-memory. Repeated mistakes belong in project `AGENTS.md` or the repo OKF bundle.
-
-Beads are tickets. These files are the change record. A bead id in the intent body is fine.
-
 ## Steps
 
-1. Before the interview, read this repo's `AGENTS.md` and list `intent/*/` (skip `intent/archive/`); use those as constraints, do not copy them into `intent.md`. Read `context.md` if exploration left one for this idea; verify its claims against the repo and use only what is still current. Then interview until the idea is concrete: what cannot be done today, what shows the problem is real (or `not checked`), who is affected, what better looks like, constraints, out of scope. Ask one question at a time when a missing answer would change the file.
+1. Before the interview, read applicable instructions in the product repository and list `intent/*/` (skip `intent/archive/`); use those as constraints, do not copy them into `intent.md`. Read `context.md` if exploration left one for this idea; verify its claims against the repo and use only what is still current. Then interview until the idea is concrete: what cannot be done today, what shows the problem is real (or `not checked`), who is affected, what better looks like, constraints, out of scope. Ask one question at a time when a missing answer would change the file.
 2. Derive a kebab-case slug. If `intent/<slug>/` already has only `context.md` from exploration, reuse it. If it has an `intent.md`, pick another slug or hand off to `sdlc-continue`. If `intent/archive/*-<slug>/` exists, that name shipped before: say so and pick a slug that does not collide with the history. `intent/archive/` is the archive, never a slug.
 3. Copy `assets/intent.md` into `intent/<slug>/intent.md`. Fill every section, including Evidence. Frontmatter starts with `status: draft`, `approved_by: pending`, and `approved_digest: pending`. Do not migrate existing consumer intents that lack Evidence. Remove from `context.md` anything now captured in `intent.md`; remove the file if nothing remains. Commit these edits before the next step.
 4. Show the path and a short summary. Ask the user to accept (that starts Design) or to correct it. If they correct the file, commit that edit before you continue.

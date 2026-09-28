@@ -8,7 +8,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.1"
+  version: "1.2"
 ---
 
 # sdlc-fix
@@ -38,7 +38,7 @@ Preserve all existing work. Do not reset, stash, clean, or include unrelated cha
 
 ## Work
 
-1. Read the repository's `AGENTS.md` and the affected source. For a bug, establish its reported failure and cause; run the original reproduction before editing when practical. Do not claim reproduction if it could not be exercised.
+1. Read applicable repository instructions and the affected source. For a bug, establish its reported failure and cause; run the original reproduction before editing when practical. Do not claim reproduction if it could not be exercised.
 2. Make the smallest root-cause change. For a refactor, state the behavior that must remain true. Preserve applicable validation, error handling, security, and accessibility.
 3. Run the original reproduction and relevant checks. Read their output. A regression test should fail for the reported reason when a durable automated check is useful; otherwise record the concrete reproduction and why a test does not fit. If the required environment or permission is unavailable, record a blocked result rather than a pass.
 4. For a consequential change, ask the independent reviewer to find the strongest evidence-backed reason the fix could be wrong, inspect the relevant source and tests in a fresh context, and name evidence that would settle each objection. Resolve findings or stop blocked. Summarize the review and any resolved dissent in the commit body so the reasoning survives the session.

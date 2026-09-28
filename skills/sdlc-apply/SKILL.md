@@ -6,14 +6,14 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.0"
+  version: "2.1"
 ---
 
 # sdlc-apply
 
 Write `intent/<slug>/plan.md`, obtain the applicable approval, implement, then verify. Do not push or deploy unless the user asks. Archive only through `sdlc-archive` after valid completion.
 
-A plan someone else could implement, written before the diff, is cheaper to correct than a finished PR.
+A plan someone else could implement, written before the diff, is cheaper to correct than a finished change.
 
 ## Before you start
 
