@@ -1,56 +1,67 @@
 ---
 slug: example-slug
-verified: pending
-verdict: pending
-isolation: pending
+intent_digest: pending
+spec_digest: pending
+plan_digest: pending
+reviewed_head: pending
+verdict: blocked
+isolation: none
 ---
 
 # Report: short name
 
 ## Change inspected
 
-Base commit, HEAD, committed change range, working-tree and untracked paths.
-State how a base was derived for an older plan.
+- Repository and branch:
+- Plan base commit:
+- Reviewed HEAD (must match frontmatter):
+- Changed paths in the reviewed range:
+- Working tree: `git status --porcelain` result at review start:
+- Untracked paths:
+- Artifact digests: list the exact approved digests recorded above and confirm dependency links.
 
 ## What shipped
 
-What the change actually does now, read from the diff and the ticked plan rather
-than from the session that wrote it. Name the surfaces and the requirements each
-one satisfies.
+What the change actually does now, the affected surfaces, and the requirements it satisfies. Use the reviewed diff and approved artifacts, not implementation-session claims.
 
 ## Deviations from plan
 
-Where the implementation departed from `plan.md`, and why. "None" is an answer.
+TBD: where the implementation departed from the plan and why, with evidence, or write `None.`
 
 ## Verification
 
+For each check, use `- PASS | action: <exact command or user action> | observed: <result> | evidence: <path or output excerpt>` (or `FAIL`/`BLOCKED`). Include every named requirement under Completeness and every named scenario under Correctness.
+
 ### Completeness
 
-Every box in `plan.md` ticked. Every requirement in `spec.md` has evidence.
+Name every spec requirement and its check entry. Confirm every plan box is ticked.
 
 ### Correctness
 
-Each scenario: what you ran or drove, what you observed. The proposed outcome in
-`intent.md` is the bar, not green tests. A user-facing pass needs a
-human-observable moment (what was driven or shown, and what a person would see).
+Name every spec scenario and its check entry. For user-facing changes, include the main flow, an error path, and a human-observable state with screenshot/DOM evidence.
 
 ### Coherence
 
-Review the full change range for logic, security, regressions, error handling,
-and architectural fit against `spec.md`, `plan.md`, and existing patterns. For
-each applicable spec Gotcha, name the matching plan check and observed evidence;
-report missing coverage as a finding.
+Give check entries for the full diff's logic, trust boundaries, regressions, error handling, and fit with the spec, plan, and existing patterns. For each applicable spec Gotcha, identify its plan check and observed evidence.
+
+## Independent challenge
+
+Summarize the strongest evidence-backed objection raised by the independent reviewer, what evidence resolved it, and any remaining disagreement. If no separate challenge was available, say so; do not present agreement as certainty.
 
 ## Findings
 
-Write `None.` or list each finding as `- CRITICAL`, `- WARNING`, or
-`- SUGGESTION`, pinned to a `file:line`. State what would settle uncertain impact.
+Write `None.` or list each finding as `- CRITICAL`, `- WARNING`, or `- SUGGESTION`, pinned to `file:line`. State what evidence would settle uncertain impact.
 
 ## Not checked
 
-Which checks you skipped and why, so nobody reads silence as a pass.
+Which checks you skipped and why. Write `None.` if every applicable check ran. For a blocked handoff, replace this prompt with exactly two nonempty lines: `Reason: <specific blocker>` and `Recovery: <concrete next step>`.
+
+## Release handoff
+
+Where relevant, list rollout prerequisites, migration state, recovery or rollback,
+and post-release observations with an owner. Write `None.` if this change has no
+release handoff. Archive alone does not claim deployment succeeded.
 
 ## Verdict
 
-Pass or fail, one line, matching `verdict` in the frontmatter. Anything left over
-that needs its own intent.
+Write `pass`, `fail`, or `blocked`, matching frontmatter. A pass requires evidence for every required outcome, a complete plan, a clean committed reviewed snapshot, matching approved digests, and no CRITICAL findings. A blocked handoff may omit snapshot provenance; it never permits completion or archive. Any work that still needs a separate change belongs in a new intent.

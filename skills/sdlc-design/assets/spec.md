@@ -2,6 +2,9 @@
 status: draft
 slug: example-slug
 intent: intent.md
+intent_digest: pending
+approved_by: pending
+approved_digest: pending
 ---
 
 # Spec: short name
@@ -38,3 +41,8 @@ Unresolved items from intent.md, plus new ones. Lower-impact items may carry an
 owner or a default. A choice that could materially change architecture, safety
 behavior, or acceptance criteria needs an answer or an explicit proposed default
 called out for approval; an owner alone does not resolve it.
+
+## Decision review
+
+For autonomous approval only: material choice, strongest counterargument from a
+fresh research subagent, evidence checked, decision, and remaining uncertainty.

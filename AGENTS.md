@@ -19,7 +19,9 @@ Archive is `intent/archive/YYYY-MM-DD-<slug>/`, a plain `mv` by `sdlc-archive`. 
 
 `sdlc-explore` normally writes nothing and owns no template. For an intent-worthy idea that needs a durable handoff before `intent.md` is ready, it may create `intent/<slug>/context.md`. This optional file holds only consequential information absent from the other artifacts; it is not a new gate or a substitute for `intent.md`. Do not give explore a `notes.md` or create folders for spikes and bounded fixes. The crystallized idea goes into `intent.md`. Its triage is deliberately duplicated in compact form in `sdlc-plan` and `sdlc-fix`, because each skill stands alone. spec-kit's clarify taxonomy and BMAD's technique library were considered for it and rejected as too much ceremony before an intent exists.
 
-Deploy and Maintain plays wait until a product repo asks for a hook.
+Deploy and Maintain automation waits until a product repo asks for a hook. A
+plan or report may record manual rollout, recovery, observation, and follow-up
+work where relevant; archiving an intent does not claim a production release.
 
 ## Edit
 

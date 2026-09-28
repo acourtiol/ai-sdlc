@@ -9,7 +9,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.2"
+  version: "1.3"
 ---
 
 # sdlc-explore
@@ -57,9 +57,9 @@ Stop when the user has enough clarity. Not every branch needs exhausting, and so
 
 ## Keep the thread across compaction
 
-For an intent-worthy idea, write consequential findings as they emerge, before a long investigation or handoff can bury them. If `intent/<slug>/intent.md` exists, read it first; route settled corrections through its owning gate instead of editing an approved artifact during exploration. For findings not yet ready for the intent, use `intent/<slug>/context.md`. If there is no intent yet, choose a provisional slug and create that file only when there is information worth preserving. It has no status or approval meaning. Do not create it for a spike, a bounded fix, or a conversation with no consequential findings.
+For an intent-worthy idea, write consequential findings as they emerge, before a long investigation or handoff can bury them. If `intent/<slug>/intent.md` exists, read it first; route settled corrections through its owning gate instead of editing an approved artifact during exploration. For findings not yet ready for the intent, use `intent/<slug>/context.md`. If there is no intent yet, choose a provisional slug and create that file only when there is information worth preserving. It has no status or approval meaning. Do not create it for a spike, a bounded fix, or a conversation with no consequential findings. Before writing, record repository, branch, HEAD, staged paths, and working-tree/untracked paths; use a clean isolated worktree if ownership overlaps, or stop without committing. Do not reset, stash, or absorb unrelated work.
 
-Keep `context.md` short and current: verified findings with source paths or commands, decisions and their reasons, assumptions labeled as such, unresolved questions, and the next decision. Record only what is absent from other files. Do not paste chat history or repeat an existing artifact. Commit each checkpoint, staging only this concern; do not push unless asked. On resuming, read it and check its claims against the repo before relying on them. Move settled content into `intent.md` through `sdlc-plan`, then remove entries that are represented there.
+Keep `context.md` short and current: verified findings with source paths or commands, decisions and their reasons, assumptions labeled as such, unresolved questions, and the next decision. Record only what is absent from other files. Do not paste chat history or repeat an existing artifact. The user's request to checkpoint normally authorizes its local commit, subject to explicit restrictions and host policy. Commit each checkpoint, staging only this concern; do not push unless asked. On resuming, read it and check its claims against the repo before relying on them. Move settled content into `intent.md` through `sdlc-plan`, then remove entries that are represented there.
 
 ## Ending
 

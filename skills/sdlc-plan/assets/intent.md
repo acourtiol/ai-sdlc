@@ -1,6 +1,8 @@
 ---
 status: draft
 slug: example-slug
+approved_by: pending
+approved_digest: pending
 ---
 
 # Intent: short name
@@ -32,3 +34,8 @@ Explicitly not this change.
 ## Open questions
 
 What must be answered before spec, or carried into spec.
+
+## Decision review
+
+For autonomous approval only: material choice, strongest counterargument from a
+fresh research subagent, evidence checked, decision, and remaining uncertainty.

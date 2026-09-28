@@ -1,51 +1,85 @@
 # ai-sdlc
 
 ```bash
-npx skills add acourtiol/ai-sdlc -g -a claude-code -a cursor -a codex -s '*' -y
+npx skills add acourtiol/ai-sdlc -g -a claude-code -a cursor -a codex -a opencode -s '*' -y
 ```
 
-Name the agents. Do not pass `--agent '*'`.
+Name each target agent; do not pass `--agent '*'`. For one-shot installation from this checkout, use `npx skills add . -l` to list skills, then install the selected folders with the CLI. Consumers run `npx skills update` to update installed copies.
 
-Cursor, Codex, and Claude Code load the same skill folders. There is no CLI. If the idea is still half-formed, brainstorm first. In the product repo the agent writes `intent/<slug>/intent.md`, then `spec.md`, then `plan.md`, then code, then `report.md`, then archives the folder. You accept or approve at each step; after a yes, the same session starts the next skill unless you tell it to stop.
+These are independently installable skills, not a CLI or orchestration framework. In a product repo the artifacts live at `intent/<slug>/`. The normal workflow is:
 
-This follows Anthropic's [AI-native SDLC playbook](https://claude.com/blog/the-ai-native-sdlc-playbook). Requirements and design go in one file, `spec.md`. Do not add a `design.md`; the playbook folded those into one session. This repo is not Anthropic, and it is not a fork of other projects that use the same playbook name.
+```text
+sdlc-explore → sdlc-plan → sdlc-design → sdlc-apply → sdlc-verify → sdlc-archive
+```
+
+Explore helps shape an idea. Plan writes the intent, design writes requirements and design together in `spec.md`, apply writes the plan and implements it, verify judges the change, and archive closes the change record. A bounded bug or behavior-preserving refactor can use `sdlc-fix` without an intent folder.
 
 ## Skills
 
 | Skill | Writes | When |
 | --- | --- | --- |
-| `sdlc-explore` | optional `intent/<slug>/context.md` | the idea is still half-formed, or you are not sure it needs the loop |
-| `sdlc-fix` | code and tests, no intent folder | bounded bug or behavior-preserving refactor in an existing flow |
-| `sdlc-plan` | `intent/<slug>/intent.md` | new product feature or change; on accept, starts design |
-| `sdlc-design` | `spec.md` | accepted intent, no spec yet; on approve, starts the plan |
-| `sdlc-apply` | `plan.md` then code then `sdlc-verify` | approved spec; plan gate before code; verify is not optional; fail → fix → re-verify |
-| `sdlc-verify` | `report.md` | judge the running change against intent; always after apply; judgment only |
-| `sdlc-archive` | moves the folder | `report.md` with `verdict: pass`, no CRITICAL, and statuses `done` |
-| `sdlc-continue` | next gate | resume an in-progress `intent/<slug>/` |
+| `sdlc-explore` | optional `intent/<slug>/context.md` | the idea is half-formed or it is unclear whether it needs the loop |
+| `sdlc-fix` | code and tests, no intent folder | a bounded bug or behavior-preserving refactor in an existing flow |
+| `sdlc-plan` | `intent/<slug>/intent.md` | a product change after exploration; intent acceptance starts design |
+| `sdlc-design` | `spec.md` | an accepted intent; spec approval starts planning |
+| `sdlc-apply` | `plan.md`, implementation, then verification handoff | a specified change; plan approval precedes implementation |
+| `sdlc-verify` | `report.md` | independent judgment of a completed implementation |
+| `sdlc-archive` | moves the folder | validated passing report and completed artifacts |
+| `sdlc-continue` | resumes one intent or runs the authorized open-intent queue | an in-progress change, or an explicit autonomous queue request |
 
-The playbook's audit trail is the diff and the PR review findings. When there is no PR, `report.md` and `intent/archive/YYYY-MM-DD-<slug>/` hold that record.
+Each skill owns its artifact template and can be installed separately. A full workflow needs the relevant skills together. The autonomous queue requires `sdlc-continue`, `sdlc-plan` (to accept existing draft intents), `sdlc-design`, `sdlc-apply`, `sdlc-verify`, and `sdlc-archive`, plus a host session that can dispatch fresh reviewers. `sdlc-continue` includes the deterministic artifact validator used by the archive gate. No scheduler or daemon is included.
 
-On plan approval, `base_commit` records the repository state before implementation. Verify checks the committed range from that commit through HEAD, plus working-tree and untracked changes, so per-slice commits remain visible.
+The validator and fingerprint scripts require Python 3.8 or newer and use only the standard library. The autonomous queue checks for the complete skill bundle and a working Python interpreter before processing intents.
 
-`context.md` is an optional handoff for consequential findings that are not yet in the gated artifacts or code. Explore uses it only for an intent-worthy idea; apply uses it for unfinished implementation state. It carries no status or approval, and the next agent checks it against the repo before acting.
+## Artifact states and integrity
 
-Before a spec is approved or an approved spec is planned, material choices about architecture, safety behavior, and acceptance criteria need an answer or an explicit default accepted in the spec review. Applicable spec risks carry into plan checks and verifier evidence. A bounded bug or behavior-preserving refactor uses `sdlc-fix` without an intent folder.
+Statuses belong to individual artifacts:
 
-`sdlc-explore` is the playbook Plan stage: you brainstorm, then `intent.md` gets written. Spike / bounded / intent-worthy triage decides whether that file is needed.
+| Artifact | Status progression | Meaning |
+| --- | --- | --- |
+| `intent.md` | `draft` → `accepted` → `done` | the problem and desired outcome are accepted |
+| `spec.md` | `draft` → `specified` → `done` | requirements and design are approved against the accepted intent |
+| `plan.md` | `draft` → `planned` → `done` | implementation work and checks are approved against the spec |
+| `report.md` | no status; `verdict: pass`, `fail`, or `blocked` | independent evidence about one reviewed implementation snapshot |
+| intent folder | active path → `intent/archive/YYYY-MM-DD-<slug>/` | archive location closes the change record; there is no `archived` status |
 
-## What the skills will not do
+Accepted intent, spec, and plan content carries an `approved_digest` and `approved_by`; downstream artifacts record the digest they depend on. A material upstream change reopens dependent decisions. The report records all three approved digests and `reviewed_head`. The continue and archive checks validate the artifact grammar, dependencies, evidence shape, and report freshness. A passing report is invalidated by later semantic artifact or implementation changes; report/status bookkeeping is handled explicitly by the validator.
 
-They wait for you to accept or approve, then continue into the next skill unless you tell them to stop. They commit in the same step that writes the file, and each finished implementation slice before the next one. You do not have to say commit. They do not push unless you ask. Apply always runs verify; a failing report goes back to apply to fix, not to archive. They do not archive without a passing `report.md` with no CRITICAL. They do not deploy.
+Verification uses an independent subagent or a separate fresh session with an explicit handoff. Missing review capability or required test access produces `blocked`, which never permits completion or archive. A `fail` means evidence showed incorrect or incomplete behavior and goes back through repair and fresh review. User-facing changes need observable evidence from the running product, not only green tests.
 
-## Files in a product repo
+## Autonomous queue
 
-```text
-intent/<slug>/intent.md
-intent/<slug>/spec.md
-intent/<slug>/plan.md
-intent/<slug>/context.md  # optional working handoff
-intent/<slug>/report.md
-intent/archive/YYYY-MM-DD-<slug>/
-```
+After creating and exploring one or more `intent.md` files, explicitly ask `sdlc-continue` to run all open intents autonomously. This is an opt-in workflow for existing intents; it does not create new ones. It inventories active intent folders, skips `intent/archive/` and context-only folders, then processes independent changes serially, rechecking the repo between them. A valid passing report allows the workflow to mark the artifact statuses done and archive the folder.
 
-Status in frontmatter: `draft` → `accepted` → `specified` → `planned` → `done`. There is no `archived` status; a folder under `intent/archive/` is archived and one under `intent/` is not.
+The request authorizes local artifact decisions, implementation, commits, completion statuses, and archival for that queue. Before each material intent, spec, or plan decision, the orchestrator asks a fresh research subagent to find the strongest counterargument, alternative, failure mode, and evidence that could disprove the proposed choice. It checks the evidence and records its rationale, dissent, and remaining risk in the artifact. The research agent advises; the orchestrator makes and owns the decision. Agreement between agents is not proof. If a decision depends on a missing business preference, external authority, or unavailable evidence, that slug is recorded as blocked and the queue continues with independent intents.
+
+The queue does not authorize pushing, deployment, production changes, destructive operations, external commitments, or material cost/security exceptions. It runs only while the host keeps the session active and can dispatch independent reviewers. These skills cannot schedule themselves, keep running after the host stops, or promise overnight execution. A later explicit request resumes remaining open intents.
+
+## Verification and harness capability
+
+Installation support does not establish end-to-end workflow support. We have not run an acceptance session for all harnesses, so no complete harness is claimed as tested. Use this matrix to record exercised capabilities; update a cell only after a reproducible check in that harness.
+
+| Harness | Skill discovery | Template/resource resolution | Fresh reviewer dispatch | Browser verification |
+| --- | --- | --- | --- | --- |
+| Claude Code | Not verified in this repo | Not verified in this repo | Not verified in this repo | Not verified in this repo |
+| Cursor | Not verified in this repo | Not verified in this repo | Not verified in this repo | Not verified in this repo |
+| Codex | Not verified in this repo | Not verified in this repo | Not verified in this repo | Not verified in this repo |
+| OpenCode | Not verified in this repo | Not verified in this repo | Not verified in this repo | Not verified in this repo |
+
+The OpenCode install target uses `-a opencode`, as shown in the [skills CLI documentation](https://github.com/vercel-labs/skills). This repo has not yet validated discovery, sibling resource lookup, isolated reviewer dispatch, or browser tooling in an OpenCode session. The same capability checks remain open for the other harnesses.
+
+## Release and maintenance
+
+Archiving closes the change record; it does not mean production deployment succeeded. Where relevant, the plan and report should name rollout prerequisites, migrations, recovery or rollback steps, and post-release observations. Deployment remains a separate product-repository activity.
+
+After release, record whether the expected behavior occurred. Feed incidents and escaped defects back through `sdlc-fix` or `sdlc-plan`, and identify the durable prevention—such as a regression check, clearer contract, missing diagnostic, or focused repository instruction. Archive history is not the current product reference; put lasting system knowledge in current documentation, tests, or focused `AGENTS.md` guidance.
+
+## Project constraints
+
+- Requirements and design stay in `spec.md`; do not add `design.md`.
+- Do not add a CLI, Codex plugin, agent organization, `CLAUDE.md` dumps, `production-gate.sh`, evals CI, or `bands.yaml`.
+- Archive is a plain move to `intent/archive/YYYY-MM-DD-<slug>/`; it is history, not a specs tree or merge step.
+- Explore normally writes nothing and owns no template. For an intent-worthy idea that needs a durable handoff first, it may write consequential findings to `context.md`; this file is not an approval or status.
+- Deploy and maintain activities may be manual until a product repository needs an automation hook.
+
+Install with `npx skills add`; do not copy these skill folders into chezmoi.
