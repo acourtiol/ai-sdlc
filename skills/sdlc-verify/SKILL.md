@@ -16,6 +16,8 @@ metadata:
 
 Judge the implementation against the accepted intent and approved artifacts. Cite what you inspected, what you ran or observed, and the result in `intent/<slug>/report.md`. Do not edit application source or tests. This skill is judgment-only: fixes belong to `sdlc-apply`, followed by a new independent verification.
 
+For a report commit, follow Conventional Commits 1.0.0: `docs(scope): imperative summary` (scope optional), a blank line, and one sentence on why.
+
 ## Review route and timing
 
 Before implementation starts, `sdlc-apply` must establish a usable independent review route and record it in the plan. The route is either a verifier subagent with fresh context or a separate fresh session that receives the handoff below. If neither can be arranged, implementation cannot enter the autonomous path; report the missing capability as blocked. Do not discover this only after implementation is complete.

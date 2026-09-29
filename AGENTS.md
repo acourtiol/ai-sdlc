@@ -25,4 +25,4 @@ work where relevant; archiving an intent does not claim a production release.
 
 ## Edit
 
-Change a skill, commit, push `main`. Consumers run `npx skills update`.
+Change a skill, commit, push `main`. Use [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) for every commit: `type(scope): imperative summary` (scope optional). Use `feat` for new behavior, `fix` for corrections, and `docs` or `chore` for other work; mark breaking changes with `!` or a `BREAKING CHANGE:` footer. Consumers run `npx skills update`.

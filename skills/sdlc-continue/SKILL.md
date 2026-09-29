@@ -19,6 +19,8 @@ Run `sh <this-skill-dir>/scripts/status.sh` from the product repo root. Its dete
 
 Before modifying anything, record repository, branch, HEAD, staged paths, working-tree paths, and untracked paths. Preserve pre-existing work. If ownership overlaps or the index contains unrelated staged work, use a clean isolated worktree when feasible; otherwise leave that slug blocked. Never reset, stash, or commit someone else's changes. Check repository state again between slugs.
 
+For every commit, follow Conventional Commits 1.0.0: `type(scope): imperative summary` (scope optional; use `feat`, `fix`, `docs`, or `chore` as appropriate). Add a blank line and one sentence on why; mark breaking changes with `!` or a `BREAKING CHANGE:` footer.
+
 Read any `context.md`, then verify its claims against current source, artifacts, and Git. It is a handoff, not authority. An accepted artifact is valid only when its `approved_digest` matches its current content and its upstream digest matches the approved upstream artifact. A passing report is current only when its artifact digests match and no implementation change followed its `reviewed_head`. Status words alone never establish approval or completion. Legacy artifacts without these bindings must be reconciled and reapproved; do not silently invent provenance.
 
 ## One slug

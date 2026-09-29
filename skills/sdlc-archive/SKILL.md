@@ -17,7 +17,7 @@ An archive is decision history. Six months on, the question is why this was buil
 
 ## Before you start
 
-Invoking this workflow normally authorizes the archive commit, subject to explicit user restrictions and host policy. Before moving anything, record repository, branch, HEAD, staged paths, and working-tree/untracked paths. Preserve unrelated work; if the index contains someone else's staged changes or ownership overlaps, use a clean isolated worktree when feasible or stop the commit. Never reset, stash, or absorb those changes. Plain `mv`, not `git mv`: Git recognizes the rename from content. Stage only the move. Do not push unless asked.
+Invoking this workflow normally authorizes the archive commit, subject to explicit user restrictions and host policy. Before moving anything, record repository, branch, HEAD, staged paths, and working-tree/untracked paths. Preserve unrelated work; if the index contains someone else's staged changes or ownership overlaps, use a clean isolated worktree when feasible or stop the commit. Never reset, stash, or absorb those changes. Plain `mv`, not `git mv`: Git recognizes the rename from content. Stage only the move. Follow Conventional Commits 1.0.0: `chore(scope): imperative summary` (scope optional), a blank line, and one sentence on why. Do not push unless asked.
 
 `intent/archive/` is the archive, not a slug. Skip it when you list changes.
 
