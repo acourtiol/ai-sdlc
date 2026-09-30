@@ -1,17 +1,17 @@
 ---
 name: sdlc-design
 description: >-
-  Write requirements and design in intent/<slug>/spec.md after an accepted
+  Write requirements and design in spec.md after an accepted
   intent. Use when the user requests a spec or design for an existing intent.
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.1"
+  version: "2.2"
 ---
 
 # sdlc-design
 
-Write `intent/<slug>/spec.md` from an accepted intent. In a normal run, wait for approval; an explicitly authorized autonomous queue may approve after its independent decision review. On approval, read `sdlc-apply` and execute it from the plan step. Do not implement.
+Write `intent/<slug>/spec.md` from an accepted intent. In a normal run, wait for approval; an explicitly authorized autonomous queue may approve after the confidence assessment below. On approval, read `sdlc-apply` and execute it from the plan step. Do not implement.
 
 Keep requirements and design in `spec.md`. Do not write a `design.md`.
 
@@ -19,17 +19,23 @@ Keep requirements and design in `spec.md`. Do not write a `design.md`.
 
 Need `intent/<slug>/intent.md` with `status: accepted` (or an accept in this session). If it is still `draft`, go back to `sdlc-plan`. An existing draft spec may be resumed here; revise it rather than copying the template over it.
 
-Invoking this workflow normally authorizes commits for its own artifacts, subject to explicit user restrictions and host policy. Before writing, record the repository, branch, HEAD, staged paths, and working-tree/untracked paths. Use a clean isolated worktree if existing work would overlap or be absorbed; otherwise stop the commit and explain the conflict. Never reset or stash someone else's changes. Stage only this concern. Follow Conventional Commits 1.0.0: `type(scope): imperative summary` (scope optional; use `feat`, `fix`, `docs`, or `chore` as appropriate). Add a blank line and one sentence on why; mark breaking changes with `!` or a `BREAKING CHANGE:` footer. Do not push unless asked.
+The workflow authorizes owned artifact commits unless the user or host restricts them. Before writing, record the repository, branch, HEAD, staged paths, and working-tree/untracked paths. Use a clean isolated worktree if existing work would overlap or be absorbed; otherwise stop the commit and explain the conflict. Never reset or stash someone else's changes. Stage only this concern. Use Conventional Commits (`type(scope): imperative summary`, optional scope), a blank line, and a sentence on why; mark breaking changes with `!` or `BREAKING CHANGE:`. Do not push unless asked.
 
-The named planner subagent is read-only. Dispatch it to research the codebase and return spec markdown. This session writes and commits the draft. Use subagents for independent research when their benefit exceeds coordination cost. A normal run waits for human approval. An explicitly authorized autonomous run uses the decision review below.
+Write a straightforward spec here. Use a read-only planner when substantial independent research or design complexity justifies the handoff; it returns markdown and this session writes the artifact. Reuse researchers for related questions, pass bounded inputs, and use completion notifications instead of repeatedly polling. A normal run waits for human approval; autonomous approval follows the confidence rule below.
+
+## Confidence and challenge
+
+High confidence requires all four: explicit outcome/constraints; current-source support; evidence for relevant contracts and important failure modes; no unresolved material assumption or conflicting evidence. Privacy, migrations, concurrency, and irreversible behavior need stronger evidence. Agreement or a stated probability is insufficient.
+
+Record confidence and evidence under Decision review for autonomous approval. At high confidence, skip the challenger. Otherwise send one fresh, read-only challenger the strongest unresolved assumption, check citations, resolve objections, and record residual uncertainty. Missing preference/authority needs the user. Carry valid evidence across gates; challenge only changed material uncertainty, with bounded repair follow-ups. Artifact edits still require reapproval and dependent digest reconciliation.
 
 ## Steps
 
 1. Resolve slug (the user names it, or the only accepted intent with no spec or a draft spec).
-2. Read `intent.md`, the existing `spec.md` if present, and any `context.md`; verify contextual claims against the product repository and carry forward only unresolved facts relevant to the design. Dispatch planner (read-only): requirements and design that fit the product repository, plus policy gotchas. Preserve valid decisions in an existing spec. Requirements come back as `### Requirement:` blocks, one SHALL statement each, every one carrying at least one `#### Scenario:` in WHEN / THEN form. Numeric, enum, and validation limits belong in a Scenario THEN, quoted verbatim, not only in Design. A scenario someone can read as a test case is what `sdlc-verify` checks against later.
-3. Copy `assets/spec.md` into `intent/<slug>/spec.md` only when creating it; otherwise revise the existing draft. Keep `status: draft` until approval. Set `intent_digest` to the current accepted intent's `approved_digest`; a mismatch means the intent changed and must be reconciled first. Remove from `context.md` anything now captured in `spec.md`; remove the file if nothing remains. Commit these edits before the next step.
+2. Read `intent.md`, the existing `spec.md` if present, and any `context.md`; verify contextual claims against the product repository and carry forward only unresolved facts relevant to the design. Prepare requirements, design, and applicable policy gotchas here or through the justified read-only planner. Preserve valid decisions in an existing spec. Use `### Requirement:` blocks with one SHALL each and at least one `#### Scenario:` in WHEN / THEN form. Quote numeric/enum/validation limits verbatim in Scenario THEN, not only Design; these scenarios are the verifier's test cases.
+3. Copy `assets/spec.md` into `intent/<slug>/spec.md` only when creating it; otherwise revise the existing draft. Keep `status: draft` until approval. Set `intent_digest` to the current accepted intent's `approved_digest`; a mismatch means the intent changed and must be reconciled first. Compact `context.md` to unresolved facts absent from the artifacts, next action, and evidence links; aim for 500–1,000 words or fewer. Remove transferred or superseded entries, preserving history in Git; remove the file if empty. Commit these edits before the next step.
 4. Before approval, check unresolved choices that could materially change architecture, safety behavior, or acceptance criteria. Research answers available in the repo. In a normal run, ask the user about decisions that only they can make, revise and commit the draft, then seek approval. An explicit proposed default may be accepted in the spec review; an owner alone is insufficient. Lower-impact questions may carry an owner or default.
-5. In an autonomous run, give a fresh, read-only research subagent the intent, draft spec, relevant source, and decision under review. Ask for the strongest counterargument, alternative, failure case, and evidence that could falsify the proposal. Check its citations against source. Record the choice, counterargument, evidence, dissent, and residual uncertainty under Decision review. The orchestrator chooses a defensible option within the accepted intent; agreement among agents is not proof. If a choice needs a preference or authority absent from the intent, leave the spec draft, record the blocker, and let the queue continue to another independent intent.
+5. In an autonomous run, assess confidence for new or changed material decisions. Record supporting evidence and any needed challenge under Decision review. Keep established decisions unless current evidence invalidates them; do not challenge them again just because this is a new gate. If a choice needs missing preference, authority, or evidence, leave the spec draft and record the blocker for the queue.
 6. On human approval or a completed autonomous decision review, set `approved_by: human` or `autonomous`, compute `approved_digest` with `python3 <this-skill-dir>/scripts/fingerprint.py intent/<slug>/spec.md`, set `status: specified`, and commit. Then read `sdlc-apply` and execute it from the plan step. A material spec edit after this point reopens spec and plan to `draft` and invalidates a prior passing report. Recompute dependent digests only after reconciling and reapproving. If the user tells you to stop after approval, stop.
 
 If a previously `specified` spec needs a blocking correction, return it to `draft` and commit the revision. If a plan already exists, return its status to `draft` in the same commit. After spec reapproval, `sdlc-apply` must reconcile and reapprove the plan before implementation resumes.

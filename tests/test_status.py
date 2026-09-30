@@ -170,10 +170,14 @@ An independent fresh-context subagent checks the committed snapshot.
         return fields
 
     def report_body(self, findings="None.", not_checked="None."):
+        paths = command(
+            "git", "diff", "--name-only", self.base, self.reviewed, cwd=self.root
+        ).stdout.splitlines()
+        changed_paths = ", ".join(f"`{path}`" for path in paths)
         return f"""# Report: example
 
 ## Change inspected
-Base commit: `{self.base}`. Reviewed HEAD: `{self.reviewed}`. Changed paths: `intent/{self.slug}/intent.md`, `intent/{self.slug}/spec.md`, `intent/{self.slug}/plan.md`, `src/app.py`. The working tree was clean during review, with no untracked paths. The report records all three approved artifact digests.
+Base commit: `{self.base}`. Reviewed HEAD: `{self.reviewed}`. Changed paths: {changed_paths}. The working tree was clean during review, with no untracked paths. The report records all three approved artifact digests.
 
 ## What shipped
 The example module now returns the updated value required by the spec.
@@ -259,6 +263,70 @@ class StatusRouterTests(unittest.TestCase):
     def test_valid_content_bound_report_routes_to_archive(self):
         self.assertEqual(self.route(), "sdlc-archive")
         self.assertEqual(self.archive_check().returncode, 0)
+
+    def approve_with_high_confidence(self):
+        review = """
+
+## Decision review
+Confidence: high. The explicit outcome is to return the updated value while
+preserving the existing caller. Current src/app.py and its reviewed diff support
+that approach. The read-value scenario and focused verification cover the caller
+contract and unchanged failure behavior. No material assumption or conflicting
+evidence remains. A separate challenge was skipped on this evidence; final
+independent verification is still required.
+"""
+        for name, digest_attribute, dependency in [
+            ("intent.md", "intent_digest", None),
+            ("spec.md", "spec_digest", "intent_digest"),
+            ("plan.md", "plan_digest", "spec_digest"),
+        ]:
+            fields, body = self.repo.read_frontmatter(self.repo.change / name)
+            fields["approved_by"] = "autonomous"
+            if dependency:
+                fields[dependency] = getattr(self.repo, dependency)
+            digest = self.repo.write_approved(name, body + review, fields)
+            setattr(self.repo, digest_attribute, digest)
+        self.repo.commit("approve evidence-supported autonomous decisions")
+        self.repo.reviewed = self.repo.head()
+        self.repo.write_report()
+        report = self.repo.change / "report.md"
+        text = report.read_text(encoding="utf-8")
+        before, rest = text.split("## Independent challenge\n", 1)
+        _, after = rest.split("## Findings\n", 1)
+        report.write_text(
+            before + "## Independent challenge\n" + review.split("## Decision review\n", 1)[1]
+            + "\n## Findings\n" + after,
+            encoding="utf-8",
+        )
+        self.repo.commit("record fresh independent verification without extra challenge")
+
+    def test_high_confidence_autonomous_approvals_can_archive_without_extra_challenge(self):
+        self.approve_with_high_confidence()
+        self.assertEqual(self.route(), "sdlc-archive")
+        self.assertEqual(self.archive_check().returncode, 0)
+
+    def test_high_confidence_does_not_bypass_approval_digest(self):
+        self.approve_with_high_confidence()
+        intent = self.repo.change / "intent.md"
+        intent.write_text(
+            intent.read_text(encoding="utf-8").replace("updated value", "different value"),
+            encoding="utf-8",
+        )
+        self.assertIn("reconcile intent approval", self.route())
+        self.assertNotEqual(self.archive_check().returncode, 0)
+
+    def test_high_confidence_does_not_bypass_independent_review(self):
+        self.approve_with_high_confidence()
+        self.mutate_report(isolation="none")
+        self.assertIn("sdlc-verify (invalid or stale evidence:", self.route())
+        self.assertNotEqual(self.archive_check().returncode, 0)
+
+    def test_high_confidence_does_not_preserve_a_verdict_after_source_changes(self):
+        self.approve_with_high_confidence()
+        self.repo.write("src/app.py", "value = 'changed after review'\n")
+        self.repo.commit("change independently reviewed source")
+        self.assertIn("sdlc-verify (invalid or stale evidence:", self.route())
+        self.assertNotEqual(self.archive_check().returncode, 0)
 
     def test_frontmatter_only_report_fails_closed(self):
         report = self.repo.change / "report.md"

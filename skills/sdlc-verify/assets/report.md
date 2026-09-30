@@ -30,7 +30,7 @@ TBD: where the implementation departed from the plan and why, with evidence, or 
 
 ## Verification
 
-For each check, use `- PASS | action: <exact command or user action> | observed: <result> | evidence: <path or output excerpt>` (or `FAIL`/`BLOCKED`). Include every named requirement under Completeness and every named scenario under Correctness.
+For each check, use `- PASS | action: <exact command or user action> | observed: <result> | evidence: <path or output excerpt>` (or `FAIL`/`BLOCKED`). Include every named requirement under Completeness and every named scenario under Correctness; reference shared check entries instead of repeating commands. For reused receipts, identify producing commit, matching code/tests/configuration/dependencies/environment and command scope, raw output and result. Record fresh targeted observations by this verifier as well.
 
 ### Completeness
 
@@ -46,7 +46,7 @@ Give check entries for the full diff's logic, trust boundaries, regressions, err
 
 ## Independent challenge
 
-Summarize the strongest evidence-backed objection raised by the independent reviewer, what evidence resolved it, and any remaining disagreement. If no separate challenge was available, say so; do not present agreement as certainty.
+TBD: record confidence with evidence for explicit outcome/constraints, current-source support, contracts and important failure modes, and absence of unresolved material assumptions/conflicts. Explain why a separate challenge was skipped at high confidence, or summarize the focused challenge, evidence checked, resolution, and residual uncertainty. Final fresh verification remains mandatory. Remove this guidance before writing the report.
 
 ## Findings
 

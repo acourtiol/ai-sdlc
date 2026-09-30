@@ -9,14 +9,12 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.4"
+  version: "1.5"
 ---
 
 # sdlc-explore
 
 Think with the user. Read the codebase, draw the problem, weigh the approaches. Preserve consequential findings if the discussion outgrows the session.
-
-The Plan stage opens with a brainstorm, not a template. An idea interviewed before it is understood yields a tidy `intent.md` for the wrong problem.
 
 ## Before you start
 
@@ -36,13 +34,13 @@ Name the path before your first question, so the user can correct you.
 
 Bounded measures the repo, not your familiarity or the number of files. If the flow you would change is not already here to read, it is not bounded.
 
-The ratchet runs one way. Complexity you uncover later upgrades the path, so stop and say so. Nothing downgrades mid-conversation. When two paths are plausible, take the heavier one.
+If investigation reveals broader scope, explain the upgraded path. Do not downgrade mid-conversation. When two paths remain plausible, take the heavier one.
 
 ## The stance
 
 No fixed steps. Follow the conversation.
 
-Use subagents to parallelize work and preserve context when it matters. Independent reads and searches go out together and come back as findings, so this conversation stays on the decision. A narrow lookup stays here. If no subagent is available, research here.
+Keep narrow lookups here. Delegate bounded independent research when parallel work or saved context outweighs startup and coordination; reuse researchers for related reads and pass paths/questions instead of the full conversation. Use completion notifications or meaningful waits without repeated status polling. Research here when delegation offers little benefit.
 
 - One question at a time, and say which decision it unlocks.
 - Read the code before asking anything the code can answer. If you list folders, `intent/*/` is work in flight (skip `intent/archive/`); use the code and applicable repository instructions to understand what the product already does.
@@ -59,7 +57,7 @@ Stop when the user has enough clarity. Not every branch needs exhausting, and so
 
 For an intent-worthy idea, write consequential findings as they emerge, before a long investigation or handoff can bury them. If `intent/<slug>/intent.md` exists, read it first; route settled corrections through its owning gate instead of editing an approved artifact during exploration. For findings not yet ready for the intent, use `intent/<slug>/context.md`. If there is no intent yet, choose a provisional slug and create that file only when there is information worth preserving. It has no status or approval meaning. Do not create it for a spike, a bounded fix, or a conversation with no consequential findings. Before writing, record repository, branch, HEAD, staged paths, and working-tree/untracked paths; use a clean isolated worktree if ownership overlaps, or stop without committing. Do not reset, stash, or absorb unrelated work.
 
-Keep `context.md` short and current: verified findings with source paths or commands, decisions and their reasons, assumptions labeled as such, unresolved questions, and the next decision. Record only what is absent from other files. Do not paste chat history or repeat an existing artifact. The user's request to checkpoint normally authorizes its local commit, subject to explicit restrictions and host policy. Commit each checkpoint, staging only this concern. Follow Conventional Commits 1.0.0: `docs(scope): imperative summary` (scope optional), a blank line, and one sentence on why. Do not push unless asked. On resuming, read it and check its claims against the repo before relying on them. Move settled content into `intent.md` through `sdlc-plan`, then remove entries that are represented there.
+Keep `context.md` current, aiming for 500–1,000 words or fewer: unresolved findings and assumptions, the next decision, and evidence links absent from other artifacts. Replace superseded entries rather than append chronology; preserve detail in Git and reports. Do not paste chat history, test receipts, or duplicate artifacts. Checkpoint requests authorize local owned commits unless user/host restrictions apply. Checkpoint before consequential handoffs or ending an unfinished turn, not every routine lookup; commit only this concern. Follow Conventional Commits 1.0.0: `docs(scope): imperative summary` (scope optional), a blank line, and one sentence on why. Do not push unless asked. On resuming, read it and check its claims against the repo before relying on them. Move settled content into `intent.md` through `sdlc-plan`, then remove entries that are represented there.
 
 ## Ending
 

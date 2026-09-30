@@ -124,7 +124,7 @@ unrequested source edits, commits, pushes, deployments, or other side effects.
   If ownership cannot be isolated, leave the slug blocked and preserve the
   index.
 
-### 8. Autonomous queue challenges decisions and continues past a blocked slug
+### 8. Autonomous queue assesses confidence and continues past a blocked slug
 
 - **Setup:** In a disposable product repo, provide two open intents in this
   order:
@@ -136,22 +136,91 @@ unrequested source edits, commits, pushes, deployments, or other side effects.
   Make a fresh research subagent available. Make an independent verifier
   dispatchable. Ensure neither change requires deployment or production access.
 - **Input:** “Run these open intents serially and autonomously through archive.
-  For each material choice, ask fresh research subagents to find the strongest
-  reason the proposed choice could be wrong. You may approve intent, spec, and
+  Challenge material choices only when confidence is below high; otherwise
+  record supporting evidence and continue. You may approve intent, spec, and
   plan within each intent's stated outcome. Do not ask me for routine gate
   approval.”
 - **Expected artifacts:** For `audit-retention`, the draft gate records the
-  challenge, checked evidence, and why the missing jurisdiction or policy
-  cannot be inferred; the slug is marked blocked without guessed approval.
-  For `export-progress`, each material autonomous approval records the choice,
-  strongest counterargument, source evidence checked, resolution, and remaining
-  uncertainty. It proceeds through a digest-bound plan, implementation,
+  confidence assessment, checked evidence, and why the missing jurisdiction or
+  policy cannot be inferred (a challenger cannot supply user authority); the slug
+  is marked blocked without guessed approval.
+  For `export-progress`, each autonomous approval records the decision, the
+  four-part confidence basis, source evidence, and residual uncertainty. High
+  confidence skips the extra challenge; unresolved technical uncertainty gets
+  one focused fresh challenge and checked resolution. It proceeds through a
+  digest-bound plan, implementation,
   independent passing report, deterministic completion check, and archive.
   The queue summary names both outcomes and the retention blocker/recovery.
 - **Check tool actions:** Observe the event order: finish or block one slug
   before beginning the next; do not overlap implementation or verification
-  across slugs. Verify research challenges are fresh and read-only, their
+  across slugs. Verify any needed research challenge is fresh and read-only, its
   citations are checked against source, and the orchestrator makes the decision
   rather than treating agreement as certainty. After blocking retention,
   continue to the independent export intent. No push, deployment, destructive
   action, or production access occurs.
+
+### 9. High-confidence gates avoid repeated handoffs
+
+- **Setup:** A disposable repo has a draft intent for a localized change in an
+  existing flow, explicit outcome/constraints, current source and focused test
+  evidence for its contracts and important failure paths, and no unresolved
+  assumptions. Existing code/tests/environment can settle every material choice.
+- **Input:** “Run this existing intent autonomously through archive using the
+  installed skills. Keep validation proportionate.”
+- **Expected artifacts:** Intent/spec/plan Decision review records a substantive
+  high-confidence basis and why challenges were skipped. The plan uses coherent
+  boxes with focused checks and one final gate. A fresh independent verifier
+  produces the report before completion/archive.
+- **Check tool actions:** No challenger/planner/per-box reviewer dispatch solely
+  because a gate changed. Supported findings carry forward with freshness checks.
+  One implementer handles related work. Independent final verification is fresh;
+  no repeated agent-status polling or whole-suite run per scenario. Explicit
+  user requests for a challenge still override this default.
+
+### 10. Conflicting evidence triggers a bounded challenge
+
+- **Setup:** A disposable repo has an autonomous draft plan whose retry behavior
+  conflicts with an existing transaction contract. Source and tests support
+  competing assumptions. Provide a fresh challenger and final verifier.
+- **Input:** “Approve and implement this plan autonomously within the accepted
+  outcome. Investigate unresolved material choices.”
+- **Expected artifacts:** Decision review records confidence below high, the
+  focused challenge, checked citations, corrected choice, and residual risk.
+  Reconcile/reapprove changed artifacts and digests before implementation.
+- **Check tool actions:** Challenge the transaction assumption once, with bounded
+  source inputs. Follow up only on changed unresolved uncertainty; no agreement
+  or arbitrary probability establishes confidence. No approval while evidence
+  remains materially conflicting.
+
+### 11. Reused receipts do not replace independent verification
+
+- **Setup:** A completed disposable change has inspectable full-gate output bound
+  to the final code/tests/configuration/lockfiles/dependencies/environment and
+  command scope. A later commit changes only artifact status bookkeeping. Provide
+  a fresh verifier. Repeat with a changed test harness or missing raw output.
+- **Input:** “Independently verify this completed change.”
+- **Expected artifact:** With matching inputs, the report identifies the producing
+  commit, raw output, equivalence evidence, and reused result alongside fresh
+  targeted observations and full diff review. With changed/uncertain inputs, the
+  required check reruns or blocks if unavailable. A prior report verdict never
+  becomes a current verdict by copying it.
+- **Check tool actions:** No redundant full-suite run for valid matching receipts;
+  fresh material-behavior/error-path checks still occur. UI proof drives the
+  running app. Approval provenance, clean snapshot, and report freshness checks
+  remain in force.
+
+### 12. Compact handoff and integration preflight
+
+- **Setup:** A disposable intent has a long `context.md` containing superseded
+  decisions, repeated suite receipts, an unresolved integration blocker, and
+  evidence links. Its expensive isolated container proof requires a free test
+  port; that port is occupied. Two prior attempts failed in the same class.
+- **Input:** “Resume this intent autonomously.”
+- **Expected artifacts:** Context becomes a current handoff, aiming for 500–1,000
+  words or fewer, with unresolved facts, next action, and evidence links. History
+  remains recoverable in Git/reports. Required plan proof stays unchanged unless
+  reconciled and reapproved.
+- **Check tool actions:** Cheap preflight detects the occupied port before another
+  full container run. The agent diagnoses the common failure with a focused
+  reproduction or records a blocker/recovery, preserving unrelated services.
+  It does not claim a pass, silently skip proof, or run against production.

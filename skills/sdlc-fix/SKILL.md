@@ -8,7 +8,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.2"
+  version: "1.3"
 ---
 
 # sdlc-fix
@@ -36,12 +36,18 @@ git ls-files --others --exclude-standard
 
 Preserve all existing work. Do not reset, stash, clean, or include unrelated changes. If an existing staged or unstaged diff touches a path you need to edit, use an isolated worktree or separate the exact hunks before proceeding; `git commit --only` commits the selected path's full working-tree content. If you cannot separate ownership safely, stop before editing that path. For unrelated staged files, keep them staged and commit this fix with an explicit path-only commit (`git commit --only -- <owned-paths>`), after reviewing exactly what that command will include. Never use `git add -A`.
 
+## Confidence and check scope
+
+Keep the implementer on related work. A separate decision challenger is needed only when confidence is below high: the outcome/constraints, current-source support, evidence for relevant contracts and important failure modes, and absence of unresolved material assumptions must all hold for high confidence. Consequential behavior needs stronger evidence. A missing preference or authority needs the user. Challenge the strongest uncertainty with bounded inputs; reuse resolved evidence and avoid repeated agent polling. Required consequential independent verification remains in place regardless of confidence.
+
+Use focused affected checks in the local loop. Run a full suite when repository instructions or the change's integration risk require it; give final validation one owner rather than repeat it in both implementation and review. Before expensive isolated checks, verify candidate identity and relevant dependencies, ports, fixtures/schema, and probes cheaply. After two failures of the same class, reassess with a focused reproduction before retrying the full gate.
+
 ## Work
 
 1. Read applicable repository instructions and the affected source. For a bug, establish its reported failure and cause; run the original reproduction before editing when practical. Do not claim reproduction if it could not be exercised.
 2. Make the smallest root-cause change. For a refactor, state the behavior that must remain true. Preserve applicable validation, error handling, security, and accessibility.
 3. Run the original reproduction and relevant checks. Read their output. A regression test should fail for the reported reason when a durable automated check is useful; otherwise record the concrete reproduction and why a test does not fit. If the required environment or permission is unavailable, record a blocked result rather than a pass.
-4. For a consequential change, ask the independent reviewer to find the strongest evidence-backed reason the fix could be wrong, inspect the relevant source and tests in a fresh context, and name evidence that would settle each objection. Resolve findings or stop blocked. Summarize the review and any resolved dissent in the commit body so the reasoning survives the session.
+4. For a consequential change, the fresh independent reviewer inspects the relevant source and tests and owns final validation. It independently reproduces the fixed behavior and important failure paths; a separate decision challenger is conditional on confidence. Existing check receipts may supplement review only when inspectable results, code/tests/configuration, command scope, dependencies, and environment match the reviewed snapshot; rerun if uncertain. Never accept an implementation-session claim as proof. Resolve findings or stop blocked. Summarize the review and any resolved dissent in the commit body so the reasoning survives the session.
 5. Review the final diff and confirm no unrelated path or user change is included. Commit only the verified fix. Follow Conventional Commits 1.0.0: `type(scope): imperative summary` (scope optional; use `fix` for bugs or `refactor` for behavior-preserving changes). Add a blank line and a sentence explaining why; mark breaking changes with `!` or a `BREAKING CHANGE:` footer. Follow the ownership preflight; do not commit if the selected paths contain work whose ownership is ambiguous. Leave no fix files dirty. Do not push unless the user asks.
 
 When the request follows an incident or escaped defect, identify how the defect passed earlier checks and add a durable prevention that fits the cause: a regression test, clearer contract, missing diagnostic, or focused repository instruction. Route broader product changes through `sdlc-plan`.

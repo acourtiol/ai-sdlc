@@ -27,7 +27,7 @@ Explore helps shape an idea. Plan writes the intent, design writes requirements 
 | `sdlc-archive` | moves the folder | validated passing report and completed artifacts |
 | `sdlc-continue` | resumes one intent or runs the authorized open-intent queue | an in-progress change, or an explicit autonomous queue request |
 
-Each skill owns its artifact template and can be installed separately. A full workflow needs the relevant skills together. The autonomous queue requires `sdlc-continue`, `sdlc-plan` (to accept existing draft intents), `sdlc-design`, `sdlc-apply`, `sdlc-verify`, and `sdlc-archive`, plus a host session that can dispatch fresh reviewers. `sdlc-continue` includes the deterministic artifact validator used by the archive gate. No scheduler or daemon is included.
+Each skill owns its artifact template and can be installed separately. A full workflow needs the relevant skills together. The autonomous queue requires `sdlc-continue`, `sdlc-plan` (to accept existing draft intents), `sdlc-design`, `sdlc-apply`, `sdlc-verify`, and `sdlc-archive`, plus a host session that can dispatch a fresh final verifier and any needed decision challenger. `sdlc-continue` includes the deterministic artifact validator used by the archive gate. No scheduler or daemon is included.
 
 The validator and fingerprint scripts require Python 3.8 or newer and use only the standard library. The autonomous queue checks for the complete skill bundle and a working Python interpreter before processing intents.
 
@@ -51,9 +51,23 @@ Verification uses an independent subagent or a separate fresh session with an ex
 
 After creating and exploring one or more `intent.md` files, explicitly ask `sdlc-continue` to run all open intents autonomously. This is an opt-in workflow for existing intents; it does not create new ones. It inventories active intent folders, skips `intent/archive/` and context-only folders, then processes independent changes serially, rechecking the repo between them. A valid passing report allows the workflow to mark the artifact statuses done and archive the folder.
 
-The request authorizes local artifact decisions, implementation, commits, completion statuses, and archival for that queue. Before each material intent, spec, or plan decision, the orchestrator asks a fresh research subagent to find the strongest counterargument, alternative, failure mode, and evidence that could disprove the proposed choice. It checks the evidence and records its rationale, dissent, and remaining risk in the artifact. The research agent advises; the orchestrator makes and owns the decision. Agreement between agents is not proof. If a decision depends on a missing business preference, external authority, or unavailable evidence, that slug is recorded as blocked and the queue continues with independent intents.
+The request authorizes local artifact decisions, implementation, commits, completion statuses, and archival for that queue. At each intent, spec, or plan gate, the orchestrator records confidence and evidence under Decision review. Confidence is high only when all four conditions hold: the outcome and constraints are explicit; current source supports the approach; relevant contracts and important failure modes have evidence; and no material assumption or conflicting evidence remains unresolved. Sensitive data, migrations, concurrency, and irreversible behavior need stronger evidence to qualify. This is an evidence threshold, not a calibrated probability.
+
+Only below high confidence does it dispatch a fresh research challenger for the strongest unresolved assumption. It checks citations and records the resolution and residual uncertainty. Supported decisions carry forward across gates; changed uncertainty gets a focused follow-up. Agent agreement is not evidence. The orchestrator owns the decision; high confidence does not waive approval digests, required checks, or final independent verification. If a decision depends on a missing business preference, external authority, or unavailable evidence, that slug is recorded as blocked and the queue continues with independent intents.
 
 The queue does not authorize pushing, deployment, production changes, destructive operations, external commitments, or material cost/security exceptions. It runs only while the host keeps the session active and can dispatch independent reviewers. These skills cannot schedule themselves, keep running after the host stops, or promise overnight execution. A later explicit request resumes remaining open intents.
+
+## Efficient execution
+
+Keep related planning and implementation in one session. Use a planner or researcher when bounded independent work saves enough time or context to justify the handoff; do not dispatch agents for routine reads or every plan box. Prefer completion notifications and meaningful waits over repeated agent/file polling.
+
+Plan boxes are coherent, reviewable changes with focused checks and a commit each. The fresh final verifier owns one full change-appropriate gate on the completed snapshot. Run full checks earlier when repository instructions or concrete integration risk require them. Consolidate overlapping gates before approval; reconcile and reapprove existing plans before changing required proof.
+
+The verifier can reuse an inspectable check receipt only after independently establishing matching code, tests, configuration/lockfiles, dependencies, command scope, and environment. Record its producing commit and raw evidence. Uncertain or changed inputs require a rerun. Receipt reuse never replaces fresh independent diff review, targeted material-behavior checks, or the main UI/error flow; a prior verdict cannot become a new verdict.
+
+Before expensive isolated integration checks, validate cheap prerequisites such as candidate identity, dependencies, ports, fixtures/schema readiness, and probe behavior. After two failures of the same class, reassess with a focused reproduction before another full run. Missing required proof still blocks completion.
+
+Keep optional `context.md` to current unresolved facts absent from the other artifacts, ownership/blockers, the next action, and evidence links. Aim for 500–1,000 words or fewer, allowing justified complex handoffs. Replace superseded entries instead of appending a session journal; Git and reports retain history. Checkpoint consequential handoffs and unfinished turns rather than routine tool results. These defaults apply on future runs; they do not rewrite existing approved product artifacts automatically.
 
 ## Verification and harness capability
 

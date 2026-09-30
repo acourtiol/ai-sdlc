@@ -44,5 +44,9 @@ called out for approval; an owner alone does not resolve it.
 
 ## Decision review
 
-For autonomous approval only: material choice, strongest counterargument from a
-fresh research subagent, evidence checked, decision, and remaining uncertainty.
+For autonomous approval only: decision, confidence, evidence for explicit outcome
+and constraints, current-source support, contracts and important failure modes,
+and unresolved assumptions/conflicts. At high confidence, explain why a challenge
+was skipped. Otherwise record the focused challenge, checked evidence, resolution,
+and residual uncertainty. Reference still-valid upstream evidence without copying
+it. Remove this guidance before approval.
