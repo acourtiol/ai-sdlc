@@ -6,10 +6,10 @@ The skills use the [Agent Skills format](https://agentskills.io/specification). 
 
 ## Install
 
-Choose your target agents explicitly; remove any you do not use:
+Install all skills globally, then choose your target agents in the installer:
 
 ```bash
-npx skills add acourtiol/ai-sdlc -g -a claude-code -a cursor -a codex -a opencode -s '*' -y
+npx skills add acourtiol/ai-sdlc -g -s '*'
 ```
 
 List skills from a local checkout with `npx skills add . -l`. Update installed copies with `npx skills update`. Artifact validation requires Python 3.8+ and uses only the standard library.
