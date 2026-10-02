@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.5"
+  version: "2.6"
 ---
 
 # sdlc-design
@@ -24,6 +24,8 @@ Need `intent/<slug>/intent.md` with `status: accepted` (or an accept in this ses
 The workflow authorizes owned artifact commits unless the user or host restricts them. Before writing, record the repository, branch, HEAD, staged paths, and working-tree/untracked paths. Use a clean isolated worktree if existing work would overlap or be absorbed; otherwise stop the commit and explain the conflict. Never reset or stash someone else's changes. Stage only this concern. Use Conventional Commits (`type(scope): imperative summary`, optional scope), a blank line, and a sentence on why; mark breaking changes with `!` or `BREAKING CHANGE:`. Do not push unless asked.
 
 Keep code implementation to one active lane per product repo; parallel design research is read-only, and added requests do not start another writer. Write a straightforward spec here. Delegate bounded read-only research when substantial independent work justifies the handoff; use its evidence to write the artifact here. Reuse researchers for related questions, pass bounded inputs, and use completion notifications instead of repeatedly polling. A normal run waits for human approval; autonomous approval follows the confidence rule below.
+
+When changing a shared command, state invariant, or persistence contract, identify existing affected callers and mutation producers in Design; cover their retained behavior or an explicitly accepted change with scenarios. Include older clients, background jobs, and adjacent flows only where they use that contract. A new-path test does not establish compatibility for existing writers.
 
 ## Confidence and challenge
 

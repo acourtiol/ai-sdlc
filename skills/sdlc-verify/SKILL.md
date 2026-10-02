@@ -8,7 +8,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.4"
+  version: "2.5"
 ---
 
 # sdlc-verify
@@ -46,6 +46,8 @@ Reuse an earlier check receipt only if you independently inspect raw output and 
 Even with valid receipts, independently inspect the full diff and gather fresh targeted evidence for material behavior and important failure paths. For UI changes, drive the main flow and an error path in the running app and preserve screenshot/DOM evidence; tests alone do not prove that flow. For non-UI changes, run the actual project verification command unless its required results are covered by a valid receipt. Cover every spec scenario, mapping shared checks to their named scenarios rather than rerunning a suite for each one.
 
 Before expensive integration proof, cheaply check candidate identity, dependencies, ports, fixtures/schema readiness, isolation, and relevant probe behavior. Use the smallest meaningful probe of the actual launcher and child environment, rather than parent configuration alone. After a failure, retain actionable phase/cause evidence and use the narrowest feasible reproduction before another full run; explain when that requires the full check. Reconcile a changed source candidate and pinned proof inputs under the existing approval policy; a diagnostic repair is not proof of the originally pinned candidate. After two failures of the same class, stop repeating the full gate and return a precise blocker/recovery or evidence-backed failure for a focused reassessment. Do not waive proof or run against production.
+
+For a changed shared invariant or command, independently identify affected existing callers/writers and exercise their important retained behavior and success/error acknowledgements. Check this against intent and source even if the plan covers only the new path. A missing material compatibility scenario is a design/plan gap to reconcile, not grounds for a pass. For schema changes, inspect migration identity/order and require evidence that upgrade over the applicable existing migration history actually applies the change and preserves data. A fresh-database pass or successful build is not equivalent. Existing matched receipts may cover these checks under the reuse rule above; do not add a duplicate full gate.
 
 ## Report and verdict
 

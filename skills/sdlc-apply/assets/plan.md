@@ -39,7 +39,13 @@ owner: focused checks per slice, one final full change-appropriate gate owned by
 fresh verifier. Consolidate overlapping gates before approval; map shared checks
 to requirements/scenarios. Record cheap prerequisites before expensive integration
 proof and the focused reassessment after two failures of the same class. An earlier
-full gate needs a repository requirement or concrete integration risk.
+full gate needs a repository requirement or concrete integration risk. Name an early
+probe of the affected real action through the normal launcher. For changed shared
+invariants, cover affected existing callers/writers and their acknowledgements.
+For schema changes, check ordering against already-applied migration history and
+prove upgrade/data preservation on a disposable database; fresh creation alone
+is insufficient. Use authorized baseline evidence and retain missing release
+prerequisites explicitly.
 
 ## Review route
 

@@ -27,7 +27,9 @@ The system SHALL do the observable thing.
 
 ## Design
 
-How it fits the existing codebase: surfaces, data, APIs, ownership.
+How it fits the existing codebase: surfaces, data, APIs, ownership. For a changed
+shared contract or state invariant, name affected existing callers/writers and
+link their retained behavior or approved change to scenarios.
 
 ## Gotchas / policy flags
 

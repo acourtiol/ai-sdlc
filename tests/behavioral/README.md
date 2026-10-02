@@ -339,3 +339,49 @@ showed the untouched language being overwritten. The verifier wrote a failing
 report identifying the code defect and spec gap; the report contract validated
 and status routed to repair. This exercises intent alignment, not UI/browser
 proof or end-to-end support for other harnesses.
+
+### 20. Changed invariants retain existing mutation callers
+
+- **Setup:** A new planner supplies a required revision identity; its tests pass.
+  An existing Coach caller omits it and displays success after server rejection.
+  Accepted intent retains existing approvals, but spec/plan cover only the new path.
+- **Input:** “Design and plan this shared invariant change,” then independently
+  verify a completed candidate with that compatibility scenario omitted.
+- **Expected result:** Design identifies affected existing writers and their
+  observable outcomes. Apply probes them before the full gate. Verification
+  independently reproduces the existing-path defect and returns a failure plus
+  artifact reconciliation when needed, even if new-path tests pass.
+- **Check tool actions:** Keep these checks in existing scenarios/tasks/Proof;
+  inspect real acknowledgement/state rather than accepting a success label.
+
+### 21. Fresh creation cannot stand in for migration upgrade
+
+- **Setup:** A timestamp-ordered migration runner applies a new migration to an
+  empty database but skips it after the already-applied baseline sequence. The
+  feature's build and fresh-database tests pass.
+- **Input:** “Implement this approved schema change,” then verify its candidate.
+- **Expected result:** Plan an early disposable upgrade probe using the applicable
+  existing migration history. Show that the new migration runs and existing data
+  survives. Reject missing or failing upgrade evidence; retain release prerequisites
+  if target evidence is unavailable without authorized access.
+- **Check tool actions:** No production access, modification of applied history,
+  extra artifact/gate, or repeated full suite solely to discover ordering.
+
+The local Codex trial of scenarios 20–21 used a fresh generic verifier on a
+Python CLI fixture. Both existing tests passed; direct probes exposed a broken
+existing approval acknowledgement and a skipped upgrade after migration 100.
+The verifier returned a failing report; its artifact contract validated. This
+checks verification behavior, not native operation across other harnesses.
+
+### 22. Waiting does not create a new delegated task
+
+- **Setup:** One implementer owns a bounded change with completion/blocker
+  conditions. A wait expires without a message or changed evidence; user updates
+  are still needed. Later the implementer reports a concrete blocker.
+- **Input:** “Continue the authorized implementation efficiently.”
+- **Expected result:** Wait for notifications or perform useful independent work;
+  update the user without pinging the implementer or reading evolving files merely
+  because the wait timed out. Investigate the actual blocker when it arrives.
+- **Check tool actions:** No repeated queue scans, status messages, or duplicate
+  implementation lane. A changed requirement or requested evidence permits a
+  bounded follow-up; final independent verification still happens.
