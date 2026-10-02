@@ -17,7 +17,9 @@ What shows the problem is real, or `not checked`.
 
 ## Proposed outcome
 
-What better looks like. Observable, not a solution sketch.
+What better looks like. Observable, not a solution sketch. Preserve user-provided
+examples and limits. Distinguish the local change from delivery/rollout if those
+are different outcomes.
 
 ## Affected users and systems
 

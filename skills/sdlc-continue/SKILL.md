@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.3"
+  version: "2.4"
 ---
 
 # sdlc-continue
@@ -15,7 +15,7 @@ Read artifacts and run the next gate for one slug. Skip `intent/archive/`; never
 
 ## Preflight
 
-Run `sh <this-skill-dir>/scripts/status.sh` in the product repo. Follow `next:` after repairing/reapproving malformed or stale artifacts; validation cannot prove claimed behavior. Direct commands are `python3 <this-skill-dir>/scripts/validator.py validate <slug>` and `archive-check <slug>` (adds done statuses). Stop if the next owning skill is unavailable; do not improvise its template or review.
+Resolve this skill's installed directory from the host's skill path; its `assets/` and `scripts/` paths are relative to that directory, not the product repo. Commands use `python3` as an example: select an available Python 3.8+ interpreter and quote resolved paths. Run `python3 "<this-skill-dir>/scripts/validator.py" route` in the product repo (`status.sh` is an optional POSIX wrapper). Follow `next:` after repairing/reapproving malformed or stale artifacts; validation cannot prove claimed behavior. Direct commands are `python3 <this-skill-dir>/scripts/validator.py validate <slug>` and `archive-check <slug>` (adds done statuses). Load the next owning skill by the host's supported mechanism or read its installed `SKILL.md` and needed local resources directly. No slash-command or skill-invocation API is assumed. If that skill or its resources cannot be resolved, hand off with the required skill, artifact path, and next gate; do not improvise its template or review.
 
 Before edits and between slugs, record repo/branch/HEAD and staged/dirty/untracked paths. Isolate overlap or unrelated staged work in a clean worktree, otherwise block. Never reset, stash, or absorb others' changes.
 

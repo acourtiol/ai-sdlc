@@ -6,16 +6,18 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.4"
+  version: "2.5"
 ---
 
 # sdlc-design
 
 Write `intent/<slug>/spec.md` from an accepted intent. In a normal run, wait for approval; an explicitly authorized autonomous queue may approve after the confidence assessment below. On approval, read `sdlc-apply` and execute it from the plan step. Do not implement.
 
-Keep requirements and design in `spec.md`. Do not write a `design.md`.
+Keep requirements and design in `spec.md`. Do not write a `design.md`. Trace the accepted outcome and each material constraint to observable requirements/scenarios; use the user's concrete examples and limits where provided. Do not silently replace the wanted behavior with an easier implementation. Carry missing product decisions forward for resolution, not invented defaults.
 
 ## Before you start
+
+Resolve `assets/` and `scripts/` against this skill's installed directory supplied by the host, not the product repo. Commands use `python3` as an example; choose an available Python 3.8+ interpreter and quote resolved paths. Load a required next skill through the host or its installed `SKILL.md`; if it or its resources are unavailable, hand off at that gate rather than inventing them.
 
 Need `intent/<slug>/intent.md` with `status: accepted` (or an accept in this session). If it is still `draft`, go back to `sdlc-plan`. An existing draft spec may be resumed here; revise it rather than copying the template over it.
 

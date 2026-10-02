@@ -8,7 +8,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.3"
+  version: "2.4"
 ---
 
 # sdlc-verify
@@ -16,6 +16,8 @@ metadata:
 Judge the completed implementation in a fresh subagent or separate fresh session. Write only `intent/<slug>/report.md`; fixes belong to `sdlc-apply`, then new independent verification. The implementer cannot supply a passing verdict.
 
 ## Independent route
+
+Resolve `assets/` and `scripts/` against this skill's installed directory supplied by the host, not the product repo. Commands use `python3` as an example; choose an available Python 3.8+ interpreter and quote resolved paths. Load a required next skill through the host or its installed `SKILL.md`; if it or its resources are unavailable, hand off at that gate rather than inventing them.
 
 Before code, apply records the stable feature review boundary, verifier route, and environment. Dispatch only once a completed committed candidate is available; setup/preflight can stay with the implementer. This review covers source coherence and behavior together, rather than a routine reviewer followed by a verifier. An unattended run requires a dispatchable verifier. Give it no implementing conversation, summary, or conclusions: only repository/slug, artifact and skill/template paths, approved digests, candidate `reviewed_head`, plan base, and expected outcomes/scenarios. Use the host's available delegation mechanism without inherited implementation history, or a separate fresh session with that bounded handoff. No named agent profile or particular model is required. Confirm actual context isolation; a role name or default dispatch behavior does not establish independence. A verifier given implementation history cannot provide an independent pass: record blocked and obtain a fresh route. It independently reads artifacts, source, and raw evidence. A separate session receives the same handoff and records `isolation: fresh-session`; returning the handoff to the implementer is not independent.
 
@@ -43,11 +45,11 @@ Reuse an earlier check receipt only if you independently inspect raw output and 
 
 Even with valid receipts, independently inspect the full diff and gather fresh targeted evidence for material behavior and important failure paths. For UI changes, drive the main flow and an error path in the running app and preserve screenshot/DOM evidence; tests alone do not prove that flow. For non-UI changes, run the actual project verification command unless its required results are covered by a valid receipt. Cover every spec scenario, mapping shared checks to their named scenarios rather than rerunning a suite for each one.
 
-Before expensive integration proof, cheaply check candidate identity, dependencies, ports, fixtures/schema readiness, isolation, and relevant probe behavior. After two failures of the same class, stop repeating the full gate and return a precise blocker/recovery or evidence-backed failure for a focused reassessment. Do not waive proof or run against production.
+Before expensive integration proof, cheaply check candidate identity, dependencies, ports, fixtures/schema readiness, isolation, and relevant probe behavior. Use the smallest meaningful probe of the actual launcher and child environment, rather than parent configuration alone. After a failure, retain actionable phase/cause evidence and use the narrowest feasible reproduction before another full run; explain when that requires the full check. Reconcile a changed source candidate and pinned proof inputs under the existing approval policy; a diagnostic repair is not proof of the originally pinned candidate. After two failures of the same class, stop repeating the full gate and return a precise blocker/recovery or evidence-backed failure for a focused reassessment. Do not waive proof or run against production.
 
 ## Report and verdict
 
-Use `assets/report.md` and retain its headings. Under each Verification subsection write at least one `- PASS | action: ... | observed: ... | evidence: ...` entry (or `FAIL`/`BLOCKED`). Include each requirement name verbatim in the `action:` of a Completeness entry and each scenario name verbatim in the `action:` of a Correctness entry; entries may reference shared receipts/checks. Coherence covers the entire change, trust boundaries, regressions, error handling, existing patterns, and each applicable spec Gotcha's plan check. All plan boxes must be ticked. Cite exact commands/actions and inspectable output, record skipped checks, and pin CRITICAL/WARNING/SUGGESTION findings to `file:line`. Record relevant rollout, migration, recovery, and observation under Release handoff; otherwise `None.`
+Use `assets/report.md` and retain its headings. Before judging spec compliance, check that its requirements and the delivered behavior still satisfy the accepted intent and material constraints. Flag a spec that missed or changed the user's outcome rather than passing an implementation merely because it matches that spec. A material spec gap returns to `sdlc-design` for draft/reapproval, then `sdlc-apply` for dependent plan reconciliation/reapproval before implementation resumes; the verifier writes only its report. Under each Verification subsection write at least one `- PASS | action: ... | observed: ... | evidence: ...` entry (or `FAIL`/`BLOCKED`). Include each requirement name verbatim in the `action:` of a Completeness entry and each scenario name verbatim in the `action:` of a Correctness entry; entries may reference shared receipts/checks. Coherence covers the entire change, trust boundaries, regressions, error handling, existing patterns, and each applicable spec Gotcha's plan check. All plan boxes must be ticked. Cite exact commands/actions and inspectable output, record skipped checks, and pin CRITICAL/WARNING/SUGGESTION findings to `file:line`. Record relevant rollout, migration, recovery, and observation under Release handoff; otherwise `None.`
 
 - `pass`: all required outcomes/checks have evidence, the plan is complete, snapshot and bindings are valid, and no CRITICAL finding remains.
 - `fail`: evidence shows an outcome is wrong, incomplete, or unsafe. Hand off to apply for repair and fresh verification; never flip the report to pass yourself.

@@ -71,16 +71,52 @@ Before expensive isolated integration checks, validate cheap prerequisites such 
 
 Keep optional `context.md` to current unresolved facts absent from the other artifacts, ownership/blockers, the next action, and evidence links. Aim for 500–1,000 words or fewer, allowing justified complex handoffs. Replace superseded entries instead of appending a session journal; Git and reports retain history. Checkpoint consequential handoffs and unfinished turns rather than routine tool results. Keep unfinished plans focused on operative tasks, decisions, and proof, usually 1,000–2,000 words unless current complexity justifies more. Replace superseded rationale and Decision review rather than appending journals; retain task states, base commit, requirements, constraints, ownership, required proof, and unresolved risks. Compact through draft/reapproval, refreshing dependent bindings and invalidating stale reports. Human approval remains human unless autonomous approval is authorized. Leave completed and archived plans intact. These defaults apply on future runs; they do not rewrite existing approved product artifacts automatically.
 
+## Portability contract
+
+The skills use the [Agent Skills format](https://agentskills.io/specification).
+Their artifact and evidence rules are independent of a model, named agent
+profile, slash-command syntax, or delegation API. A capable host needs repository
+file access, Git, an available Python 3.8+ interpreter, and the project's required
+validation tools. The examples use `python3`; select the installed interpreter
+and quote paths. `validator.py route` is the portable status entrypoint;
+`status.sh` is an optional POSIX convenience. Archive uses an ordinary filesystem
+folder move with an absent destination, preserving the artifact bytes.
+
+Resolve each skill's resources against its installed directory. At a handoff,
+load the required skill through the host or read its installed `SKILL.md` and
+needed resources. A missing skill produces a precise handoff at that gate.
+Independent review requires demonstrably separate context without inherited
+implementation history: host delegation or a separately started fresh session
+with the bounded artifact handoff. If neither is available, verification remains
+blocked. An unattended queue additionally needs that route dispatchable during
+the run; an interactive workflow can hand off to a separate session.
+
+Native skill support is documented for [Codex](https://learn.chatgpt.com/docs/build-skills),
+[Claude Code](https://code.claude.com/docs/en/skills),
+[Cursor](https://cursor.com/docs/skills), and
+[OpenCode](https://opencode.ai/docs/skills/). Installation and invocation vary by
+host. Local/global skill installation does not establish availability in a remote
+or cloud execution environment; confirm resources and tools there. This contract
+supports capable harnesses, not an unconditional promise about every agent host.
+
 ## Verification and harness capability
 
 Installation support does not establish end-to-end workflow support. We have not run an acceptance session for all harnesses, so no complete harness is claimed as tested. Use this matrix to record exercised capabilities; update a cell only after a reproducible check in that harness.
 
 | Harness | Skill discovery | Template/resource resolution | Fresh reviewer dispatch | Browser verification |
 | --- | --- | --- | --- | --- |
-| Claude Code | Not verified in this repo | Not verified in this repo | Not verified in this repo | Not verified in this repo |
-| Cursor | Not verified in this repo | Not verified in this repo | Not verified in this repo | Not verified in this repo |
-| Codex | Not verified in this repo | Not verified in this repo | Not verified in this repo | Not verified in this repo |
+| Claude Code | Native smoke blocked by expired OAuth (2026-10-02) | Not exercised by native smoke | Not verified in this repo | Not verified in this repo |
+| Cursor | Native smoke blocked by workspace trust (2026-10-02) | Not exercised by native smoke | Not verified in this repo | Not verified in this repo |
+| Codex (local app sessions) | Catalog and skill loading observed (2026-10-02) | Local resources exercised | Two-step trial and fresh generic intent-mismatch review (2026-10-02) | Not verified in these fixtures |
 | OpenCode | Not verified in this repo | Not verified in this repo | Not verified in this repo | Not verified in this repo |
+
+The 2026-10-02 local checks ran under Python 3.14.7, Codex CLI 0.160.0,
+Claude Code 2.1.287, and Cursor 3.22.12; no OpenCode binary was installed.
+Version/help inspection establishes no workflow capability. Native probes use
+the disposable fixture in behavioral scenario 17; authentication/trust failures
+are blocked, never passes. The tests also exercise direct routing and archive
+validation with separate installed-resource and product paths containing spaces
+and non-ASCII characters. This Linux run does not establish Windows execution.
 
 The OpenCode install target uses `-a opencode`, as shown in the [skills CLI documentation](https://github.com/vercel-labs/skills). This repo has not yet validated discovery, sibling resource lookup, isolated reviewer dispatch, or browser tooling in an OpenCode session. The same capability checks remain open for the other harnesses.
 
@@ -89,6 +125,40 @@ The OpenCode install target uses `-a opencode`, as shown in the [skills CLI docu
 Archiving closes the change record; it does not mean production deployment succeeded. Where relevant, the plan and report should name rollout prerequisites, migrations, recovery or rollback steps, and post-release observations. Deployment remains a separate product-repository activity.
 
 After release, record whether the expected behavior occurred. Feed incidents and escaped defects back through `sdlc-fix` or `sdlc-plan`, and identify the durable prevention—such as a regression check, clearer contract, missing diagnostic, or focused repository instruction. Archive history is not the current product reference; put lasting system knowledge in current documentation, tests, or focused `AGENTS.md` guidance.
+
+## Design basis and feedback
+
+The [Anthropic AI-native SDLC playbook](https://claude.com/blog/the-ai-native-sdlc-playbook)
+provides the artifact loop and human accountability. Its stages are modular;
+these skills adapt the local intent, design, implementation, and verification
+loop rather than reproduce Claude-specific infrastructure. Deployment and
+maintenance remain product-owned until an integration is requested.
+
+[OpenSpec](https://github.com/Fission-AI/OpenSpec/blob/main/docs/workflows.md)
+informs iterative refinement and completeness/correctness/coherence review;
+[spec-kit](https://github.com/github/spec-kit) informs testable requirements,
+clarification, and distinct paths for features, fixes, and assessment. We retain
+one design file, digest-bound decisions, required independent verification, and
+plain historical archive rather than import their whole artifact/CLI systems.
+
+Public experience is input, not proof of an improvement. Examples include
+[spec-kit's token-budget extension](https://github.com/tinesoft/spec-kit-token-budget),
+[OpenSpec's unavailable-workflow report](https://github.com/Fission-AI/OpenSpec/issues/1734),
+and its [verification-of-removed-behavior bug](https://github.com/Fission-AI/OpenSpec/issues/1959).
+They motivate compact current artifacts, capability checks, and verification
+against the actual accepted outcome. Their anecdotes and reported savings do not
+establish this workflow's performance.
+
+Evaluate representative product changes through their existing plans/reports
+and session telemetry: time from approval to independently verified delivery,
+failed checks and repair cycles, repeated product corrections, and missed
+requirements or escaped defects. Separate environment/setup failures from
+workflow handoffs. Distinguish new input, cached/repeated input, and output where
+telemetry provides them; do not sum cumulative counters or equate processed input
+with fresh context or spend. Compare similar scopes across several runs, retaining
+required proof and human outcome acceptance. Do not add artifacts or a reporting
+gate solely to collect these measures. A skill change earns its place through
+observed improvement without worse correctness or intent alignment.
 
 ## Project constraints
 

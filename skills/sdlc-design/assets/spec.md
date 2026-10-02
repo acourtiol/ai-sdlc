@@ -12,7 +12,8 @@ approved_digest: pending
 ## Requirements
 
 What the system must do. Testable. Not file paths. One block per requirement,
-each with at least one scenario.
+each with at least one scenario. Trace the accepted outcome and material
+constraints to these requirements; preserve user-provided examples and limits.
 
 ### Requirement: short name
 

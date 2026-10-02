@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.3"
+  version: "2.4"
 ---
 
 # sdlc-plan
@@ -14,6 +14,8 @@ metadata:
 Write `intent/<slug>/intent.md` from the user's idea, preserving their wording for the outcome. In a normal run, wait for acceptance; an explicitly authorized autonomous queue may accept an existing draft after the confidence assessment below. On acceptance, read `sdlc-design` and execute it.
 
 ## Before you start
+
+Resolve `assets/` and `scripts/` against this skill's installed directory supplied by the host, not the product repo. Commands use `python3` as an example; choose an available Python 3.8+ interpreter and quote resolved paths. Load a required next skill through the host or its installed `SKILL.md`; if it or its resources are unavailable, hand off at that gate rather than inventing them.
 
 Triage before you write. A feasibility question is a spike: answer it, do not open an intent. A bounded bug or behavior-preserving refactor of an existing flow goes to `sdlc-fix`, without an intent. An intent is for work that changes what the product does. File count alone does not decide the path. Use `sdlc-explore` for a shapeless idea; when routing is ambiguous, take the heavier path. Record evidence of the problem or `not checked`.
 

@@ -8,7 +8,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.5"
+  version: "1.6"
 ---
 
 # sdlc-fix
@@ -40,7 +40,7 @@ Preserve all existing work. Do not reset, stash, clean, or include unrelated cha
 
 Keep one active implementation lane per product repo through its final review; implement here by default or retain one delegated owner. Parallel research is read-only. Queue other fixes/features unless explicitly reprioritized, checkpointing before a switch. A separate decision challenger is needed only when confidence is below high: the outcome/constraints, current-source support, evidence for relevant contracts and important failure modes, and absence of unresolved material assumptions must all hold for high confidence. Consequential behavior needs stronger evidence. A missing preference or authority needs the user. Challenge the strongest uncertainty with bounded inputs; reuse resolved evidence and avoid repeated agent polling. Required consequential independent verification remains in place regardless of confidence.
 
-Use focused affected checks in the local loop. Run a full suite when repository instructions or the change's integration risk require it; give final validation one owner rather than repeat it in both implementation and review. Before expensive isolated checks, verify candidate identity and relevant dependencies, ports, fixtures/schema, and probes cheaply. After two failures of the same class, reassess with a focused reproduction before retrying the full gate.
+Use focused affected checks in the local loop. Run a full suite when repository instructions or the change's integration risk require it; give final validation one owner rather than repeat it in both implementation and review. Before expensive isolated checks, verify candidate identity and relevant dependencies, ports, fixtures/schema, and probes cheaply. Use the smallest meaningful probe of the actual launcher and child environment, rather than parent configuration alone. After a failure, retain actionable phase/cause evidence and use the narrowest feasible reproduction before another full run; explain when that requires the full check. Reconcile a changed source candidate and pinned proof inputs under the existing approval policy; a diagnostic repair is not proof of the originally pinned candidate. After two failures of the same class, reassess with a focused reproduction before retrying the full gate.
 
 ## Work
 

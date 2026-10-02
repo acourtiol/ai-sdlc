@@ -36,6 +36,10 @@ For each check, use `- PASS | action: <exact command or user action> | observed:
 ### Completeness
 
 Name every spec requirement and its check entry. Confirm every plan box is ticked.
+Compare the delivered result with the original accepted intent and constraints;
+a spec that missed the wanted outcome cannot justify a pass. Report a material
+spec gap for `sdlc-design` draft/reapproval, followed by dependent plan
+reconciliation/reapproval in `sdlc-apply`; do not edit those artifacts here.
 
 ### Correctness
 

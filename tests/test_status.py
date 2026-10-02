@@ -2,7 +2,9 @@
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
+import shutil
 import subprocess
+import sys
 import unittest
 
 
@@ -83,7 +85,7 @@ class ProductRepo:
         return digest
 
     def digest(self, relative):
-        return command("python3", str(FINGERPRINT), relative, cwd=self.root).stdout.strip()
+        return command(sys.executable, str(FINGERPRINT), relative, cwd=self.root).stdout.strip()
 
     @staticmethod
     def markdown(fields, body):
@@ -250,11 +252,11 @@ class StatusRouterTests(unittest.TestCase):
         self.repo = ProductRepo(self.temp.name)
 
     def route(self):
-        result = command("sh", str(STATUS), cwd=self.repo.root)
+        result = command(sys.executable, str(VALIDATOR), "route", cwd=self.repo.root)
         return result.stdout.split("  next: ", 1)[1].strip()
 
     def archive_check(self):
-        return command("python3", str(VALIDATOR), "archive-check", self.repo.slug, str(self.repo.root), cwd=self.repo.root, check=False)
+        return command(sys.executable, str(VALIDATOR), "archive-check", self.repo.slug, str(self.repo.root), cwd=self.repo.root, check=False)
 
     def mutate_report(self, verdict="pass", isolation="subagent", findings="None.", not_checked="None."):
         self.repo.write_report(verdict, isolation, findings, not_checked)
@@ -263,6 +265,24 @@ class StatusRouterTests(unittest.TestCase):
     def test_valid_content_bound_report_routes_to_archive(self):
         self.assertEqual(self.route(), "sdlc-archive")
         self.assertEqual(self.archive_check().returncode, 0)
+
+    @unittest.skipUnless(shutil.which("sh") and shutil.which("python3"), "optional POSIX wrapper unavailable")
+    def test_optional_posix_wrapper_matches_portable_python_route(self):
+        wrapped = command("sh", str(STATUS), cwd=self.repo.root)
+        direct = command(sys.executable, str(VALIDATOR), "route", cwd=self.repo.root)
+        self.assertEqual(wrapped.stdout, direct.stdout)
+
+    def test_portable_checks_resolve_spaced_resource_and_product_paths(self):
+        with TemporaryDirectory(prefix="ai sdlc é ") as temporary:
+            root = Path(temporary)
+            repo = ProductRepo(root / "product repo")
+            resources = root / "installed skill" / "scripts"
+            shutil.copytree(CONTINUE_SCRIPTS, resources, ignore=shutil.ignore_patterns("__pycache__"))
+            validator = resources / "validator.py"
+            route = command(sys.executable, str(validator), "route", str(repo.root), cwd=root)
+            self.assertIn("next: sdlc-archive", route.stdout)
+            checked = command(sys.executable, str(validator), "archive-check", repo.slug, str(repo.root), cwd=root)
+            self.assertIn("example: valid", checked.stdout)
 
     def approve_with_high_confidence(self):
         review = """
