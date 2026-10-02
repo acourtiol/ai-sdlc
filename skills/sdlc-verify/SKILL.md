@@ -8,7 +8,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.2"
+  version: "2.3"
 ---
 
 # sdlc-verify
@@ -17,7 +17,7 @@ Judge the completed implementation in a fresh subagent or separate fresh session
 
 ## Independent route
 
-Before code, apply records the stable feature review boundary, verifier route, and environment. Dispatch only once a completed committed candidate is available; setup/preflight can stay with the implementer. This review covers source coherence and behavior together, rather than a routine reviewer followed by a verifier. An unattended run requires a dispatchable verifier. Give it no implementing conversation, summary, or conclusions: only repository/slug, artifact and skill/template paths, approved digests, candidate `reviewed_head`, plan base, and expected outcomes/scenarios. When the host supports `fork_turns`, the caller must explicitly set `fork_turns: "none"`; otherwise disable history inheritance through the equivalent setting or use a separate session. A verifier given implementation history cannot provide an independent pass: record blocked and obtain a fresh route. It independently reads artifacts, source, and raw evidence. A separate session receives the same handoff and records `isolation: fresh-session`; returning the handoff to the implementer is not independent.
+Before code, apply records the stable feature review boundary, verifier route, and environment. Dispatch only once a completed committed candidate is available; setup/preflight can stay with the implementer. This review covers source coherence and behavior together, rather than a routine reviewer followed by a verifier. An unattended run requires a dispatchable verifier. Give it no implementing conversation, summary, or conclusions: only repository/slug, artifact and skill/template paths, approved digests, candidate `reviewed_head`, plan base, and expected outcomes/scenarios. Use the host's available delegation mechanism without inherited implementation history, or a separate fresh session with that bounded handoff. No named agent profile or particular model is required. Confirm actual context isolation; a role name or default dispatch behavior does not establish independence. A verifier given implementation history cannot provide an independent pass: record blocked and obtain a fresh route. It independently reads artifacts, source, and raw evidence. A separate session receives the same handoff and records `isolation: fresh-session`; returning the handoff to the implementer is not independent.
 
 For consequential changes (authorization, sensitive data, migrations or irreversible operations, financial calculations, safety), inspect the exact commit in a disposable checkout with limited test credentials. Never run consequential checks against production. Missing isolation, access, or an independent route is `blocked`.
 

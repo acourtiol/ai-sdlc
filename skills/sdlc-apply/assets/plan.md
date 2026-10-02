@@ -43,9 +43,11 @@ full gate needs a repository requirement or concrete integration risk.
 
 ## Review route
 
-Name the fresh verifier subagent or separate fresh-session handoff capability,
-stable completed-feature boundary, environment and access. Explicitly disable
-history inheritance (`fork_turns: "none"` where supported). Combine source review
+Name the fresh verifier subagent or separate fresh-session handoff capability
+available in this host, along with the stable completed-feature boundary,
+environment and access. This assigns a task, not a required agent profile. Prevent
+inheritance of implementation history using the host's available mechanism or a
+separate fresh session; confirm actual isolation. Combine source review
 and behavioral verification; dispatch when the committed candidate is ready,
 not to wait for code. An autonomous run needs a dispatchable verifier before code.
 Any interim review needs an explicit unresolved risk or binding requirement.

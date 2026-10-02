@@ -8,7 +8,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.4"
+  version: "1.5"
 ---
 
 # sdlc-fix
@@ -21,7 +21,7 @@ This path fits a concrete bug in an existing readable flow or a behavior-preserv
 
 Use `sdlc-plan` if investigation reveals a new capability, unresolved product choice, architectural decision, or work spanning multiple subsystems. Do not disguise expanded scope as a fix.
 
-Escalate assurance for changes affecting authorization, sensitive data, irreversible operations or migrations, financial calculations, safety-critical behavior, or another consequential invariant. Before editing, establish an independent reviewer route at the stable completed-fix boundary. When dispatch supports `fork_turns`, explicitly set `fork_turns: "none"`; otherwise disable inherited history with the equivalent setting or use a separate session. A conversation-forked review cannot pass as independent. If the host cannot provide that capability, do not make an autonomous consequential fix; state the blocker. Use a disposable checkout and a limited test environment for the independent check when the change could damage data or depend on privileged access. No review route makes the work blocked, not verified.
+Escalate assurance for changes affecting authorization, sensitive data, irreversible operations or migrations, financial calculations, safety-critical behavior, or another consequential invariant. Before editing, establish an independent reviewer route at the stable completed-fix boundary. Use the host's available delegation mechanism without inherited implementation history, or a separate fresh session with a bounded handoff. No named agent profile or particular model is required. Confirm actual isolation; review with inherited implementation history cannot pass as independent. If the host cannot provide that capability, do not make an autonomous consequential fix; state the blocker. Use a disposable checkout and a limited test environment for the independent check when the change could damage data or depend on privileged access. No review route makes the work blocked, not verified.
 
 ## Ownership preflight
 

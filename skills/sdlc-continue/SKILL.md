@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.2"
+  version: "2.3"
 ---
 
 # sdlc-continue
@@ -33,7 +33,7 @@ Record confidence and evidence under Decision review for autonomous approval. At
 
 Keep one active implementation lane per product repo, including final review. This session implements by default; if delegated, one implementer keeps the related change. Parallel work is read-only research. Queue added requests until the current feature passes or is explicitly blocked; an explicit user reprioritization requires a committed handoff before switching. Disjoint files do not justify overlapping migration or verification lanes. Do not start a final verifier merely to wait for unfinished code.
 
-Final review combines source and behavior on a stable completed commit. When dispatch supports `fork_turns`, set it explicitly to `"none"` (or the host's equivalent fresh setting); never inherit implementation history. Use completion notifications or meaningful waits instead of repeatedly listing agents/polling files.
+Final review combines source and behavior on a stable completed commit. Use a review context without inherited implementation history through the host's available delegation mechanism or a separate fresh session. Confirm isolation rather than relying on default dispatch behavior; no named agent profile or particular model is required. Use completion notifications or meaningful waits instead of repeatedly listing agents/polling files.
 
 ## One slug
 

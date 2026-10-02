@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.3"
+  version: "2.4"
 ---
 
 # sdlc-design
@@ -21,7 +21,7 @@ Need `intent/<slug>/intent.md` with `status: accepted` (or an accept in this ses
 
 The workflow authorizes owned artifact commits unless the user or host restricts them. Before writing, record the repository, branch, HEAD, staged paths, and working-tree/untracked paths. Use a clean isolated worktree if existing work would overlap or be absorbed; otherwise stop the commit and explain the conflict. Never reset or stash someone else's changes. Stage only this concern. Use Conventional Commits (`type(scope): imperative summary`, optional scope), a blank line, and a sentence on why; mark breaking changes with `!` or `BREAKING CHANGE:`. Do not push unless asked.
 
-Keep code implementation to one active lane per product repo; parallel design research is read-only, and added requests do not start another writer. Write a straightforward spec here. Use a read-only planner when substantial independent research or design complexity justifies the handoff; it returns markdown and this session writes the artifact. Reuse researchers for related questions, pass bounded inputs, and use completion notifications instead of repeatedly polling. A normal run waits for human approval; autonomous approval follows the confidence rule below.
+Keep code implementation to one active lane per product repo; parallel design research is read-only, and added requests do not start another writer. Write a straightforward spec here. Delegate bounded read-only research when substantial independent work justifies the handoff; use its evidence to write the artifact here. Reuse researchers for related questions, pass bounded inputs, and use completion notifications instead of repeatedly polling. A normal run waits for human approval; autonomous approval follows the confidence rule below.
 
 ## Confidence and challenge
 
@@ -32,7 +32,7 @@ Record confidence and evidence under Decision review for autonomous approval. At
 ## Steps
 
 1. Resolve slug (the user names it, or the only accepted intent with no spec or a draft spec).
-2. Read `intent.md`, the existing `spec.md` if present, and any `context.md`; verify contextual claims against the product repository and carry forward only unresolved facts relevant to the design. Prepare requirements, design, and applicable policy gotchas here or through the justified read-only planner. Preserve valid decisions in an existing spec; replace superseded rationale instead of appending review chronology. Check prerequisite contracts/migrations and the intended delivery baseline in Design/Gotchas before choosing an approach; label unrequested release proof as outstanding, not implicit permission. Use `### Requirement:` blocks with one SHALL each and at least one `#### Scenario:` in WHEN / THEN form. Quote numeric/enum/validation limits verbatim in Scenario THEN, not only Design; these scenarios are the verifier's test cases.
+2. Read `intent.md`, the existing `spec.md` if present, and any `context.md`; verify contextual claims against the product repository and carry forward only unresolved facts relevant to the design. Prepare requirements, design, and applicable policy gotchas here, using bounded read-only research when justified. Preserve valid decisions in an existing spec; replace superseded rationale instead of appending review chronology. Check prerequisite contracts/migrations and the intended delivery baseline in Design/Gotchas before choosing an approach; label unrequested release proof as outstanding, not implicit permission. Use `### Requirement:` blocks with one SHALL each and at least one `#### Scenario:` in WHEN / THEN form. Quote numeric/enum/validation limits verbatim in Scenario THEN, not only Design; these scenarios are the verifier's test cases.
 3. Copy `assets/spec.md` into `intent/<slug>/spec.md` only when creating it; otherwise revise the existing draft. Keep `status: draft` until approval. Set `intent_digest` to the current accepted intent's `approved_digest`; a mismatch means the intent changed and must be reconciled first. Compact `context.md` to unresolved facts absent from the artifacts, next action, and evidence links; aim for 500–1,000 words or fewer. Remove transferred or superseded entries, preserving history in Git; remove the file if empty. Commit these edits before the next step.
 4. Before approval, check unresolved choices that could materially change architecture, safety behavior, or acceptance criteria. Research answers available in the repo. In a normal run, ask the user about decisions that only they can make, revise and commit the draft, then seek approval. An explicit proposed default may be accepted in the spec review; an owner alone is insufficient. Lower-impact questions may carry an owner or default.
 5. In an autonomous run, assess confidence for new or changed material decisions. Record supporting evidence and any needed challenge under Decision review. Keep established decisions unless current evidence invalidates them; do not challenge them again just because this is a new gate. If a choice needs missing preference, authority, or evidence, leave the spec draft and record the blocker for the queue.

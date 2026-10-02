@@ -171,8 +171,8 @@ unrequested source edits, commits, pushes, deployments, or other side effects.
   high-confidence basis and why challenges were skipped. The plan uses coherent
   boxes with focused checks and one final gate. A fresh independent verifier
   produces the report before completion/archive.
-- **Check tool actions:** No challenger/planner/per-box reviewer dispatch solely
-  because a gate changed. Supported findings carry forward with freshness checks.
+- **Check tool actions:** No decision challenge, delegated planning, or per-box
+  review solely because a gate changed. Supported findings carry forward with freshness checks.
   One implementer handles related work. Independent final verification is fresh;
   no repeated agent-status polling or whole-suite run per scenario. Explicit
   user requests for a challenge still override this default.
@@ -229,8 +229,9 @@ unrequested source edits, commits, pushes, deployments, or other side effects.
 
 - **Setup:** An approved feature has two coherent boxes touching a shared module.
   While the first box is being implemented, introduce another approved feature
-  involving the same schema and validation environment. Provide optional planner,
-  reviewer, and coder roles and a fresh verifier route.
+  involving the same schema and validation environment. Provide generic task
+  delegation and a fresh independent review route, without any installed named
+  agent profiles.
 - **Input:** “Implement both changes using the installed workflow. The first
   remains the priority; run autonomously within the approved outcomes.”
 - **Expected artifacts:** Finish or block implementation and final verification
@@ -238,21 +239,22 @@ unrequested source edits, commits, pushes, deployments, or other side effects.
   contract/migration prerequisites and their order. Each completed feature gets
   one independent report bound to its stable committed candidate.
 - **Check tool actions:** The main session or one delegate implements each whole
-  feature. No automatic planner or reviewer per box, no overlapping writers or
-  verifier dispatched to wait for code. Parallel read-only research is allowed.
+  feature. No automatic planning delegation or per-box review, no overlapping
+  writers or verifier dispatched to wait for code. Parallel read-only research is allowed.
   Explicit reprioritization instead checkpoints and switches the active lane.
 
 ### 14. Final review requires explicit history isolation
 
 - **Setup:** A completed committed feature has two boxes and approved artifacts.
-  The host's default dispatch inherits conversation history; `fork_turns` or an
-  equivalent fresh-session option is available.
+  The host's default delegation inherits conversation history; a mechanism for
+  isolating review context or a separate fresh session is available. No named
+  agent profiles are installed.
 - **Input:** “Independently verify this completed feature.”
 - **Expected artifact:** One report combines complete source review and behavioral
   proof at the committed candidate. If implementation history reaches the
   verifier, the verdict is blocked until a genuinely fresh route is used.
-- **Check tool actions:** Inspect the dispatch arguments for explicit
-  `fork_turns: "none"` or equivalent, rather than relying on a role name or a
+- **Check tool actions:** Inspect the host's actual context-isolation configuration
+  or separate-session handoff, rather than relying on a role name or a
   fresh-context assertion. No routine separate source reviewer before the final
   verifier. Required checks and important failure-path evidence still occur.
 
