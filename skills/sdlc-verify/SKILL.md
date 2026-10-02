@@ -8,7 +8,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.1"
+  version: "2.2"
 ---
 
 # sdlc-verify
@@ -17,7 +17,7 @@ Judge the completed implementation in a fresh subagent or separate fresh session
 
 ## Independent route
 
-Before code, `sdlc-apply` records the verifier route and environment in the plan. An unattended run requires a dispatchable verifier. Give it no implementing conversation, summary, or conclusions: only repository/slug, artifact and skill/template paths, approved digests, candidate `reviewed_head`, plan base, and expected outcomes/scenarios. It independently reads artifacts, source, and raw evidence. A separate session receives the same handoff and records `isolation: fresh-session`; returning the handoff to the implementer is not independent.
+Before code, apply records the stable feature review boundary, verifier route, and environment. Dispatch only once a completed committed candidate is available; setup/preflight can stay with the implementer. This review covers source coherence and behavior together, rather than a routine reviewer followed by a verifier. An unattended run requires a dispatchable verifier. Give it no implementing conversation, summary, or conclusions: only repository/slug, artifact and skill/template paths, approved digests, candidate `reviewed_head`, plan base, and expected outcomes/scenarios. When the host supports `fork_turns`, the caller must explicitly set `fork_turns: "none"`; otherwise disable history inheritance through the equivalent setting or use a separate session. A verifier given implementation history cannot provide an independent pass: record blocked and obtain a fresh route. It independently reads artifacts, source, and raw evidence. A separate session receives the same handoff and records `isolation: fresh-session`; returning the handoff to the implementer is not independent.
 
 For consequential changes (authorization, sensitive data, migrations or irreversible operations, financial calculations, safety), inspect the exact commit in a disposable checkout with limited test credentials. Never run consequential checks against production. Missing isolation, access, or an independent route is `blocked`.
 
@@ -25,7 +25,7 @@ For consequential changes (authorization, sensitive data, migrations or irrevers
 
 Final independent verification is mandatory. A separate decision challenger is conditional: confidence is high only when outcome/constraints are explicit, current source supports the approach, relevant contracts and important failure modes have evidence, and no material assumption or conflicting evidence remains unresolved. Consequential behavior needs stronger evidence. Agreement or a stated probability is insufficient.
 
-At high confidence, record the evidence and why a separate challenge was skipped under Independent challenge. Otherwise request one fresh, read-only challenger for the strongest unresolved assumption, check its citations, and record resolution and residual uncertainty. A missing preference or authority needs the user. Reuse still-valid decision evidence; focus follow-ups on changed uncertainty. Do not add a second full reviewer just to repeat this verification. Use completion notifications or meaningful waits without repeated status polling.
+At high confidence, record the evidence and why a separate challenge was skipped under Independent challenge. Otherwise request one fresh, read-only challenger (history inheritance disabled) for the strongest unresolved assumption, check its citations, and record resolution and residual uncertainty. A missing preference or authority needs the user. Reuse still-valid decision evidence; focus follow-ups on changed uncertainty. Do not add a second full reviewer just to repeat this verification. Use completion notifications or meaningful waits without repeated status polling.
 
 ## Snapshot and artifact contract
 
@@ -37,7 +37,7 @@ The report records `intent_digest`, `spec_digest`, `plan_digest`, `reviewed_head
 
 ## Validation ownership and evidence
 
-Own one full change-appropriate final gate on the completed snapshot. Follow repository instructions and the approved Proof; do not add a universal suite. Focused implementation checks need not become repeated full gates. Do not silently omit duplicate checks required by an existing approved plan: reconcile/reapprove its proof before verification.
+Own one full change-appropriate final gate on the stable completed feature snapshot. No other writer may change that reviewed checkout or artifact inputs during review; subsequent changes require fresh verification. Parallel research may inspect other work, but another implementation lane waits until review finishes or is blocked. Follow repository instructions and the approved Proof; do not add a universal suite. Focused implementation checks need not become repeated full gates. Do not silently omit duplicate checks required by an existing approved plan: reconcile/reapprove its proof before verification.
 
 Reuse an earlier check receipt only if you independently inspect raw output and provenance and establish that code, tests, configuration/lockfiles, dependencies, command scope, and environment match this snapshot. Record the producing commit, identity of those inputs, command, result, and evidence path. A report/status-only commit need not rerun the suite when those inputs are unchanged. A claim, stale/missing output, changed input, or uncertain equivalence requires a rerun. Never reuse a prior verdict as the current verdict.
 

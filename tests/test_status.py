@@ -328,6 +328,34 @@ independent verification is still required.
         self.assertIn("sdlc-verify (invalid or stale evidence:", self.route())
         self.assertNotEqual(self.archive_check().returncode, 0)
 
+    def test_plan_compaction_requires_reapproval_and_fresh_verification(self):
+        self.approve_with_high_confidence()
+        plan = self.repo.change / "plan.md"
+        fields, body = self.repo.read_frontmatter(plan)
+        original_base = fields["base_commit"]
+        original_tasks = [line for line in body.splitlines() if "- [x]" in line]
+        compact_body = body.split("## Decision review\n", 1)[0] + """## Decision review
+Confidence: high. src/app.py and the read-value scenario establish the explicit
+outcome and caller contract. Focused verification covers failure behavior; no
+material conflicting evidence remains. Superseded rationale is retained in Git.
+"""
+        plan.write_text(self.repo.markdown(fields, compact_body), encoding="utf-8")
+        self.assertIn("reconcile approved plan", self.route())
+        self.assertNotEqual(self.archive_check().returncode, 0)
+        self.repo.plan_digest = self.repo.write_approved("plan.md", compact_body, fields)
+        self.repo.commit("reapprove compact operative plan")
+        self.assertIn("sdlc-verify", self.route())
+        self.assertNotEqual(self.archive_check().returncode, 0)
+        current_fields, current_body = self.repo.read_frontmatter(plan)
+        self.assertEqual(current_fields["base_commit"], original_base)
+        self.assertEqual([line for line in current_body.splitlines() if "- [x]" in line], original_tasks)
+        self.assertIn("## Proof\nRun the focused unit test", current_body)
+        self.repo.reviewed = self.repo.head()
+        self.repo.write_report()
+        self.repo.commit("record fresh verification of compact plan")
+        self.assertEqual(self.route(), "sdlc-archive")
+        self.assertEqual(self.archive_check().returncode, 0)
+
     def test_frontmatter_only_report_fails_closed(self):
         report = self.repo.change / "report.md"
         report.write_text(

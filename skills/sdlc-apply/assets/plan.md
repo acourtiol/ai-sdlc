@@ -12,7 +12,7 @@ approved_digest: pending
 
 ## Files that change
 
-Exact paths. New vs edit. One line each on what changes.
+Exact paths. New vs edit. One line each on what changes. Name the single implementation owner; parallel researchers are read-only.
 
 ## Order of work
 
@@ -30,7 +30,7 @@ example before approval.
 Carry each applicable spec Gotcha here with its concrete failure case and a
 matching check in Order of work or Proof. Include only relevant migration,
 external-API, compatibility, security, safety, or accessibility checks. Write
-`None.` if no applicable risks were identified.
+`None.` if no applicable risks were identified. Include prerequisite contract/migration owners and order, implementation versus intended delivery baseline, and shared verification resources where applicable; verify target-source dependencies before implementation, without assuming release permission.
 
 ## Proof
 
@@ -44,8 +44,11 @@ full gate needs a repository requirement or concrete integration risk.
 ## Review route
 
 Name the fresh verifier subagent or separate fresh-session handoff capability,
-the environment it can inspect, and any access needed. An autonomous run needs
-a verifier dispatchable before implementation begins.
+stable completed-feature boundary, environment and access. Explicitly disable
+history inheritance (`fork_turns: "none"` where supported). Combine source review
+and behavioral verification; dispatch when the committed candidate is ready,
+not to wait for code. An autonomous run needs a dispatchable verifier before code.
+Any interim review needs an explicit unresolved risk or binding requirement.
 
 ## Decision review
 
@@ -54,4 +57,4 @@ and constraints, current-source support, contracts and important failure modes,
 and unresolved assumptions/conflicts. At high confidence, explain why a challenge
 was skipped. Otherwise record the focused challenge, checked evidence, resolution,
 and residual uncertainty. Reference still-valid upstream evidence without copying
-it. Remove this guidance before approval.
+it. Replace superseded rationale; keep only current decisions and unresolved risks, preserving history in Git. Aim for a 1,000–2,000-word operative plan unless current scope needs more. Compact through reapproval, retaining task states/base/proof and reconciling downstream digests. Remove this guidance before approval.

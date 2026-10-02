@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.1"
+  version: "2.2"
 ---
 
 # sdlc-continue
@@ -21,7 +21,9 @@ Before edits and between slugs, record repo/branch/HEAD and staged/dirty/untrack
 
 Use Conventional Commits (`type(scope): imperative summary`, optional scope), a blank line, and a sentence on why; mark breaking changes with `!` or `BREAKING CHANGE:`.
 
-Read any `context.md`, then check relevant current claims against source, artifacts, and Git. Compact it to unresolved facts absent from artifacts, next action, and evidence links; aim for 500–1,000 words or fewer. Remove transferred or superseded entries, preserving history in Git and reports. It is a handoff, not authority. Approvals require matching content/dependency digests. A pass requires matching artifact digests and no later implementation change after `reviewed_head`. Status alone proves neither. Reconcile/reapprove legacy unbound artifacts; never invent provenance.
+Read any `context.md`, then check relevant current claims against source, artifacts, and Git. Compact context to unresolved facts absent from artifacts, next action, and evidence links; aim for 500–1,000 words or fewer. Remove transferred or superseded entries, preserving history in Git and reports. It is a handoff, not authority. Approvals require matching content/dependency digests. A pass requires matching artifact digests and no later implementation change after `reviewed_head`. Status alone proves neither. Reconcile/reapprove legacy unbound artifacts; never invent provenance.
+
+While implementation or repair is pending, route an oversized plan to apply for replacement of superseded rationale through draft/reapproval; do not reopen a completed plan merely for size. Preserve operative tasks, proof, base and risks; leave completed/archived records intact. This is reconciliation, not permission to waive checks.
 
 ## Confidence and challenge
 
@@ -29,7 +31,9 @@ High confidence requires all four: explicit outcome/constraints; current-source 
 
 Record confidence and evidence under Decision review for autonomous approval. At high confidence, skip the challenger. Otherwise send one fresh, read-only challenger the strongest unresolved assumption, check citations, resolve objections, and record residual uncertainty. Missing preference/authority needs the user. Carry valid evidence across gates; challenge only changed material uncertainty, with bounded repair follow-ups. Artifact edits still require reapproval and dependent digest reconciliation.
 
-Keep related planning and implementation in one session. Delegate bounded research only when it saves enough work or context to justify coordination; reuse researchers and pass paths/questions rather than the whole conversation. Final verification always gets a fresh context. Use completion notifications where available; otherwise wait meaningfully and do independent work instead of repeatedly listing agents or polling their files.
+Keep one active implementation lane per product repo, including final review. This session implements by default; if delegated, one implementer keeps the related change. Parallel work is read-only research. Queue added requests until the current feature passes or is explicitly blocked; an explicit user reprioritization requires a committed handoff before switching. Disjoint files do not justify overlapping migration or verification lanes. Do not start a final verifier merely to wait for unfinished code.
+
+Final review combines source and behavior on a stable completed commit. When dispatch supports `fork_turns`, set it explicitly to `"none"` (or the host's equivalent fresh setting); never inherit implementation history. Use completion notifications or meaningful waits instead of repeatedly listing agents/polling files.
 
 ## One slug
 
@@ -54,10 +58,10 @@ Report progress as `N/M boxes ticked` when a plan exists. A plan with zero or ma
 
 This mode begins only after the user explicitly authorizes it for existing intents. It covers local artifact approvals, implementation, local commits, marking done, and archiving. It does not authorize creating new intents, pushing, deploying, production changes, destructive operations, external commitments, or material cost/security exceptions. Do not ask for per-artifact approval during the run. If a decision requires authority outside this grant, record a specific blocker for that slug and continue with independent work. A prior user restriction still applies.
 
-1. Inventory every `intent/*/` folder except `intent/archive/`. Queue only folders with `intent.md`; leave context-only folders for exploration. Read each intent and identify dependencies, shared files, incompatible outcomes, and work that would make another intent's approved artifacts stale. Assess confidence in material dependency/order choices; use one fresh challenger only for unresolved uncertainty. Do not reread archived intent history without a relevant dependency. Choose a serial order from evidence, not directory order alone. Record the order and assumptions in the run summary; re-evaluate after each slug.
+1. Inventory every `intent/*/` folder except `intent/archive/`. Queue only folders with `intent.md`; leave context-only folders for exploration. Read each intent and identify contract/migration prerequisites, their owners/order, intended delivery baseline, shared validation resources, incompatible outcomes, and work that would stale another artifact. Check target-source prerequisites before coding a change promised for that target; otherwise label local work and its release prerequisites. Assess confidence in material dependency/order choices; use one fresh challenger only for unresolved uncertainty. Do not reread archived intent history without a relevant dependency. Choose a serial order from evidence, not directory order alone. Record the order and assumptions in the run summary; re-evaluate after each slug.
 2. Preflight the full skill bundle (`sdlc-plan`, `sdlc-design`, `sdlc-apply`, `sdlc-verify`, `sdlc-archive`), Python 3.8 or newer for the local validator, Git ownership, and a dispatchable fresh-context verifier before implementation. Check challenger availability when confidence requires one. Keep blocked slugs incomplete. The host must remain active; skills cannot schedule or restart themselves.
 3. For each slug, rerun the status validator and reconcile stale approvals or reports. At each draft gate, the owning skill prepares the artifact and records confidence, supporting evidence, and any needed challenge under Decision review. Reuse supported decisions across gates; challenge only new or changed material uncertainty. After an objection is resolved, avoid another review unless evidence or the governing decision changed. The orchestrator decides within the stated outcome; agent agreement does not create certainty or authority. If no defensible choice fits, leave the gate draft and record the blocker in a short `context.md` with the evidence and exact recovery action; commit only that handoff.
-4. Implement through `sdlc-apply` and obtain an independent `sdlc-verify` report. On fail, repair and reverify within that skill's attempt limit. On blocked verification, record the recovery needed in the blocked report or `context.md`. Never promote a malformed, stale, or unobserved report to pass.
+4. Finish or block one slug, including its independent final review, before starting another implementation. Use `sdlc-apply` and one fresh `sdlc-verify` review at the stable feature boundary; interim reviews need an explicit unresolved risk, failure, or binding requirement. On fail, repair and reverify within that skill's attempt limit. On blocked verification, record the recovery needed in the blocked report or `context.md`. Never promote a malformed, stale, or unobserved report to pass.
 5. On a current pass, run `validate <slug>` before setting statuses done. Set intent, spec, and plan statuses to `done` in a bookkeeping commit; these status edits do not change approved digests. Run `archive-check <slug>`, invoke `sdlc-archive`, and confirm the move. Reinspect Git and remaining intents before the next slug.
 6. At the end, summarize archived slugs, blocked slugs with exact recovery actions, and checks run. Do not describe blocked work as complete. If the host nears its execution limit, commit only valid completed slices and leave a concise `context.md` handoff for the current slug where needed; a later explicit autonomous invocation resumes the queue.
 
