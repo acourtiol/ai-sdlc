@@ -12,6 +12,7 @@ isolation: none
 
 ## Change inspected
 
+- Isolation: use `subagent`, `subagent-same-model`, `subagent-different-model`, `fresh-session`, or `separate-session`; `none` is only for a blocked handoff. Record the same literal in frontmatter; do not invent `fresh-subagent`.
 - Repository and branch:
 - Plan base commit:
 - Reviewed HEAD (must match frontmatter):
@@ -30,7 +31,7 @@ TBD: where the implementation departed from the plan and why, with evidence, or 
 
 ## Verification
 
-For each check, use `- PASS | action: <exact command or user action> | observed: <result> | evidence: <path or output excerpt>` (or `FAIL`/`BLOCKED`). Include every named requirement under Completeness and every named scenario under Correctness; reference shared check entries instead of repeating commands. For reused receipts, identify producing commit, matching code/tests/configuration/dependencies/environment and command scope, raw output and result. Record fresh targeted observations by this verifier as well.
+For each check, use `- PASS | action: <exact command or user action> | observed: <result> | evidence: <path or output excerpt>` (or `FAIL`/`BLOCKED`). Include each requirement name verbatim in a Completeness `action:` and each scenario name verbatim in a Correctness `action:`; reference shared check entries instead of repeating commands. For reused receipts, identify producing commit, matching code/tests/configuration/dependencies/environment and command scope, raw output and result. Record fresh targeted observations by this verifier as well.
 
 ### Completeness
 
