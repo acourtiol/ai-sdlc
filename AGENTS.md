@@ -1,28 +1,20 @@
-# ai-sdlc (this repo)
+# ai-sdlc
 
-Skills for the Anthropic AI-native SDLC artifact loop. No CLI. Product-repo files live at `intent/<slug>/`, not here.
+Standalone skills for the Anthropic AI-native SDLC artifact loop. Product artifacts belong in `intent/<slug>/` in consumer repositories.
 
-## Commands
+## Structure
 
-```bash
-npx skills add . -l
-npx skills add acourtiol/ai-sdlc -g -a claude-code -a cursor -a codex -s '*' -y
-```
+- Each `SKILL.md` must stand alone: installers copy skill folders independently. Keep templates with their owner: plan → intent, design → spec, apply → plan, verify → report. Resolve resources relative to the installed skill directory.
+- Keep instructions harness-neutral. Use capabilities and task responsibilities, never named agent profiles, specific models, or vendor-only delegation arguments.
+- Requirements and design share `spec.md`; do not add `design.md`.
+- Explore normally writes nothing and owns no template. Optional `context.md` holds consequential handoff information absent from other artifacts; it creates no gate. No `notes.md` or folders for spikes and bounded fixes. Keep compact triage in explore, plan, and fix so each works independently.
+- Archive is an ordinary directory move to `intent/archive/YYYY-MM-DD-<slug>/`. Skip `intent/archive/` in active-intent scans. No `archived` status, capability specs tree, delta sections, or merge step.
+- Deployment and maintenance automation wait for a product-repository request. Existing plans/reports may record rollout, recovery, and observations; archive does not imply release.
 
-## Do not add
+Do not add a CLI, Codex plugin, agent organization, `CLAUDE.md` dumps, `production-gate.sh`, evals CI, or `bands.yaml`. Install using `npx skills add`; do not copy skills into chezmoi.
 
-A CLI, a Codex plugin, an agent-org, `CLAUDE.md` dumps, `production-gate.sh`, evals CI, or `bands.yaml`. Design stays in `spec.md`; do not add a `design.md`. Do not copy these skills into chezmoi. Install with `npx skills add`.
+## Validate and publish
 
-Each `SKILL.md` has to stand alone. skills.sh copies folders independently. Templates stay in the skill that owns the artifact (`sdlc-plan` → intent, `sdlc-design` → spec, `sdlc-apply` → plan, `sdlc-verify` → report).
+List installable skills with `npx skills add . -l`. For behavior changes, run `python3 -m unittest discover -s tests` and check affected behavioral scenarios in `tests/behavioral/README.md`. Inspect the final diff and preserve unrelated work.
 
-Archive is `intent/archive/YYYY-MM-DD-<slug>/`, a plain `mv` by `sdlc-archive`. No `archived` status; the directory is the signal. `intent/archive/` is not a slug, so anything scanning `intent/*/` skips it. Archive keeps history only: no `specs/<capability>/` tree, no delta sections, no merge step.
-
-`sdlc-explore` normally writes nothing and owns no template. For an intent-worthy idea that needs a durable handoff before `intent.md` is ready, it may create `intent/<slug>/context.md`. This optional file holds only consequential information absent from the other artifacts; it is not a new gate or a substitute for `intent.md`. Do not give explore a `notes.md` or create folders for spikes and bounded fixes. The crystallized idea goes into `intent.md`. Its triage is deliberately duplicated in compact form in `sdlc-plan` and `sdlc-fix`, because each skill stands alone. spec-kit's clarify taxonomy and BMAD's technique library were considered for it and rejected as too much ceremony before an intent exists.
-
-Deploy and Maintain automation waits until a product repo asks for a hook. A
-plan or report may record manual rollout, recovery, observation, and follow-up
-work where relevant; archiving an intent does not claim a production release.
-
-## Edit
-
-Change a skill, commit, push `main`. Use [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) for every commit: `type(scope): imperative summary` (scope optional). Use `feat` for new behavior, `fix` for corrections, and `docs` or `chore` for other work; mark breaking changes with `!` or a `BREAKING CHANGE:` footer. Consumers run `npx skills update`.
+Commit and push `main`. Use Conventional Commits: `type(scope): imperative summary` (scope optional); `feat` for new behavior, `fix` for corrections, `docs` or `chore` otherwise. Mark breaking changes with `!` or a `BREAKING CHANGE:` footer. Consumers update with `npx skills update`.
