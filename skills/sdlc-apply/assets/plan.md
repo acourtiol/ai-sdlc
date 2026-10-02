@@ -45,7 +45,8 @@ invariants, cover affected existing callers/writers and their acknowledgements.
 For schema changes, check ordering against already-applied migration history and
 prove upgrade/data preservation on a disposable database; fresh creation alone
 is insufficient. Use authorized baseline evidence and retain missing release
-prerequisites explicitly.
+prerequisites explicitly. Stop dependent setup on failure; verify the actual child
+connection target before mutating proof, with no shared-default fallback.
 
 ## Review route
 
@@ -54,7 +55,10 @@ available in this host, along with the stable completed-feature boundary,
 environment and access. This assigns a task, not a required agent profile. Prevent
 inheritance of implementation history using the host's available mechanism or a
 separate fresh session; confirm actual isolation. Combine source review
-and behavioral verification; dispatch when the committed candidate is ready,
+and behavioral verification; before dispatch, check artifact/task structure,
+canonical approvals/dependencies and the clean committed candidate/base. Freeze
+those inputs; the verifier repeats this cheap check before setup or full proof.
+Dispatch when the committed candidate is ready,
 not to wait for code. An autonomous run needs a dispatchable verifier before code.
 Any interim review needs an explicit unresolved risk or binding requirement.
 
