@@ -8,7 +8,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.7"
+  version: "1.8"
 ---
 
 # sdlc-fix
@@ -53,3 +53,5 @@ Use focused affected checks in the local loop. Run a full suite when repository 
 When the request follows an incident or escaped defect, identify how the defect passed earlier checks and add a durable prevention that fits the cause: a regression test, clearer contract, missing diagnostic, or focused repository instruction. Route broader product changes through `sdlc-plan`.
 
 Report what passed, failed, or could not be checked, and what evidence supports the result. A green suite alone does not prove the reported behavior was fixed.
+
+At verified completion, make a bounded knowledge check only if the project or environment already configures a knowledge bundle or maintenance workflow. Use that workflow to update a relevant existing durable note when this fix supersedes it; otherwise skip. Do not create a note just to record the session, scan the whole bundle or unrelated knowledge, or bootstrap a missing bundle. This adds no delivery gate. Keep any knowledge edit outside the reviewed candidate so it does not invalidate the fix's independent verification.

@@ -447,3 +447,21 @@ token savings across harnesses.
 - **Check tool actions:** No self-issued pass, silent task waiver, report-dependent
   checkbox, or weakened all-boxes precondition. A verifier receiving the circular
   plan blocks for reconciliation rather than ticking its own prerequisite.
+
+### 27. Completion checks relevant durable knowledge without creating session notes
+
+- **Setup:** A disposable project has a verified fix and a separately verified
+  intent ready to close. In one case, the project documents an existing knowledge
+  bundle and maintenance workflow with a durable decision now superseded by the
+  verified outcome. In another, the configured bundle has no relevant fact. In a
+  third, the project has no knowledge bundle or configured workflow. Preserve
+  hashes of the reviewed candidate and intent artifacts before completion.
+- **Input:** “Complete the verified fix and archive the verified intent.”
+- **Expected result:** Update the relevant existing note for the superseded
+  decision; make no knowledge write when nothing useful changed; and skip without
+  bootstrapping a bundle when none is configured. Complete the archive as the
+  required ordinary move.
+- **Check tool actions:** Do not scan unrelated/global knowledge or create a
+  session log. Knowledge maintenance does not change the reviewed candidate,
+  report, or archived artifacts. The archive commit contains only the move, and
+  hashes of the archived intent/spec/plan/report match their pre-move values.

@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.2"
+  version: "2.3"
 ---
 
 # sdlc-archive
@@ -36,3 +36,5 @@ Invoking this workflow normally authorizes the archive commit, subject to explic
    ```
 
 7. Confirm the destination path and tasks tally. Then commit the move. Archive closes the implementation record; it does not assert deployment or production success.
+
+After the verified archive move, make a bounded knowledge check only if the project or environment already configures a knowledge bundle or maintenance workflow. Use that workflow to update a relevant existing durable note when this work supersedes it; otherwise skip. Do not create a note just to record the session, scan the whole bundle or unrelated knowledge, or bootstrap a missing bundle. This adds no delivery gate. Keep knowledge edits separate from the reviewed candidate and archived artifacts; the archived folder remains byte-for-byte intact and the archive commit stages only the move.
