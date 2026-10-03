@@ -29,7 +29,11 @@ The system SHALL do the observable thing.
 
 How it fits the existing codebase: surfaces, data, APIs, ownership. For a changed
 shared contract or state invariant, name affected existing callers/writers and
-link their retained behavior or approved change to scenarios.
+link their retained behavior or approved change to scenarios. At affected provider/runtime
+boundaries, identify established adapters/error parsers and the source, version-matched
+documentation or authorized response evidence supporting consequential assumptions.
+For stateful flows, scenarios cover relevant transitions and persisted results after
+failure, retry or reload; an immediate response alone may hide rolled-back state.
 
 ## Gotchas / policy flags
 

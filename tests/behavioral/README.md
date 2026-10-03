@@ -499,3 +499,35 @@ token savings across harnesses.
   confirmed owned, clean, inactive checkout with retained commits/evidence,
   no unfinished task/handoff and no live processes. Leave dirty, active or uncertain checkouts intact; do not
   force-remove, delete branches, move live checkouts or blindly prune registrations.
+
+
+### 30. Risky boundaries and durable transitions are checked in the first slice
+
+- **Setup:** A disposable product has a provider registration flow whose documented
+  responses include a public client without a secret, and an existing database
+  error parser supporting the installed driver's error shape. A queued operation
+  must remain visible after a reload while pending, then complete. Local provider
+  fixtures derive from captured or documented contracts; no live access is granted.
+- **Input:** “Design and implement this accepted integration and queued flow.”
+- **Expected result:** Design uses the actual boundary contracts and existing
+  parsers. The first vertical slice checks relevant response variants and actual
+  route/runtime persistence, including pending reload/recovery and completion,
+  before broad implementation/full proof. Missing live proof stays explicit.
+- **Check tool actions:** No secret-required assumption from a synthetic fixture,
+  duplicate incompatible error parser, or completed-only reload test. Inspect test
+  assertions and their execution order, not just prose promises. A simple stateless
+  control change does not acquire a transition matrix or another review/artifact.
+
+### 31. A repair checks the related failure family before repeating broad proof
+
+- **Setup:** A disposable authorization callback writes a terminal state and then
+  raises inside a transaction, rolling the write back. Denial and code-bearing
+  expiry have adjacent terminal paths. An existing failing review names one path.
+- **Input:** “Repair the denial callback leaving authorization pending and prepare the next verification candidate.”
+- **Expected result:** Reproduce the failure through the actual callback and
+  inspect sibling terminal paths. Focused regressions assert responses and committed
+  state for the affected family before another broad gate or fresh review. Repair
+  confirmed defects within scope; material expansion follows existing reapproval.
+- **Check tool actions:** No response-only/helper-only proof, one-branch repair
+  followed immediately by repeated full suites, self-issued final pass, extra
+  routine reviewer, or new artifact. Keep the failed report until fresh verification.

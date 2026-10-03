@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.7"
+  version: "2.8"
 ---
 
 # sdlc-design
@@ -27,7 +27,7 @@ The workflow authorizes owned artifact commits unless the user or host restricts
 
 Keep code implementation to one active lane per product repo; parallel design research is read-only, and added requests do not start another writer. Write a straightforward spec here. Delegate bounded read-only research when substantial independent work justifies the handoff; use its evidence to write the artifact here. Reuse researchers for related questions, pass bounded inputs, and use completion notifications instead of repeatedly polling. A normal run waits for human approval; autonomous approval follows the confidence rule below.
 
-When changing a shared command, state invariant, or persistence contract, identify existing affected callers and mutation producers in Design; cover their retained behavior or an explicitly accepted change with scenarios. Include older clients, background jobs, and adjacent flows only where they use that contract. A new-path test does not establish compatibility for existing writers.
+When changing a shared command, state invariant, or persistence contract, identify existing affected callers and mutation producers in Design; cover their retained behavior or an explicitly accepted change with scenarios. Include older clients, background jobs, and adjacent flows only where they use that contract. A new-path test does not establish compatibility for existing writers. For provider/runtime boundaries, inspect established adapters and error parsers first; ground consequential response and error assumptions in current source, version-matched documentation or authorized captured responses, not invented mock shapes. Reuse that handling unless evidence justifies a change. For stateful flows, specify the relevant transitions and observable persisted result after failure, retry or reload, rather than only an immediate response. Keep this evidence and scenarios in the existing Design/Requirements sections; unavailable boundary evidence remains an explicit assumption or blocker.
 
 ## Confidence and challenge
 

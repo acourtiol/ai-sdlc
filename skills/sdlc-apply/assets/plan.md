@@ -21,7 +21,10 @@ reviewable changes, each with a focused check and commit; do not split by indivi
 file, tool call, or bookkeeping. Keep one implementer on related work. Remove every
 example before approval. Boxes end at implementation, implementer-owned checks
 and a committed handoff. Put final independent verification/report and
-completion/archive in Review route; they cannot be checkbox prerequisites.
+completion/archive in Review route; they cannot be checkbox prerequisites. For an
+affected integration or stateful flow, put the first actual route/runtime slice
+early: verify the risky contract and response plus committed state before building
+all adjacent surfaces. Choose applicable failure/reload/retry cases from the spec.
 
 - [ ] 1.1 What changes — verify: command, test, or observable behavior
 - [ ] 1.2 Next step in this area — verify: ...
@@ -43,8 +46,14 @@ storage; temporary scratch is not their sole copy. Consolidate overlapping gates
 before approval; map shared checks to requirements/scenarios. Record cheap prerequisites before expensive integration
 proof and the focused reassessment after two failures of the same class. An earlier
 full gate needs a repository requirement or concrete integration risk. Name an early
-probe of the affected real action through the normal launcher. For changed shared
-invariants, cover affected existing callers/writers and their acknowledgements.
+probe of the affected real action through the normal launcher. Ground provider/driver
+response and error variants in established adapters and contract evidence; distinguish
+contract-backed fixture checks from live proof. For stateful flows, assert response
+and persisted state through the actual route/runtime on disposable persistence,
+including relevant failure, pending reload/recovery and retry transitions. After a
+defect, check related branches sharing its contract or transition with focused
+regressions before another broad gate/review; do not wait for repeated failures.
+For changed shared invariants, cover affected existing callers/writers and their acknowledgements.
 For schema changes, check ordering against already-applied migration history and
 prove upgrade/data preservation on a disposable database; fresh creation alone
 is insufficient. Use authorized baseline evidence and retain missing release
