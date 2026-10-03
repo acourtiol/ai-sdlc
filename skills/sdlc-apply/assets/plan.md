@@ -19,7 +19,9 @@ Exact paths. New vs edit. One line each on what changes. Name the single impleme
 Replace this guidance with task boxes only. Use numeric prefixes for coherent,
 reviewable changes, each with a focused check and commit; do not split by individual
 file, tool call, or bookkeeping. Keep one implementer on related work. Remove every
-example before approval.
+example before approval. Boxes end at implementation, implementer-owned checks
+and a committed handoff. Put final independent verification/report and
+completion/archive in Review route; they cannot be checkbox prerequisites.
 
 - [ ] 1.1 What changes — verify: command, test, or observable behavior
 - [ ] 1.2 Next step in this area — verify: ...
@@ -36,8 +38,9 @@ external-API, compatibility, security, safety, or accessibility checks. Write
 
 The end-to-end evidence that the whole spec is met. Name each check's scope and
 owner: focused checks per slice, one final full change-appropriate gate owned by the
-fresh verifier. Consolidate overlapping gates before approval; map shared checks
-to requirements/scenarios. Record cheap prerequisites before expensive integration
+fresh verifier. Retained raw receipts and provenance use persistent, non-cache
+storage; temporary scratch is not their sole copy. Consolidate overlapping gates
+before approval; map shared checks to requirements/scenarios. Record cheap prerequisites before expensive integration
 proof and the focused reassessment after two failures of the same class. An earlier
 full gate needs a repository requirement or concrete integration risk. Name an early
 probe of the affected real action through the normal launcher. For changed shared
@@ -60,6 +63,8 @@ canonical approvals/dependencies and the clean committed candidate/base. Freeze
 those inputs; the verifier repeats this cheap check before setup or full proof.
 Dispatch when the committed candidate is ready,
 not to wait for code. An autonomous run needs a dispatchable verifier before code.
+State the subsequent independent report and completion/archive sequence here,
+after implementation boxes are checked; no box depends on that report.
 Any interim review needs an explicit unresolved risk or binding requirement.
 
 ## Decision review

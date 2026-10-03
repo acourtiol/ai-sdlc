@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.7"
+  version: "2.8"
 ---
 
 # sdlc-apply
@@ -19,7 +19,7 @@ Resolve `assets/` and `scripts/` against this skill's installed directory suppli
 
 Need `intent/<slug>/spec.md` with `status: specified` or session approval. Resolve choices that could change architecture, safety, or acceptance before planning/resuming. Research repo answers; a remaining material choice needs an answer or explicitly approved default. Otherwise return to design for correction/reapproval, reopening an existing plan to `draft` too. Lower-impact questions with an owner/default do not block.
 
-The workflow authorizes owned artifact and verified slice commits unless the user/host restricts them. Before writing, record repo, branch, HEAD, staged and dirty/untracked paths. Isolate overlapping/unowned work in a clean worktree or stop; never reset, stash, or absorb it. Stage only owned paths/hunks. Use Conventional Commits (`type(scope): imperative summary`, optional scope), a blank line, and a sentence on why; mark breaking changes with `!` or `BREAKING CHANGE:`. Do not push unless asked.
+The workflow authorizes owned artifact and verified slice commits unless the user/host restricts them. Before writing, record repo, branch, HEAD, staged and dirty/untracked paths. Isolate overlapping/unowned work in a clean worktree or stop; never reset, stash, or absorb it. Use persistent, non-cache storage for resumable implementation checkouts and retained raw proof. Temporary directories are for disposable scratch; write needed receipts/provenance to persistent storage as produced and cite those copies in handoffs/reports. Stage only owned paths/hunks. Use Conventional Commits (`type(scope): imperative summary`, optional scope), a blank line, and a sentence on why; mark breaking changes with `!` or `BREAKING CHANGE:`. Do not push unless asked.
 
 Prepare a straightforward plan here; delegate bounded read-only research only when its benefit justifies the handoff. This session writes and commits the draft. Approval changes it to `planned` before implementation. A normal run waits for the user; autonomous approval follows the confidence rule below.
 
@@ -45,7 +45,7 @@ Record confidence and evidence under Decision review for autonomous approval. At
 
 ## Work and validation granularity
 
-Make each box a coherent change with a meaningful observable check; do not make boxes for individual tool calls, files, or bookkeeping. Keep ordered dependencies and a verified commit per box. Use focused affected tests, typechecks, and relevant browser checks within boxes. Do not require independent reviews merely to tick each box; use the implementer's observed focused checks unless the approved plan or a concrete unresolved risk requires an interim review.
+Boxes cover implementation, implementer-owned checks, and the committed handoff. Final independent verification, its report, completion and archive belong in Review route, outside Order of work; no box may require that final report to become tickable. Reconcile/reapprove an existing circular dependency before dispatch, preserving completed work, the original base and the independent review requirement. Make each box a coherent change with a meaningful observable check; do not make boxes for individual tool calls, files, or bookkeeping. Keep ordered dependencies and a verified commit per box. Use focused affected tests, typechecks, and relevant browser checks within boxes. Do not require independent reviews merely to tick each box; use the implementer's observed focused checks unless the approved plan or a concrete unresolved risk requires an interim review.
 
 The fresh final verifier owns one full change-appropriate gate on the completed snapshot. Run a full gate earlier only when repository instructions or integration risk require it. Record each command's scope and owner in Proof; map requirements and scenarios to shared checks instead of repeating a suite for each scenario. Consolidate overlapping checks before plan approval. An existing approved plan's required proof cannot be silently dropped: reconcile and reapprove it first.
 

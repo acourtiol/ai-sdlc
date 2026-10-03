@@ -8,7 +8,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.6"
+  version: "2.7"
 ---
 
 # sdlc-verify
@@ -31,7 +31,7 @@ At high confidence, record the evidence and why a separate challenge was skipped
 
 ## Snapshot and artifact contract
 
-Before dependency installation, environment setup, tests, builds, or browser work, independently check artifact structure, completed task entries, approvals/dependencies, and the clean candidate/base. Use available deterministic artifact/task diagnostics. On any invalid input, stop and write only a blocked report with the discrepancy and recovery; do not continue proof while awaiting reconciliation. All three approved artifacts are required for a pass. Compute their digests with `python3 <this-skill-dir>/scripts/fingerprint.py <artifact-path>` and compare `approved_digest` and downstream dependency fields. Canonical digests exclude only `status` and `approved_digest`, and normalize task checkbox state in the plan's Order of work; other content, including approver and base, is bound. Missing, malformed, stale, or mismatched bindings block a pass and route to the owning skill for reconciliation/reapproval.
+Before dependency installation, environment setup, tests, builds, or browser work, independently check artifact structure, completed task entries, approvals/dependencies, and the clean candidate/base. Final independent review/report and closure belong outside implementation boxes. A box depending on this review is a plan dependency error: block for apply reconciliation, never tick it on the implementer’s behalf. Use available deterministic artifact/task diagnostics. On any invalid input, stop and write only a blocked report with the discrepancy and recovery; do not continue proof while awaiting reconciliation. All three approved artifacts are required for a pass. Compute their digests with `python3 <this-skill-dir>/scripts/fingerprint.py <artifact-path>` and compare `approved_digest` and downstream dependency fields. Canonical digests exclude only `status` and `approved_digest`, and normalize task checkbox state in the plan's Order of work; other content, including approver and base, is bound. Missing, malformed, stale, or mismatched bindings block a pass and route to the owning skill for reconciliation/reapproval.
 
 At inspection start, `HEAD` must equal the full `reviewed_head` hash and `git status --porcelain` must be empty. Inspect the full `base_commit..reviewed_head` range and artifacts. If the range is unavailable or dirty/untracked/generated files could affect the result, return `blocked`. Record repository, base, head, changed paths, working tree, and untracked paths under Change inspected.
 
@@ -41,7 +41,7 @@ The report records `intent_digest`, `spec_digest`, `plan_digest`, `reviewed_head
 
 Own one full change-appropriate final gate on the stable completed feature snapshot. No other writer may change that reviewed checkout or artifact inputs during review; subsequent changes require fresh verification. Parallel research may inspect other work, but another implementation lane waits until review finishes or is blocked. Follow repository instructions and the approved Proof; do not add a universal suite. Focused implementation checks need not become repeated full gates. Do not silently omit duplicate checks required by an existing approved plan: reconcile/reapprove its proof before verification.
 
-Reuse an earlier check receipt only if you independently inspect raw output and provenance and establish that code, tests, configuration/lockfiles, dependencies, command scope, and environment match this snapshot. Record the producing commit, identity of those inputs, command, result, and evidence path. A report/status-only commit need not rerun the suite when those inputs are unchanged. A claim, stale/missing output, changed input, or uncertain equivalence requires a rerun. Never reuse a prior verdict as the current verdict.
+Reuse an earlier check receipt only if you independently inspect raw output and provenance and establish that code, tests, configuration/lockfiles, dependencies, command scope, and environment match this snapshot. Record the producing commit, identity of those inputs, command, result, and evidence path. A report/status-only commit need not rerun the suite when those inputs are unchanged. A claim, stale/missing output, changed input, or uncertain equivalence requires a rerun. Never reuse a prior verdict as the current verdict. Keep retained raw receipts/provenance on persistent, non-cache storage and cite those copies; temporary/cache paths alone are insufficient. Write retained evidence there as it is produced, so restart or scratch cleanup does not erase it.
 
 Even with valid receipts, independently inspect the full diff and gather fresh targeted evidence for material behavior and important failure paths. For UI changes, drive the main flow and an error path in the running app and preserve screenshot/DOM evidence; tests alone do not prove that flow. For non-UI changes, run the actual project verification command unless its required results are covered by a valid receipt. Cover every spec scenario, mapping shared checks to their named scenarios rather than rerunning a suite for each one.
 

@@ -8,7 +8,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.6"
+  version: "1.7"
 ---
 
 # sdlc-fix
@@ -34,7 +34,7 @@ git diff
 git ls-files --others --exclude-standard
 ```
 
-Preserve all existing work. Do not reset, stash, clean, or include unrelated changes. If an existing staged or unstaged diff touches a path you need to edit, use an isolated worktree or separate the exact hunks before proceeding; `git commit --only` commits the selected path's full working-tree content. If you cannot separate ownership safely, stop before editing that path. For unrelated staged files, keep them staged and commit this fix with an explicit path-only commit (`git commit --only -- <owned-paths>`), after reviewing exactly what that command will include. Never use `git add -A`.
+Use persistent, non-cache storage for a checkout that may need resumption and for retained proof receipts; temporary directories are disposable scratch. Preserve all existing work. Do not reset, stash, clean, or include unrelated changes. If an existing staged or unstaged diff touches a path you need to edit, use an isolated worktree or separate the exact hunks before proceeding; `git commit --only` commits the selected path's full working-tree content. If you cannot separate ownership safely, stop before editing that path. For unrelated staged files, keep them staged and commit this fix with an explicit path-only commit (`git commit --only -- <owned-paths>`), after reviewing exactly what that command will include. Never use `git add -A`.
 
 ## Confidence and check scope
 

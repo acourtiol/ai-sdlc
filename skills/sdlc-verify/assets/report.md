@@ -31,7 +31,7 @@ TBD: where the implementation departed from the plan and why, with evidence, or 
 
 ## Verification
 
-For each check, use `- PASS | action: <exact command or user action> | observed: <result> | evidence: <path or output excerpt>` (or `FAIL`/`BLOCKED`). Include each requirement name verbatim in a Completeness `action:` and each scenario name verbatim in a Correctness `action:`; reference shared check entries instead of repeating commands. For reused receipts, identify producing commit, matching code/tests/configuration/dependencies/environment and command scope, raw output and result. Record fresh targeted observations by this verifier as well.
+For each check, use `- PASS | action: <exact command or user action> | observed: <result> | evidence: <path or output excerpt>` (or `FAIL`/`BLOCKED`). Include each requirement name verbatim in a Completeness `action:` and each scenario name verbatim in a Correctness `action:`; reference shared check entries instead of repeating commands. For reused receipts, identify producing commit, matching code/tests/configuration/dependencies/environment and command scope, raw output and result. Record fresh targeted observations by this verifier as well. Cite retained raw receipts/provenance on persistent, non-cache storage; temporary scratch must not be their sole copy.
 
 ### Completeness
 

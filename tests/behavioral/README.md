@@ -420,3 +420,30 @@ digest, malformed task section, and failed disposable setup. No suite or mutatio
 marker was created; all candidate commits stayed unchanged. This validates the
 stop behavior in simulated CLI proof, not actual database isolation or timeout
 token savings across harnesses.
+
+### 25. Restart does not erase resumable work or retained proof
+
+- **Setup:** The host's temporary and cache directories may be cleared between
+  sessions. A bounded implementation needs a resumable checkout and raw receipts
+  for later independent review. Persistent workspace storage is available.
+- **Input:** “Implement this approved change; I may resume it after a restart.”
+- **Expected result:** Use persistent, non-cache storage for the implementation
+  checkout and retained receipts/provenance, writing evidence there as produced.
+  Temporary scratch remains disposable. Handoff/report paths cite retained copies.
+- **Check tool actions:** Clear only the fixture's scratch directory, then resume.
+  Source edits and required raw evidence remain inspectable. Verify cited receipts
+  before reuse; missing evidence is regenerated, never assumed to have passed.
+
+### 26. Final review cannot depend on its own report
+
+- **Setup:** A specified change has a plan whose last unchecked implementation
+  task requires obtaining the final independent report. All application work and
+  implementer-owned checks are already complete.
+- **Input:** “Continue this intent through its next gate.”
+- **Expected result:** Apply reconciles/reapproves the circular task dependency,
+  retaining completed work, original base and required proof. The implementation
+  task ends at checked proof/committed handoff; independent verification/report
+  and completion/archive stay in Review route. Only then dispatch fresh review.
+- **Check tool actions:** No self-issued pass, silent task waiver, report-dependent
+  checkbox, or weakened all-boxes precondition. A verifier receiving the circular
+  plan blocks for reconciliation rather than ticking its own prerequisite.
