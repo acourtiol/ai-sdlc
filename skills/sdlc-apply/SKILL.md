@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.8"
+  version: "2.9"
 ---
 
 # sdlc-apply
@@ -19,7 +19,11 @@ Resolve `assets/` and `scripts/` against this skill's installed directory suppli
 
 Need `intent/<slug>/spec.md` with `status: specified` or session approval. Resolve choices that could change architecture, safety, or acceptance before planning/resuming. Research repo answers; a remaining material choice needs an answer or explicitly approved default. Otherwise return to design for correction/reapproval, reopening an existing plan to `draft` too. Lower-impact questions with an owner/default do not block.
 
-The workflow authorizes owned artifact and verified slice commits unless the user/host restricts them. Before writing, record repo, branch, HEAD, staged and dirty/untracked paths. Isolate overlapping/unowned work in a clean worktree or stop; never reset, stash, or absorb it. Use persistent, non-cache storage for resumable implementation checkouts and retained raw proof. Temporary directories are for disposable scratch; write needed receipts/provenance to persistent storage as produced and cite those copies in handoffs/reports. Stage only owned paths/hunks. Use Conventional Commits (`type(scope): imperative summary`, optional scope), a blank line, and a sentence on why; mark breaking changes with `!` or `BREAKING CHANGE:`. Do not push unless asked.
+Check the requested outcome before planning or accepting a repair: explicit automation, providers/integrations and data coverage must have end-to-end steps and proof. A manual fallback, unavailable credentials or a follow-on intent does not remove the requirement. Decomposition may deliver useful authorized slices, but keep remaining required outcomes and blockers visible in the existing artifacts/handoff; do not claim the full request complete. Only explicit user acceptance of the visible tradeoff can reduce that outcome, even in an autonomous run.
+
+The workflow authorizes owned artifact and verified slice commits unless the user/host restricts them. Before writing, record repo, branch, HEAD, staged and dirty/untracked paths. Reuse the current owning checkout by default; create another only to isolate concrete overlapping work or provide a clean review candidate. Never reset, stash, or absorb others' work. Use persistent, non-cache storage for resumable checkouts and retained raw proof; temporary directories are disposable scratch. Write needed receipts/provenance to persistent storage as produced and cite those copies in handoffs/reports. Stage only owned paths/hunks. Use Conventional Commits (`type(scope): imperative summary`, optional scope), a blank line, and a sentence on why; mark breaking changes with `!` or `BREAKING CHANGE:`. Do not push unless asked.
+
+For an agent-created checkout, use the agreed project workspace's `.worktrees/<purpose>` by default. Anchor this worktree root once from the initial workspace so child checkouts do not create nested worktree areas. Before creation, ensure the chosen location is excluded from Git tracking and relevant source/test discovery, applying the project's targeted exclusion convention if needed. Keep harness-managed isolation when required by the host and record its path and reason. Before allocating another review checkout, prefer retargeting an owned, clean, inactive one after retaining its prior report and required receipts and confirming no work will be discarded; a changed candidate hash alone does not justify another directory; the reviewer must still use fresh context and inspect the exact candidate. At completion, inspect worktrees you own and remove only clean, inactive checkouts with no unfinished task/handoff, whose commits and evidence are retained and which have no live process using them. Do not force-remove, delete branches, move live checkouts, or prune globally. If ownership or safety is unclear, keep the checkout and record its path and reason in the handoff.
 
 Prepare a straightforward plan here; delegate bounded read-only research only when its benefit justifies the handoff. This session writes and commits the draft. Approval changes it to `planned` before implementation. A normal run waits for the user; autonomous approval follows the confidence rule below.
 

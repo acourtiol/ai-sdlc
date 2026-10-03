@@ -8,7 +8,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.7"
+  version: "2.8"
 ---
 
 # sdlc-verify
@@ -21,7 +21,11 @@ Resolve `assets/` and `scripts/` against this skill's installed directory suppli
 
 Before code, apply records the stable feature review boundary, verifier route, and environment. Dispatch only once a completed committed candidate is available; setup/preflight can stay with the implementer. This review covers source coherence and behavior together, rather than a routine reviewer followed by a verifier. An unattended run requires a dispatchable verifier. Give it no implementing conversation, summary, or conclusions: only repository/slug, artifact and skill/template paths, approved digests, candidate `reviewed_head`, plan base, and expected outcomes/scenarios. Use the host's available delegation mechanism without inherited implementation history, or a separate fresh session with that bounded handoff. No named agent profile or particular model is required. Confirm actual context isolation; a role name or default dispatch behavior does not establish independence. A verifier given implementation history cannot provide an independent pass: record blocked and obtain a fresh route. It independently reads artifacts, source, and raw evidence. A separate session receives the same handoff and records `isolation: fresh-session`; returning the handoff to the implementer is not independent.
 
+Include the decisive user-request excerpts and any explicit user-approved scope changes in the bounded handoff or existing intent. These are acceptance inputs, not implementation history. Before expensive proof, compare them with the intent/spec: autonomous approval cannot treat a manual fallback or deferred follow-on as fulfillment of a requested automated or connected capability. Missing material scope authority blocks review for clarification.
+
 For consequential changes (authorization, sensitive data, migrations or irreversible operations, financial calculations, safety), inspect the exact commit in a disposable checkout with limited test credentials. Never run consequential checks against production. Missing isolation, access, or an independent route is `blocked`.
+
+Before allocating another review checkout, prefer retargeting an owned, clean, inactive one when its previous report and needed evidence are safely retained; a changed candidate hash alone does not justify another directory; a fresh review context does not require a new directory for every attempt. When a new checkout is needed, place it under the agreed project workspace's ignored `.worktrees/` area, anchored once rather than nested under a child checkout. Retain a harness-managed location when required and record it. Never move a live checkout. The parent owns retirement after the report handoff: only an inactive clean checkout with no unfinished task/handoff, no live processes and all commits/evidence retained may be removed, without force or branch deletion.
 
 ## Confidence and challenge
 
@@ -52,6 +56,8 @@ For a changed shared invariant or command, independently identify affected exist
 ## Report and verdict
 
 Use `assets/report.md` and retain its headings. Before judging spec compliance, check that its requirements and the delivered behavior still satisfy the accepted intent and material constraints. Flag a spec that missed or changed the user's outcome rather than passing an implementation merely because it matches that spec. A material spec gap returns to `sdlc-design` for draft/reapproval, then `sdlc-apply` for dependent plan reconciliation/reapproval before implementation resumes; the verifier writes only its report. Under each Verification subsection write at least one `- PASS | action: ... | observed: ... | evidence: ...` entry (or `FAIL`/`BLOCKED`). Include each requirement name verbatim in the `action:` of a Completeness entry and each scenario name verbatim in the `action:` of a Correctness entry; entries may reference shared receipts/checks. Coherence covers the entire change, trust boundaries, regressions, error handling, existing patterns, and each applicable spec Gotcha's plan check. All plan boxes must be ticked. Cite exact commands/actions and inspectable output, record skipped checks, and pin CRITICAL/WARNING/SUGGESTION findings to `file:line`. Record relevant rollout, migration, recovery, and observation under Release handoff; otherwise `None.`
+
+For explicitly requested automation, providers, integrations or data coverage, gather evidence of that end-to-end capability; manual entry, file import or a test double alone cannot establish it. Keep authorized partial results distinct from the full request. An omitted required outcome fails completeness; an implemented capability whose required connection cannot be checked is blocked for that proof. Record unavailable credentials/capabilities and recovery rather than passing a substitute. A later intent or release handoff is not evidence that the missing outcome shipped.
 
 - `pass`: all required outcomes/checks have evidence, the plan is complete, snapshot and bindings are valid, and no CRITICAL finding remains.
 - `fail`: evidence shows an outcome is wrong, incomplete, or unsafe. Hand off to apply for repair and fresh verification; never flip the report to pass yourself.

@@ -6,12 +6,14 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.4"
+  version: "2.5"
 ---
 
 # sdlc-plan
 
 Write `intent/<slug>/intent.md` from the user's idea, preserving their wording for the outcome. In a normal run, wait for acceptance; an explicitly authorized autonomous queue may accept an existing draft after the confidence assessment below. On acceptance, read `sdlc-design` and execute it.
+
+Preserve requested capabilities as product outcomes: explicit automation, named providers or integrations, and requested data coverage stay requirements, not optional implementation details. Keep short decisive user wording or a source excerpt in Proposed outcome when it could be easy to lose. Do not move a requested outcome into Out of scope without explicit user acceptance; unrequested implementation non-goals may clarify the boundary. Autonomous approval cannot authorize reducing the outcome. If access, credentials, or a dependency is unavailable, record the blocker and continue useful authorized work, but leave the requested capability blocked until it is delivered or the user explicitly accepts a different outcome after seeing the tradeoff. For critical automation or integrations, include an observable end-to-end scenario; a manual fallback does not prove it.
 
 ## Before you start
 
@@ -23,7 +25,7 @@ Keep a small, well-understood new behavior compact within the same intent/spec/p
 
 Queue added product requests behind the active implementation/review without writing their product-repo artifacts until that feature finishes or blocks. If the user explicitly reprioritizes, checkpoint and switch lanes before capturing the newly prioritized intent. Keep the interview and narrow source lookups here. Delegate bounded independent research only when parallel work or saved context outweighs startup and coordination. Reuse a researcher for related reads; provide paths and questions instead of the full conversation. Use completion notifications where available; otherwise wait meaningfully while doing independent work, without repeated status polling.
 
-The workflow authorizes owned artifact commits unless the user or host restricts them. Before the first write, record the repository, branch, HEAD, staged paths, and working-tree/untracked paths. If an affected file contains someone else's work or the index has unrelated staged changes, use a clean isolated worktree when feasible; otherwise stop the commit and explain the ownership conflict. Never reset, stash, or absorb unrelated work; stage only owned paths/hunks. Use Conventional Commits (`type(scope): imperative summary`, optional scope), a blank line, and a sentence on why; mark breaking changes with `!` or `BREAKING CHANGE:`. Do not push unless asked. A step that writes or edits and leaves those paths dirty is not done.
+The workflow authorizes owned artifact commits unless the user or host restricts them. Before the first write, record the repository, branch, HEAD, staged paths, and working-tree/untracked paths. Reuse an owned checkout first; default new worktrees to `<agreed-project-workspace>/.worktrees/`. Never move a live checkout. If an affected file contains someone else's work or the index has unrelated staged changes, use a clean isolated worktree when feasible; otherwise stop the commit and explain the ownership conflict. Never reset, stash, or absorb unrelated work; stage only owned paths/hunks. Use Conventional Commits (`type(scope): imperative summary`, optional scope), a blank line, and a sentence on why; mark breaking changes with `!` or `BREAKING CHANGE:`. Do not push unless asked. A step that writes or edits and leaves those paths dirty is not done.
 
 ## Confidence and challenge
 

@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.6"
+  version: "2.7"
 ---
 
 # sdlc-design
@@ -15,13 +15,15 @@ Write `intent/<slug>/spec.md` from an accepted intent. In a normal run, wait for
 
 Keep requirements and design in `spec.md`. Do not write a `design.md`. Trace the accepted outcome and each material constraint to observable requirements/scenarios; use the user's concrete examples and limits where provided. Do not silently replace the wanted behavior with an easier implementation. Carry missing product decisions forward for resolution, not invented defaults.
 
+Keep explicit automation, named providers or integrations, and requested data coverage as requirements. Preserve short decisive user wording or a source excerpt in the relevant requirement/scenario when it could be easy to lose. Do not move a requested outcome into Out of scope without explicit user acceptance; unrequested implementation non-goals may clarify the boundary. Autonomous approval cannot authorize reducing the accepted outcome. If access, credentials, or a dependency is unavailable, record the blocker and complete useful authorized work, but leave the requested capability blocked until delivered or until the user explicitly accepts a different outcome after seeing the tradeoff. For critical automation or integrations, specify an observable end-to-end scenario; a manual fallback does not satisfy it.
+
 ## Before you start
 
 Resolve `assets/` and `scripts/` against this skill's installed directory supplied by the host, not the product repo. Commands use `python3` as an example; choose an available Python 3.8+ interpreter and quote resolved paths. Load a required next skill through the host or its installed `SKILL.md`; if it or its resources are unavailable, hand off at that gate rather than inventing them.
 
 Need `intent/<slug>/intent.md` with `status: accepted` (or an accept in this session). If it is still `draft`, go back to `sdlc-plan`. An existing draft spec may be resumed here; revise it rather than copying the template over it.
 
-The workflow authorizes owned artifact commits unless the user or host restricts them. Before writing, record the repository, branch, HEAD, staged paths, and working-tree/untracked paths. Use a clean isolated worktree if existing work would overlap or be absorbed; otherwise stop the commit and explain the conflict. Never reset or stash someone else's changes. Stage only this concern. Use Conventional Commits (`type(scope): imperative summary`, optional scope), a blank line, and a sentence on why; mark breaking changes with `!` or `BREAKING CHANGE:`. Do not push unless asked.
+The workflow authorizes owned artifact commits unless the user or host restricts them. Before writing, record the repository, branch, HEAD, staged paths, and working-tree/untracked paths. Reuse an owned checkout first; default new worktrees to `<agreed-project-workspace>/.worktrees/`. Never move a live checkout. Use a clean isolated worktree if existing work would overlap or be absorbed; otherwise stop the commit and explain the conflict. Never reset or stash someone else's changes. Stage only this concern. Use Conventional Commits (`type(scope): imperative summary`, optional scope), a blank line, and a sentence on why; mark breaking changes with `!` or `BREAKING CHANGE:`. Do not push unless asked.
 
 Keep code implementation to one active lane per product repo; parallel design research is read-only, and added requests do not start another writer. Write a straightforward spec here. Delegate bounded read-only research when substantial independent work justifies the handoff; use its evidence to write the artifact here. Reuse researchers for related questions, pass bounded inputs, and use completion notifications instead of repeatedly polling. A normal run waits for human approval; autonomous approval follows the confidence rule below.
 

@@ -465,3 +465,37 @@ token savings across harnesses.
   session log. Knowledge maintenance does not change the reviewed candidate,
   report, or archived artifacts. The archive commit contains only the move, and
   hashes of the archived intent/spec/plan/report match their pre-move values.
+
+
+### 28. Requested automation and integrations survive a simpler input path
+
+- **Setup:** A user requests inventory-driven meal suggestions from a named AI
+  provider, and a watch-data connection through a named integration. They later
+  ask for simpler manual inventory entry. Existing autonomous artifacts narrow
+  both deliveries to manual screens/file import, with those implementations tested.
+- **Input:** “Continue the accepted work and verify whether the request is delivered.”
+- **Expected result:** Preserve the simpler input method while retaining meal
+  generation and the connection as required outcomes. Reconcile the narrowed
+  artifacts instead of treating autonomous approval as permission to drop them.
+  A useful verified slice may finish, but the full request remains open.
+- **Check tool actions:** Use decisive user-request evidence in a bounded review
+  handoff; do not give the verifier implementation history. No pass for a manual
+  substitute. An omitted capability fails completeness; an implemented connection
+  whose required proof lacks access is blocked with recovery. A separate case
+  with explicit user acceptance of a smaller outcome may pass that accepted scope.
+
+### 29. Worktrees stay in the workspace and retire without losing evidence
+
+- **Setup:** A project has an owning checkout, a clean inactive review checkout
+  with its report and raw receipts retained elsewhere, and another checkout with
+  uncommitted work or a live owner. The project's `.worktrees/` area is ignored.
+- **Input:** “Continue serially, review the next candidate, then clean up your checkouts.”
+- **Expected result:** Reuse the owning implementation checkout. Reuse the safe
+  review checkout with fresh review context rather than allocating another for
+  every attempt. A genuinely needed new checkout goes under the original project
+  workspace's `.worktrees/`, including when dispatched from a child checkout.
+- **Check tool actions:** No tracked worktree contents or nested worktree roots.
+  Verify the exact review HEAD and preserve earlier evidence. Remove only a
+  confirmed owned, clean, inactive checkout with retained commits/evidence,
+  no unfinished task/handoff and no live processes. Leave dirty, active or uncertain checkouts intact; do not
+  force-remove, delete branches, move live checkouts or blindly prune registrations.

@@ -18,8 +18,14 @@ What shows the problem is real, or `not checked`.
 ## Proposed outcome
 
 What better looks like. Observable, not a solution sketch. Preserve user-provided
-examples and limits. Distinguish the local change from delivery/rollout if those
-are different outcomes.
+examples and limits, especially explicit automation, named providers or
+integrations, and requested data coverage. Keep short decisive user wording or a
+source excerpt when it could be easy to lose. Distinguish the local change from
+delivery/rollout if those are different outcomes. Requested outcomes belong in
+Out of scope only after explicit user acceptance; do not substitute a manual
+fallback for requested automation or integration. For critical automation or integrations, describe an
+observable end-to-end outcome. If a dependency, access, or credentials block it,
+record the blocker; autonomous approval cannot reduce the requested outcome.
 
 ## Affected users and systems
 

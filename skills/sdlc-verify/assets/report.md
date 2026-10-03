@@ -40,6 +40,10 @@ Compare the delivered result with the original accepted intent and constraints;
 a spec that missed the wanted outcome cannot justify a pass. Report a material
 spec gap for `sdlc-design` draft/reapproval, followed by dependent plan
 reconciliation/reapproval in `sdlc-apply`; do not edit those artifacts here.
+Compare decisive user wording and explicit scope approvals with the artifacts.
+For requested automation, providers, integrations or data coverage, distinguish
+the real end-to-end capability from manual fallbacks, test doubles and deferred
+follow-ons. A partial delivery does not complete the full request.
 
 ### Correctness
 
