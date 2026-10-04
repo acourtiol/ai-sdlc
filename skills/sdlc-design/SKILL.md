@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.9"
+  version: "2.10"
 ---
 
 # sdlc-design
@@ -18,6 +18,8 @@ Keep requirements and design in `spec.md`. Do not write a `design.md`. Trace the
 Keep explicit automation, named providers or integrations, and requested data coverage as requirements. Preserve short decisive user wording or a source excerpt in the relevant requirement/scenario when it could be easy to lose. Do not move a requested outcome into Out of scope without explicit user acceptance; unrequested implementation non-goals may clarify the boundary. Autonomous approval cannot authorize reducing the accepted outcome. If access, credentials, or a dependency is unavailable, record the blocker and complete useful authorized work, but leave the requested capability blocked until delivered or until the user explicitly accepts a different outcome after seeing the tradeoff. For critical automation or integrations, specify an observable end-to-end scenario; a manual fallback does not satisfy it.
 
 Check added scope as well as missing scope. Additional screens, required inputs, acknowledgements, reconfirmation steps or gates beyond the requested flow are product decisions, not routine implementation details. Trace each to an explicit user request or an evidenced binding constraint in existing artifacts; broad autonomy, generic product goals and agent-authored requirements do not supply that authority. Autonomous approval cannot expand the accepted outcome. Keep necessary internal validation, security and error handling tied to the changed flow, but do not turn known external limits into an unrequested user ceremony. If a new product decision is genuinely needed and authority is missing, present the concrete tradeoff before implementing it. An agent-created guard is not justification for another feature needed solely to configure that guard. Size the solution to the stated users and deployment; do not assume organizational approval, compliance administration or future multi-user needs. Prefer the smallest design that delivers the complete requested behavior.
+
+Apply YAGNI after understanding the affected flow: reuse suitable existing code and patterns, then prefer standard-library, native-platform or installed-dependency capabilities when they meet the requirements. Add custom code or a dependency only for a demonstrated gap. Avoid speculative configuration, extension points and scaffolding for future features; retain abstractions justified by current contracts or clarity. This is a quick design choice, not a new research or review stage. Minimize implementation complexity, not requested capability: preserve explicit outcomes, compatibility, validation, error handling, security and accessibility. Readable, complete code wins over fewer lines; simplification cannot silently substitute a lesser outcome.
 
 ## Before you start
 

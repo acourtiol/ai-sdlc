@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.14"
+  version: "2.15"
 ---
 
 # sdlc-apply
@@ -22,6 +22,8 @@ Need `intent/<slug>/spec.md` with `status: specified` or session approval. Resol
 Check the requested outcome before planning or accepting a repair: explicit automation, providers/integrations and data coverage must have end-to-end steps and proof. A manual fallback, unavailable credentials or a follow-on intent does not remove the requirement. Decomposition may deliver useful authorized slices, but keep remaining required outcomes and blockers visible in the existing artifacts/handoff; do not claim the full request complete. Only explicit user acceptance of the visible tradeoff can reduce that outcome, even in an autonomous run.
 
 Before code or repair, compare newly added user-facing behavior and prerequisites with actual user authority or evidenced binding constraints. Autonomous artifacts and broad completion/decomposition authority cannot authorize new screens, mandatory inputs, acknowledgements or gates. An agent-created dependency is not proof that the user wanted it. Route unsupported scope through its owning artifacts for correction/reapproval; preserve established security and the requested outcome. Do not build a setup UI merely to satisfy an unrequested guard.
+
+Apply YAGNI after understanding the affected flow: reuse suitable existing code and patterns, then prefer standard-library, native-platform or installed-dependency capabilities when they meet the requirements. Add custom code or a dependency only for a demonstrated gap. Avoid speculative configuration, extension points and scaffolding for future features; retain abstractions justified by current contracts or clarity. This is a quick design choice, not a new research or review stage. Minimize implementation complexity, not requested capability: preserve explicit outcomes, compatibility, validation, error handling, security and accessibility. Readable, complete code wins over fewer lines; simplification cannot silently substitute a lesser outcome.
 
 The workflow authorizes owned artifact and verified slice commits unless the user/host restricts them. Before writing, record repo, branch, HEAD, staged and dirty/untracked paths. Reuse the current owning checkout by default; create another only to isolate concrete overlapping work or provide a clean review candidate. Never reset, stash, or absorb others' work. Use persistent, non-cache storage for resumable checkouts and retained raw proof; temporary directories are disposable scratch. Write needed receipts/provenance to persistent storage as produced and cite those copies in handoffs/reports. Stage only owned paths/hunks. Use Conventional Commits (`type(scope): imperative summary`, optional scope), a blank line, and a sentence on why; mark breaking changes with `!` or `BREAKING CHANGE:`. Do not push unless asked.
 

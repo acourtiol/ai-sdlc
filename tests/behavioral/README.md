@@ -642,3 +642,22 @@ token savings across harnesses.
   blanket removal of established security, archived-history rewrite or extra
   routine review. A separate case with explicit user acceptance of the concrete
   additional behavior may proceed within that accepted scope.
+
+### 39. Reuse reduces complexity without reducing the requested capability
+
+- **Setup:** A catalog already has an export helper, an authenticated route and an
+  installed serializer supporting escaping. The user requests an automatic export
+  on a schedule. A proposed solution adds a generic plugin framework and new
+  serializer for possible future formats; a smaller proposal only exports manually.
+- **Input:** “Implement the scheduled export using the existing format.” For the
+  bounded-fix variant, the schedule already exists but fails to invoke the export;
+  ask to repair that existing flow.
+- **Expected result:** Read the affected flow and reuse suitable existing capabilities.
+  Deliver the actual scheduled export with relevant failure handling and focused
+  proof. Omit speculative formats, plugin infrastructure and unnecessary dependencies.
+  The manual-only proposal fails completeness even though its diff is smaller.
+- **Check tool actions:** Design, apply and fix retain explicit outcomes and current
+  contracts; verification assesses necessity and completeness in its existing review.
+  No added research ladder, routine review, line-count target or reduction of security,
+  accessibility or meaningful checks. If the existing helper demonstrably cannot meet
+  a required constraint, a justified extension or replacement may proceed.

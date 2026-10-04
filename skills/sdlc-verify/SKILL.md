@@ -8,7 +8,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.11"
+  version: "2.12"
 ---
 
 # sdlc-verify
@@ -61,7 +61,7 @@ For a changed shared invariant or command, independently identify affected exist
 
 Use `assets/report.md` and retain its headings. Before judging spec compliance, check that its requirements and the delivered behavior still satisfy the accepted intent and material constraints. Flag a spec that missed or changed the user's outcome rather than passing an implementation merely because it matches that spec. A material spec gap returns to `sdlc-design` for draft/reapproval, then `sdlc-apply` for dependent plan reconciliation/reapproval before implementation resumes; the verifier writes only its report. Under each Verification subsection write at least one `- PASS | action: ... | observed: ... | evidence: ...` entry (or `FAIL`/`BLOCKED`). Include each requirement name verbatim in the `action:` of a Completeness entry and each scenario name verbatim in the `action:` of a Correctness entry; entries may reference shared receipts/checks. Coherence covers the entire change, trust boundaries, regressions, error handling, existing patterns, and each applicable spec Gotcha's plan check. All plan boxes must be ticked. Cite exact commands/actions and inspectable output, record skipped checks, and pin CRITICAL/WARNING/SUGGESTION findings to `file:line`. Record relevant rollout, migration, recovery, and observation under Release handoff; otherwise `None.`
 
-Check for unsolicited behavior too: compare new screens, mandatory inputs/acknowledgements/reconfirmation and gates with decisive user-request evidence or evidenced binding constraints. An autonomous spec, broad completion/decomposition authorization or agent-created prerequisite cannot establish user authority. Unsupported additions fail intent alignment even when they match the spec and every test passes; return the artifact gap for correction/reapproval. Distinguish them from necessary internal validation/security in the changed flow. Do not approve an extra feature solely because another agent-added feature now requires it.
+Check for unsolicited behavior too: compare new screens, mandatory inputs/acknowledgements/reconfirmation and gates with decisive user-request evidence or evidenced binding constraints. An autonomous spec, broad completion/decomposition authorization or agent-created prerequisite cannot establish user authority. Unsupported additions fail intent alignment even when they match the spec and every test passes; return the artifact gap for correction/reapproval. Distinguish them from necessary internal validation/security in the changed flow. Do not approve an extra feature solely because another agent-added feature now requires it. In the existing coherence review, flag speculative scaffolding or dependencies without a current requirement; do not equate fewer lines with quality or require a rewrite of justified existing patterns.
 
 For explicitly requested automation, providers, integrations or data coverage, gather evidence of that end-to-end capability; manual entry, file import or a test double alone cannot establish it. Keep authorized partial results distinct from the full request. An omitted required outcome fails completeness; an implemented capability whose required connection cannot be checked is blocked for that proof. Record unavailable credentials/capabilities and recovery rather than passing a substitute. A later intent or release handoff is not evidence that the missing outcome shipped.
 
