@@ -8,7 +8,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.8"
+  version: "2.9"
 ---
 
 # sdlc-verify
@@ -46,6 +46,8 @@ The report records `intent_digest`, `spec_digest`, `plan_digest`, `reviewed_head
 Own one full change-appropriate final gate on the stable completed feature snapshot. No other writer may change that reviewed checkout or artifact inputs during review; subsequent changes require fresh verification. Parallel research may inspect other work, but another implementation lane waits until review finishes or is blocked. Follow repository instructions and the approved Proof; do not add a universal suite. Focused implementation checks need not become repeated full gates. Do not silently omit duplicate checks required by an existing approved plan: reconcile/reapprove its proof before verification.
 
 Reuse an earlier check receipt only if you independently inspect raw output and provenance and establish that code, tests, configuration/lockfiles, dependencies, command scope, and environment match this snapshot. Record the producing commit, identity of those inputs, command, result, and evidence path. A report/status-only commit need not rerun the suite when those inputs are unchanged. A claim, stale/missing output, changed input, or uncertain equivalence requires a rerun. Never reuse a prior verdict as the current verdict. Keep retained raw receipts/provenance on persistent, non-cache storage and cite those copies; temporary/cache paths alone are insufficient. Write retained evidence there as it is produced, so restart or scratch cleanup does not erase it.
+
+Check the runner/discovery scope of reused or new receipts against affected tests, including component tests and distinct extensions. Explicitly run required relevant tests excluded by the broad command unless a matching focused receipt’s command and output establish that those tests actually ran under the same reuse rule. Do not report an excluded test as passed; distinguish baseline fixture defects from candidate regressions and record unavailable required coverage.
 
 Even with valid receipts, independently inspect the full diff and gather fresh targeted evidence for material behavior and important failure paths. For UI changes, drive the main flow and an error path in the running app and preserve screenshot/DOM evidence; tests alone do not prove that flow. For non-UI changes, run the actual project verification command unless its required results are covered by a valid receipt. Cover every spec scenario, mapping shared checks to their named scenarios rather than rerunning a suite for each one.
 

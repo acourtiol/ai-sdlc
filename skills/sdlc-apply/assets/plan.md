@@ -24,7 +24,9 @@ and a committed handoff. Put final independent verification/report and
 completion/archive in Review route; they cannot be checkbox prerequisites. For an
 affected integration or stateful flow, put the first actual route/runtime slice
 early: verify the risky contract and response plus committed state before building
-all adjacent surfaces. Choose applicable failure/reload/retry cases from the spec.
+all adjacent surfaces. For asynchronous or revision-bound UI, include pending
+reload/recovery, completion, relevant source/version invalidation, stale authority
+controls and retry together. Choose applicable cases from the spec.
 
 - [ ] 1.1 What changes — verify: command, test, or observable behavior
 - [ ] 1.2 Next step in this area — verify: ...
@@ -41,7 +43,9 @@ external-API, compatibility, security, safety, or accessibility checks. Write
 
 The end-to-end evidence that the whole spec is met. Name each check's scope and
 owner: focused checks per slice, one final full change-appropriate gate owned by the
-fresh verifier. Retained raw receipts and provenance use persistent, non-cache
+fresh verifier. Check affected test discovery before the first slice; name relevant
+tests omitted by the broad command and the explicit runner covering them.
+Retained raw receipts and provenance use persistent, non-cache
 storage; temporary scratch is not their sole copy. Consolidate overlapping gates
 before approval; map shared checks to requirements/scenarios. Record cheap prerequisites before expensive integration
 proof and the focused reassessment after two failures of the same class. An earlier

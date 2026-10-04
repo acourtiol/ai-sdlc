@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.8"
+  version: "2.9"
 ---
 
 # sdlc-continue
@@ -24,6 +24,8 @@ Use Conventional Commits (`type(scope): imperative summary`, optional scope), a 
 Read any `context.md`, then check relevant current claims against source, artifacts, and Git. Compact context to unresolved facts absent from artifacts, next action, and evidence links; aim for 500–1,000 words or fewer. Remove transferred or superseded entries, preserving history in Git and reports. It is a handoff, not authority. Approvals require matching content/dependency digests. A pass requires matching artifact digests and no later implementation change after `reviewed_head`. Status alone proves neither. Reconcile/reapprove legacy unbound artifacts; never invent provenance.
 
 Where current user feedback or preserved request evidence contradicts a narrowed artifact, reconcile the outcome through its owning skill before accepting completion. Autonomous approval does not authorize replacing requested automation or integrations with a manual fallback. A verified slice may finish while a required follow-on remains open, but keep that distinction and its blocker visible; do not report the full request delivered.
+
+Keep one compact current delivery summary in the existing run summary or handoff, referencing canonical artifacts rather than mirroring them. State the requested outcome, verified outcome, deployed outcome only when authorized evidence exists, remaining scope/blocker, current slug/owning checkout and next action. Refresh it at meaningful delivery boundaries, not each tool call. A reused checkout or agent name does not identify the current feature. When verified source and delivery histories diverge, reconcile the actual target against its current baseline, reuse still-valid mapping evidence, and distinguish adaptation still needed from behavior already delivered; preserve archives and avoid reopening completed work merely to synchronize old counts. This creates no new artifact or gate.
 
 While implementation or repair is pending, route an oversized plan to apply for replacement of superseded rationale through draft/reapproval; do not reopen a completed plan merely for size. Preserve operative tasks, proof, base and risks; leave completed/archived records intact. This is reconciliation, not permission to waive checks.
 
@@ -54,7 +56,7 @@ Name the slug; ask which when several are active without queue authorization. Fo
 | current pass, statuses short of done | Ask to mark done in a normal run |
 | current pass, all statuses done | Run `sdlc-archive` when requested |
 
-Report progress as `N/M boxes ticked` when a plan exists. A plan with zero or malformed boxes cannot advance.
+Report progress as `N/M boxes ticked` for the current canonical plan; label historical source-pool counts as historical. A plan with zero or malformed boxes cannot advance.
 
 ## Autonomous queue
 

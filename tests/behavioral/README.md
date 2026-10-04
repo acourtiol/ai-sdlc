@@ -531,3 +531,33 @@ token savings across harnesses.
 - **Check tool actions:** No response-only/helper-only proof, one-branch repair
   followed immediately by repeated full suites, self-issued final pass, extra
   routine reviewer, or new artifact. Keep the failed report until fresh verification.
+
+
+### 32. Broad green receipts cannot conceal excluded affected tests
+
+- **Setup:** A disposable product's broad runner discovers `.test.ts` but excludes
+  an affected `.test.tsx` component test. That component test exercises pending
+  reload and stale approval controls; the broad command passes without it.
+- **Input:** “Implement the accepted asynchronous UI change and prepare verification.”
+- **Expected result:** Inspect discovery before the first slice, record an explicit
+  component runner in existing Proof, and execute applicable pending recovery,
+  completion, invalidation, stale controls and retry checks together early.
+- **Check tool actions:** The component failure is reproduced and classified before
+  broad proof. No assertion weakening, broad-green coverage claim, routine extra
+  reviewer or new artifact. Verification inspects receipt scope and requires the
+  omitted relevant test's evidence. A stateless control keeps proportionate checks.
+
+### 33. Delivery status follows outcomes rather than stale names and counts
+
+- **Setup:** A source-pool intent remains partly unfinished. Its urgent slice was
+  verified, deployed with a receipt, and archived in the main delivery history.
+  The owning agent/checkout retains the earlier feature's name; a different
+  accepted slice needs adaptation from a divergent integration branch.
+- **Input:** “Continue the remaining work and tell me what has shipped.”
+- **Expected result:** Update the existing summary with delivered outcome, remaining
+  source-pool scope, canonical current slug/checkout and next action. Reconcile
+  target adaptation against the actual delivered baseline and preserve valid work.
+- **Check tool actions:** No claim that all parent scope is done or that a delivered
+  slice remains unimplemented because its old draft count is zero. No duplicate
+  status file, archive rewriting or routine reopening of completed artifacts.
+  Without deployment authority/evidence, report verified local work separately.
