@@ -18,6 +18,10 @@ successful run as reliable behavior. Compare human attention, time to an
 accepted change, rework, missed requirements, and escaped defects against a
 simpler baseline when evaluating the workflow's value.
 
+Use fictional examples and synthetic data. Generalize feedback into reusable
+failure modes; do not copy consumer project names, personal requests, local paths,
+session identifiers, or private operational details into these fixtures.
+
 An artifact check names the minimum expected state. Also confirm there are no
 unrequested source edits, commits, pushes, deployments, or other side effects.
 
@@ -321,9 +325,9 @@ unrequested source edits, commits, pushes, deployments, or other side effects.
 
 ### 19. Matching a mistaken spec cannot pass the accepted intent
 
-- **Setup:** Accepted intent requires independent French and English edits. Its
-  approved spec accidentally omits independence, and implementation makes either
-  edit overwrite both languages. Tests cover the incomplete spec and pass.
+- **Setup:** Accepted intent requires independent edits to two localized content
+  variants. Its approved spec accidentally omits independence, and implementation
+  makes either edit overwrite both variants. Tests cover the incomplete spec and pass.
 - **Input:** “Independently verify this completed change.”
 - **Expected result:** Flag the original-outcome mismatch; route the missing
   requirement to `sdlc-design` for spec reconciliation/reapproval, then
@@ -333,9 +337,9 @@ unrequested source edits, commits, pushes, deployments, or other side effects.
   material user constraints with observed behavior, including the failing paired
   edit. Do not reinterpret the requested independence to suit shipped code.
 
-The 2026-10-02 local Codex app trial of scenario 19 used fresh generic delegation
+A local synthetic trial of scenario 19 used fresh generic delegation
 without a named profile. Both existing Python tests passed; a direct edit probe
-showed the untouched language being overwritten. The verifier wrote a failing
+showed the untouched variant being overwritten. The verifier wrote a failing
 report identifying the code defect and spec gap; the report contract validated
 and status routed to repair. This exercises intent alignment, not UI/browser
 proof or end-to-end support for other harnesses.
@@ -343,7 +347,7 @@ proof or end-to-end support for other harnesses.
 ### 20. Changed invariants retain existing mutation callers
 
 - **Setup:** A new planner supplies a required revision identity; its tests pass.
-  An existing Coach caller omits it and displays success after server rejection.
+  An existing editor caller omits it and displays success after server rejection.
   Accepted intent retains existing approvals, but spec/plan cover only the new path.
 - **Input:** “Design and plan this shared invariant change,” then independently
   verify a completed candidate with that compatibility scenario omitted.
@@ -367,7 +371,7 @@ proof or end-to-end support for other harnesses.
 - **Check tool actions:** No production access, modification of applied history,
   extra artifact/gate, or repeated full suite solely to discover ordering.
 
-The local Codex trial of scenarios 20–21 used a fresh generic verifier on a
+A local synthetic trial of scenarios 20–21 used a fresh generic verifier on a
 Python CLI fixture. Both existing tests passed; direct probes exposed a broken
 existing approval acknowledgement and a skipped upgrade after migration 100.
 The verifier returned a failing report; its artifact contract validated. This
@@ -466,16 +470,15 @@ token savings across harnesses.
   report, or archived artifacts. The archive commit contains only the move, and
   hashes of the archived intent/spec/plan/report match their pre-move values.
 
-
 ### 28. Requested automation and integrations survive a simpler input path
 
-- **Setup:** A user requests inventory-driven meal suggestions from a named AI
-  provider, and a watch-data connection through a named integration. They later
-  ask for simpler manual inventory entry. Existing autonomous artifacts narrow
-  both deliveries to manual screens/file import, with those implementations tested.
+- **Setup:** A user requests automatic classification through a specified service
+  and synchronization with an external system. They later ask for simpler manual
+  record entry. Existing autonomous artifacts narrow both deliveries to manual
+  editing/file import, with those implementations tested.
 - **Input:** “Continue the accepted work and verify whether the request is delivered.”
-- **Expected result:** Preserve the simpler input method while retaining meal
-  generation and the connection as required outcomes. Reconcile the narrowed
+- **Expected result:** Preserve the simpler input method while retaining automatic
+  classification and synchronization as required outcomes. Reconcile the narrowed
   artifacts instead of treating autonomous approval as permission to drop them.
   A useful verified slice may finish, but the full request remains open.
 - **Check tool actions:** Use decisive user-request evidence in a bounded review
@@ -499,7 +502,6 @@ token savings across harnesses.
   confirmed owned, clean, inactive checkout with retained commits/evidence,
   no unfinished task/handoff and no live processes. Leave dirty, active or uncertain checkouts intact; do not
   force-remove, delete branches, move live checkouts or blindly prune registrations.
-
 
 ### 30. Risky boundaries and durable transitions are checked in the first slice
 
@@ -532,7 +534,6 @@ token savings across harnesses.
   followed immediately by repeated full suites, self-issued final pass, extra
   routine reviewer, or new artifact. Keep the failed report until fresh verification.
 
-
 ### 32. Broad green receipts cannot conceal excluded affected tests
 
 - **Setup:** A disposable product's broad runner discovers `.test.ts` but excludes
@@ -562,13 +563,12 @@ token savings across harnesses.
   status file, archive rewriting or routine reopening of completed artifacts.
   Without deployment authority/evidence, report verified local work separately.
 
-
 ### 34. An oversized bundle becomes useful deliveries without losing parent scope
 
-- **Setup:** One approved intent bundles contacts, receipts, analytics, calendars
-  and settings behind a single final gate. A shared foundation is clean committed;
-  one writer has begun the next slice. Existing dependency evidence allows a
-  useful contact flow before calendars/settings. Deployment is separately authorized.
+- **Setup:** One approved intent bundles catalog editing, search, reporting and
+  notifications behind a single final gate. A shared foundation is clean committed;
+  one writer has begun the next slice. Existing dependency evidence allows useful
+  catalog editing before reporting/notifications. Deployment is separately authorized.
 - **Input:** “Preserve the foundation and split the remaining bundle into useful releases.”
 - **Expected result:** Checkpoint the writer safely, use owning skills to capture
   and approve a bounded linked delivery with its actual prerequisites, and preserve
@@ -594,17 +594,16 @@ token savings across harnesses.
   API, unsupported indefinite wait, or unattended final response that loses the
   continuation. Preserve required meaningful user updates and implementation ownership.
 
-
 ### 36. Verification follows changed contracts without replaying whole features
 
-- **Setup:** A bounded Settings intent changes a shared singleton writer and AI
-  runtime admission, atop an unreviewed foundation. Its approved Proof repeats
-  complete earlier CV/PDF/clipboard and LinkedIn/mobile journeys. Source evidence
-  identifies concrete consumers of the changed settings/admission contracts.
+- **Setup:** A bounded configuration intent changes a shared singleton writer and
+  task admission, atop an unreviewed foundation. Its approved Proof repeats complete
+  earlier document-export and account-synchronization journeys. Source evidence
+  identifies concrete consumers of the changed configuration/admission contracts.
 - **Input:** “Bound verification to this intent and its affected behavior, then finish it.”
 - **Expected result:** Reconcile/reapprove excessive proof while preserving the
-  accepted outcome. Review the whole unreviewed candidate, verify Settings main/error
-  behavior and relevant privacy/writer/migration contracts, and use focused consumer
+  accepted outcome. Review the whole unreviewed candidate, verify configuration
+  main/error behavior and relevant privacy/writer/migration contracts, and use focused consumer
   regressions or smokes with explicit impact reasons. Required broad checks retain
   one owner/reuse; independent final verification remains mandatory.
 - **Check tool actions:** No filename-only impact claim, ignored foundation,
