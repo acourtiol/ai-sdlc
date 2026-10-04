@@ -8,7 +8,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.12"
+  version: "1.13"
 ---
 
 # sdlc-fix
@@ -19,7 +19,7 @@ Repair a bounded existing flow without opening `intent/<slug>/`. The fix request
 
 This path fits a concrete bug in an existing readable flow or a behavior-preserving refactor. Judge both the size of the change and the impact if it is wrong; a small patch can be high consequence and a large mechanical change can be low consequence.
 
-Use `sdlc-plan` if investigation reveals a new capability, unresolved product choice, architectural decision, or work spanning multiple subsystems. Do not disguise expanded scope as a fix.
+Use `sdlc-plan` if investigation reveals a new capability, unresolved product choice, architectural decision, or work spanning multiple subsystems. Do not disguise expanded scope as a fix. Preserve the actual requested outcome: a manual substitute does not satisfy requested automation or integration. Extra screens, mandatory inputs, acknowledgements or enablement gates need user authority or an evidenced binding constraint; a guard invented during the fix does not supply it. Keep necessary internal validation, security and error handling, and choose the smallest complete repair for the stated users and deployment. Present a genuinely necessary new product decision before implementing it; broad autonomy does not authorize it.
 
 Escalate assurance for changes affecting authorization, sensitive data, irreversible operations or migrations, financial calculations, safety-critical behavior, or another consequential invariant. Before editing, establish an independent reviewer route at the stable completed-fix boundary. Use the host's available delegation mechanism without inherited implementation history, or a separate fresh session with a bounded handoff. No named agent profile or particular model is required. Confirm actual isolation; review with inherited implementation history cannot pass as independent. If the host cannot provide that capability, do not make an autonomous consequential fix; state the blocker. Use a disposable checkout and a limited test environment for the independent check when the change could damage data or depend on privileged access. No review route makes the work blocked, not verified.
 

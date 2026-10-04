@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.6"
+  version: "2.7"
 ---
 
 # sdlc-plan
@@ -14,6 +14,8 @@ metadata:
 Write `intent/<slug>/intent.md` from the user's idea, preserving their wording for the outcome. In a normal run, wait for acceptance; an explicitly authorized autonomous queue may accept an existing draft after the confidence assessment below. On acceptance, read `sdlc-design` and execute it.
 
 Preserve requested capabilities as product outcomes: explicit automation, named providers or integrations, and requested data coverage stay requirements, not optional implementation details. Keep short decisive user wording or a source excerpt in Proposed outcome when it could be easy to lose. Do not move a requested outcome into Out of scope without explicit user acceptance; unrequested implementation non-goals may clarify the boundary. Autonomous approval cannot authorize reducing the outcome. If access, credentials, or a dependency is unavailable, record the blocker and continue useful authorized work, but leave the requested capability blocked until it is delivered or the user explicitly accepts a different outcome after seeing the tradeoff. For critical automation or integrations, include an observable end-to-end scenario; a manual fallback does not prove it.
+
+Check added scope as well as missing scope. Additional screens, required inputs, acknowledgements, reconfirmation steps or gates beyond the requested flow are product decisions, not routine implementation details. Trace each to an explicit user request or an evidenced binding constraint in existing artifacts; broad autonomy, generic product goals and agent-authored requirements do not supply that authority. Autonomous approval cannot expand the accepted outcome. Keep necessary internal validation, security and error handling tied to the changed flow, but do not turn known external limits into an unrequested user ceremony. If a new product decision is genuinely needed and authority is missing, present the concrete tradeoff before implementing it. An agent-created guard is not justification for another feature needed solely to configure that guard. Size the solution to the stated users and deployment; do not assume organizational approval, compliance administration or future multi-user needs. Prefer the smallest design that delivers the complete requested behavior.
 
 ## Before you start
 

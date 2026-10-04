@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.13"
+  version: "2.14"
 ---
 
 # sdlc-apply
@@ -20,6 +20,8 @@ Resolve `assets/` and `scripts/` against this skill's installed directory suppli
 Need `intent/<slug>/spec.md` with `status: specified` or session approval. Resolve choices that could change architecture, safety, or acceptance before planning/resuming. Research repo answers; a remaining material choice needs an answer or explicitly approved default. Otherwise return to design for correction/reapproval, reopening an existing plan to `draft` too. Lower-impact questions with an owner/default do not block.
 
 Check the requested outcome before planning or accepting a repair: explicit automation, providers/integrations and data coverage must have end-to-end steps and proof. A manual fallback, unavailable credentials or a follow-on intent does not remove the requirement. Decomposition may deliver useful authorized slices, but keep remaining required outcomes and blockers visible in the existing artifacts/handoff; do not claim the full request complete. Only explicit user acceptance of the visible tradeoff can reduce that outcome, even in an autonomous run.
+
+Before code or repair, compare newly added user-facing behavior and prerequisites with actual user authority or evidenced binding constraints. Autonomous artifacts and broad completion/decomposition authority cannot authorize new screens, mandatory inputs, acknowledgements or gates. An agent-created dependency is not proof that the user wanted it. Route unsupported scope through its owning artifacts for correction/reapproval; preserve established security and the requested outcome. Do not build a setup UI merely to satisfy an unrequested guard.
 
 The workflow authorizes owned artifact and verified slice commits unless the user/host restricts them. Before writing, record repo, branch, HEAD, staged and dirty/untracked paths. Reuse the current owning checkout by default; create another only to isolate concrete overlapping work or provide a clean review candidate. Never reset, stash, or absorb others' work. Use persistent, non-cache storage for resumable checkouts and retained raw proof; temporary directories are disposable scratch. Write needed receipts/provenance to persistent storage as produced and cite those copies in handoffs/reports. Stage only owned paths/hunks. Use Conventional Commits (`type(scope): imperative summary`, optional scope), a blank line, and a sentence on why; mark breaking changes with `!` or `BREAKING CHANGE:`. Do not push unless asked.
 

@@ -25,7 +25,9 @@ delivery/rollout if those are different outcomes. Requested outcomes belong in
 Out of scope only after explicit user acceptance; do not substitute a manual
 fallback for requested automation or integration. For critical automation or integrations, describe an
 observable end-to-end outcome. If a dependency, access, or credentials block it,
-record the blocker; autonomous approval cannot reduce the requested outcome.
+record the blocker; autonomous approval cannot reduce the requested outcome. Trace
+added product behavior to the user request or an evidenced binding constraint;
+agent-authored prerequisites cannot authorize additional scope.
 
 ## Affected users and systems
 

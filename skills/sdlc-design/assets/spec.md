@@ -14,6 +14,9 @@ approved_digest: pending
 What the system must do. Testable. Not file paths. One block per requirement,
 each with at least one scenario. Trace the accepted outcome and material
 constraints to these requirements; preserve user-provided examples and limits.
+Check both missing outcomes and added product behavior against decisive user
+wording and evidenced binding constraints. Agent-authored requirements alone
+do not authorize extra scope; keep that trace here without a separate document.
 
 ### Requirement: short name
 
