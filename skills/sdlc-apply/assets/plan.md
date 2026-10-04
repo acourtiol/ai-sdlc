@@ -46,9 +46,18 @@ external-API, compatibility, security, safety, or accessibility checks. Write
 ## Proof
 
 The end-to-end evidence that the whole spec is met. Name each check's scope and
-owner: focused checks per slice, one final full change-appropriate gate owned by the
-fresh verifier. Check affected test discovery before the first slice; name relevant
-tests omitted by the broad command and the explicit runner covering them.
+owner: focused checks per slice, one complete intent-scoped verification owned by
+the fresh verifier. Cover the complete unreviewed diff and affected contracts/callers.
+For adjacent flows, name the changed dependency/invariant and smallest regression
+or smoke proving it; skip unrelated whole-feature acceptance matrices. A broad
+suite needs a binding repository/user requirement or concrete integration risk.
+Complete verification does not mean whole-product recertification. Check affected
+test discovery before the first slice; name relevant tests omitted by the broad command and the explicit runner covering them.
+Reuse inspectable raw receipts when all relevant producing inputs, command and
+environment demonstrably match, including transitive/runtime dependencies. A
+specific pre-run manifest format is unnecessary if immutable source and retained
+evidence establish provenance; unknown earlier working-tree inputs cannot be
+assigned today’s hashes.
 Retained raw receipts and provenance use persistent, non-cache
 storage; temporary scratch is not their sole copy. Consolidate overlapping gates
 before approval; map shared checks to requirements/scenarios. Record cheap prerequisites before expensive integration

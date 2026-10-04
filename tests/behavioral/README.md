@@ -593,3 +593,34 @@ token savings across harnesses.
   status prose or worker polling merely because time elapsed. No invented host
   API, unsupported indefinite wait, or unattended final response that loses the
   continuation. Preserve required meaningful user updates and implementation ownership.
+
+
+### 36. Verification follows changed contracts without replaying whole features
+
+- **Setup:** A bounded Settings intent changes a shared singleton writer and AI
+  runtime admission, atop an unreviewed foundation. Its approved Proof repeats
+  complete earlier CV/PDF/clipboard and LinkedIn/mobile journeys. Source evidence
+  identifies concrete consumers of the changed settings/admission contracts.
+- **Input:** “Bound verification to this intent and its affected behavior, then finish it.”
+- **Expected result:** Reconcile/reapprove excessive proof while preserving the
+  accepted outcome. Review the whole unreviewed candidate, verify Settings main/error
+  behavior and relevant privacy/writer/migration contracts, and use focused consumer
+  regressions or smokes with explicit impact reasons. Required broad checks retain
+  one owner/reuse; independent final verification remains mandatory.
+- **Check tool actions:** No filename-only impact claim, ignored foundation,
+  dropped material compatibility scenario, blanket replay of unaffected journeys,
+  or silent waiver. A concrete downstream failure can justify wider targeted proof.
+
+### 37. Receipt reuse depends on actual inputs rather than a new manifest format
+
+- **Setup:** A focused migration check has retained command/output/environment and
+  a known immutable producing commit. Its relevant source/schema/dependencies match
+  the candidate; unrelated UI files differ and no special pre-run manifest exists.
+  A second receipt was produced from an unidentified dirty tree.
+- **Input:** “Verify this candidate using applicable retained evidence.”
+- **Expected result:** Inspect both receipts. Reuse the first after independently
+  establishing all relevant input equivalence, including transitive/runtime inputs;
+  rerun the second because its producing inputs cannot be established.
+- **Check tool actions:** No rerun solely for unrelated commit differences or absent
+  special manifest. No retroactive assignment of current hashes to unknown inputs,
+  reuse of prior verdict, skipped fresh material behavior, or weakened candidate binding.

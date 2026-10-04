@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.12"
+  version: "2.13"
 ---
 
 # sdlc-apply
@@ -57,7 +57,11 @@ Boxes cover implementation, implementer-owned checks, and the committed handoff.
 
 Before the first implementation check, inspect the configured runner/discovery rules for affected tests, including component tests and distinct file extensions. In existing Proof or the fix record, name relevant tests omitted by the normal command and their explicit runner. Run those focused tests early; a green broad receipt cannot cover files it excludes. Classify failures against the baseline without changing assertions to hide them; unavailable required coverage remains blocked.
 
-The fresh final verifier owns one full change-appropriate gate on the completed snapshot. Run a full gate earlier only when repository instructions or integration risk require it. Record each command's scope and owner in Proof; map requirements and scenarios to shared checks instead of repeating a suite for each scenario. Consolidate overlapping checks before plan approval. An existing approved plan's required proof cannot be silently dropped: reconcile and reapprove it first.
+Bound behavioral verification to the accepted intent and the impact of the complete candidate diff, including unreviewed prerequisite changes. Identify affected contracts/callers, not just edited filenames. For each adjacent flow included in Proof, name the changed dependency or invariant that warrants it and choose the smallest regression or smoke establishing that behavior. Do not replay an unrelated feature’s entire acceptance journey, clipboard, responsive or lifecycle matrix merely because it was delivered earlier. Broaden only for a concrete impact, observed failure or binding repository/user requirement; record that reason in existing Proof. Reconcile/reapprove excessive approved proof instead of silently omitting it; preserve requested outcomes and material compatibility coverage.
+
+The fresh final verifier owns complete intent-scoped verification on the completed snapshot; complete verification does not mean a full project suite or whole-product recertification. Run a broad suite only for a binding repository/user requirement or concrete integration risk, with one owner and valid receipt reuse. Earlier checks stay focused unless that requirement/risk needs more. Record each command’s scope and owner in Proof; map requirements/scenarios to shared checks and consolidate overlapping gates before approval.
+
+Before repeating retained proof, compare the check’s actual producing source/tests, configuration, transitive/runtime dependencies, command and environment with current relevant inputs. If immutable source and retained raw evidence establish equivalence, keep that receipt for the final verifier to inspect rather than rerunning for an unrelated commit difference or absent special pre-run manifest. Unknown earlier working-tree inputs cannot be assigned current hashes; uncertain or changed relevant inputs need fresh proof.
 
 Before an expensive container, restore, migration, or browser integration run, check cheap prerequisites in the isolated environment: candidate identity, dependencies, ports, fixture/schema readiness, and probe behavior relevant to that run. Use the smallest meaningful probe of the actual launcher and child environment, rather than parent configuration alone. Run dependent setup steps sequentially and stop on failure. Before migrations or other mutating proof, verify the actual child connection resolves to the intended disposable database/schema or equivalent target; never fall back to a shared default. After a failure, retain actionable phase/cause evidence and use the narrowest feasible reproduction before another full run; explain when that requires the full check. Reconcile a changed source candidate and pinned proof inputs under the existing approval policy; a diagnostic repair is not proof of the originally pinned candidate. After two failures of the same class, stop repeating the full gate and reassess the cause with a focused reproduction. This does not authorize production access or waive required proof.
 
