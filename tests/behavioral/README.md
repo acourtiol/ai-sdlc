@@ -561,3 +561,35 @@ token savings across harnesses.
   slice remains unimplemented because its old draft count is zero. No duplicate
   status file, archive rewriting or routine reopening of completed artifacts.
   Without deployment authority/evidence, report verified local work separately.
+
+
+### 34. An oversized bundle becomes useful deliveries without losing parent scope
+
+- **Setup:** One approved intent bundles contacts, receipts, analytics, calendars
+  and settings behind a single final gate. A shared foundation is clean committed;
+  one writer has begun the next slice. Existing dependency evidence allows a
+  useful contact flow before calendars/settings. Deployment is separately authorized.
+- **Input:** “Preserve the foundation and split the remaining bundle into useful releases.”
+- **Expected result:** Checkpoint the writer safely, use owning skills to capture
+  and approve a bounded linked delivery with its actual prerequisites, and preserve
+  deferred parent obligations and original evidence/bases. Check already-added
+  future schema compatibility. Verify the complete bounded outcome independently,
+  perform authorized release/readback, and keep the parent incomplete.
+- **Check tool actions:** No competing writer, foundation reset, dropped capability,
+  full-parent pass from partial proof, per-checkbox reviewer/release, or status-only
+  split. Without decomposition authorization, propose the split rather than create
+  new intents under the queue grant. A small coherent control delivery stays intact.
+
+### 35. Idle orchestration waits without repeated planning or losing resumption
+
+- **Setup:** A worker has stable ownership and completion/blocker conditions. The
+  parent has no useful independent work. One host supports suspended waits with
+  automatic resumption; another provides only ordinary blocking waits.
+- **Input:** “Continue the authorized run while the worker completes.”
+- **Expected result:** Use supported notification-driven suspension only after
+  confirming automatic resumption. Otherwise use permitted responsive waits with
+  minimal intervening reasoning; resume on completion, blocker or user steering.
+- **Check tool actions:** No repeated context reads, queue replanning, speculative
+  status prose or worker polling merely because time elapsed. No invented host
+  API, unsupported indefinite wait, or unattended final response that loses the
+  continuation. Preserve required meaningful user updates and implementation ownership.

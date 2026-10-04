@@ -18,7 +18,11 @@ Exact paths. New vs edit. One line each on what changes. Name the single impleme
 
 Replace this guidance with task boxes only. Use numeric prefixes for coherent,
 reviewable changes, each with a focused check and commit; do not split by individual
-file, tool call, or bookkeeping. Keep one implementer on related work. Remove every
+file, tool call, or bookkeeping. Keep one implementer on related work. Before
+approval, name the first independently useful outcome and its concrete prerequisites in existing Risks/Proof. Several
+features behind one final gate need a delivery-sizing decision, even with few
+boxes; authorized bounded delivery intents preserve the parent’s remaining scope.
+Do not turn every box into a separate release. Remove every
 example before approval. Boxes end at implementation, implementer-owned checks
 and a committed handoff. Put final independent verification/report and
 completion/archive in Review route; they cannot be checkbox prerequisites. For an

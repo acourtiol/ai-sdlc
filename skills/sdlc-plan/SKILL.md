@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.5"
+  version: "2.6"
 ---
 
 # sdlc-plan
@@ -21,7 +21,7 @@ Resolve `assets/` and `scripts/` against this skill's installed directory suppli
 
 Triage before you write. A feasibility question is a spike: answer it, do not open an intent. A bounded bug or behavior-preserving refactor of an existing flow goes to `sdlc-fix`, without an intent. An intent is for work that changes what the product does. File count alone does not decide the path. Use `sdlc-explore` for a shapeless idea; when routing is ambiguous, take the heavier path. Record evidence of the problem or `not checked`.
 
-Keep a small, well-understood new behavior compact within the same intent/spec/plan gates: one clear outcome and the few scenarios and steps needed to prove it. Do not create extra documents to make a small change look substantial.
+Keep a small, well-understood new behavior compact within the same intent/spec/plan gates: one clear outcome and the few scenarios and steps needed to prove it. Do not create extra documents to make a small change look substantial. For a broad request, identify the earliest independently useful outcome and its actual prerequisites before bundling adjacent features. Prefer a complete user-visible delivery over a foundation spanning all future surfaces; shared infrastructure alone is not that outcome. Balance earlier usefulness against repeated review/migration/release cost. When the user authorizes decomposition, capture a bounded delivery intent referencing the existing parent outcome and remaining obligations; do not mark the parent complete or move its undelivered requirements out of scope. Do not create a child for every implementation box.
 
 Queue added product requests behind the active implementation/review without writing their product-repo artifacts until that feature finishes or blocks. If the user explicitly reprioritizes, checkpoint and switch lanes before capturing the newly prioritized intent. Keep the interview and narrow source lookups here. Delegate bounded independent research only when parallel work or saved context outweighs startup and coordination. Reuse a researcher for related reads; provide paths and questions instead of the full conversation. Use completion notifications where available; otherwise wait meaningfully while doing independent work, without repeated status polling.
 
