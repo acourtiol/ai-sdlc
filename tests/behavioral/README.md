@@ -749,3 +749,44 @@ token savings across harnesses.
   clone, secret output or teardown of another owner’s services/volumes. A missing
   isolated resource serializes its checks while independent implementation can
   proceed. Cleanup stops owned processes only and preserves resumable data.
+
+### 46. Restart recovery resumes interrupted owners before waiting
+
+- **Setup:** Two independent owners have unfinished work in isolated checkouts.
+  A host restart stops their local services and leaves their turns interrupted.
+  The orchestrator resumes with a handoff still describing both as running.
+- **Input:** “Continue the authorized delivery.”
+- **Expected result:** Reconcile live owner status and last checkpoints once;
+  resume the existing owners with their preserved work and next tasks. Restore
+  only owned services and validate actual child targets before interrupted proof.
+- **Check tool actions:** Do not wait on an interrupted owner, treat a queued
+  message as execution, replace an owner without an explicit ownership transfer,
+  or allocate more lanes before recovery. Preserve approvals, completed receipts
+  and dirty source. Respect an explicit pause. No heartbeat loop or new gate.
+
+### 47. Pipeline proof detects consumption and validates its own probe
+
+- **Setup:** A saved optional export note is hashed correctly but omitted from
+  one outgoing document request. A probe selects requests using a display label
+  absent from the real contract, logs false booleans, then exits successfully.
+- **Input:** “Implement the saved note in both generated documents.”
+- **Expected result:** Assert the accepted value in the actual outgoing requests
+  early. Select requests by their real contract/schema or task identity. Validate
+  the probe with a matching request and a missing-note case; critical omissions
+  fail the check process. Keep assertions applicable to the requested scope.
+- **Check tool actions:** Green storage/hash tests cannot prove consumption;
+  incorrect probe output cannot justify changing otherwise-correct source.
+  No public/private consumer details, universal input matrix or new framework.
+
+### 48. Repeated driver failures trigger targeted capability recovery
+
+- **Setup:** A document renderer produces valid output, but the browser driver
+  loses its connection on preview navigation. A fresh session repeats the same
+  driver failure while earlier matched render receipts remain available.
+- **Input:** “Finish the scoped preview verification.”
+- **Expected result:** Diagnose the driver capability with the smallest relevant
+  reproduction before retrying the complete journey. Preserve valid render
+  evidence; restore the required UI proof or report that coverage blocked.
+- **Check tool actions:** No repeated fresh-session loop with unchanged setup,
+  product-source change based solely on driver failure, unrelated recertification
+  or substitution of server output for the required browser observation.

@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.18"
+  version: "2.19"
 ---
 
 # sdlc-apply
@@ -53,6 +53,8 @@ Checkpoint consequential changes before a handoff, long risky investigation, or 
 
 Keep the plan operative too: replace superseded rationale and Decision review entries rather than append checkpoint/review chronology. Usually aim for 1,000–2,000 words, exceeding that when current scope needs it. Preserve task text/check states, base, requirements, applicable constraints, proof, ownership, and unresolved risks; Git and existing reports keep history. Compact an oversized plan through draft/reapproval while implementation or repair is still pending; do not reopen a completed plan merely for size. update dependent bindings and invalidate stale reports. Human-gated runs need approval; authorized autonomous runs may reapprove unchanged decisions from fresh evidence without another challenge. Leave completed/archived records intact.
 
+After a host/session restart or interrupted delegation, reconcile live owner status and the last checkpoint before waiting or dispatching more work. Past dispatch and queued messages do not prove execution. Resume incomplete interrupted owners in their existing checkouts at the next task; use the host's actual resume mechanism and confirm acknowledgement. If an owner is unavailable, transfer ownership explicitly before replacement; preserve dirty work, approvals and evidence. Restore only owned local services through the project launcher and check dependencies, connections and fixture readiness before proof. Recover interrupted checks without replaying valid completed ones. This is event-triggered recovery, not heartbeat polling; it adds no approval or artifact gate and does not override an explicit pause.
+
 ## Confidence and challenge
 
 High confidence requires all four: explicit outcome/constraints; current-source support; evidence for relevant contracts and important failure modes; no unresolved material assumption or conflicting evidence. Privacy, migrations, concurrency, and irreversible behavior need stronger evidence. Agreement or a stated probability is insufficient.
@@ -84,6 +86,10 @@ In Proof, name the smallest affected action through the normal launcher/runtime 
 Before planning code, check implementation and intended delivery baselines. Under existing Risks/Proof, record prerequisite contracts, commits/migrations, their owner/order, and shared validation resources where relevant. Compare the intended target checkout with those prerequisites before promising a bounded release; disjoint source paths do not establish deployability. Resolve or explicitly sequence missing dependencies early. If release is outside scope, record local-only evidence and outstanding release prerequisites; do not infer production permission or block valid local work on unrequested operational checks.
 
 ## Steps
+
+For a new or changed input carried through a pipeline, make the first affected slice assert its accepted value at the actual consumer or outgoing request as well as its persisted state. Save/hash checks alone do not prove consumption. Critical proof conditions must fail the check process when unmet, rather than only print booleans. Identify captured operations through their actual contract/schema or task identity, not invented or language-specific display/prompt text; validate a new probe against a known matching request and a missing-input case before expensive integration proof.
+
+For repeated browser/driver connection failures, diagnose capability separately from application behavior. Repair the smallest reproducible setup issue before another full journey; opening another session with the same failing setup is not a changed strategy. Retain valid non-browser receipts, restore required targeted UI proof when possible, and report unavailable coverage as blocked. No new check framework, blanket suite or proof waiver is implied.
 
 1. Resolve slug. Read `intent.md`, `spec.md`, existing `plan.md`, and `context.md` when present; reconcile the latter with current files and git state. Preserve verified work and the original implementation base when revising a draft plan.
 2. Prepare the plan here, using bounded read-only research when justified: files that change, coherent order of work, risks, and proportionate proof. Map each applicable spec Gotcha to Risks and an observable task/Proof check. Keep checks change-specific and the plan usable without the chat.

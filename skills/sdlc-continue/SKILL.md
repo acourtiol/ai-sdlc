@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.12"
+  version: "2.13"
 ---
 
 # sdlc-continue
@@ -18,6 +18,8 @@ Read artifacts and run the next gate for one slug. Skip `intent/archive/`; never
 Resolve this skill's installed directory from the host's skill path; its `assets/` and `scripts/` paths are relative to that directory, not the product repo. Commands use `python3` as an example: select an available Python 3.8+ interpreter and quote resolved paths. Run `python3 "<this-skill-dir>/scripts/validator.py" route` in the product repo (`status.sh` is an optional POSIX wrapper). Follow `next:` after repairing/reapproving malformed or stale artifacts; validation cannot prove claimed behavior. Direct commands are `python3 <this-skill-dir>/scripts/validator.py validate <slug>` and `archive-check <slug>` (adds done statuses). Load the next owning skill by the host's supported mechanism or read its installed `SKILL.md` and needed local resources directly. No slash-command or skill-invocation API is assumed. If that skill or its resources cannot be resolved, hand off with the required skill, artifact path, and next gate; do not improvise its template or review.
 
 Before edits and between slugs, record repo/branch/HEAD and staged/dirty/untracked paths. Reuse the current owning checkout by default; isolate concrete overlap or provide a clean review candidate only when needed. Never reset, stash, or absorb others' changes. Resumable checkouts and retained receipts use persistent, non-cache storage; temporary directories are disposable. For an agent-created checkout, use the agreed project workspace's `.worktrees/<purpose>` by default, anchoring the root once from the initial workspace to avoid nested worktree areas. Ensure the location is excluded from Git tracking and relevant source/test discovery before creation, applying the project's targeted exclusion convention if needed. Keep host-managed isolation when required and record its path and reason. On resumption, check cited evidence still exists before reuse.
+
+After a host/session restart or interrupted delegation, reconcile live owner status and the last checkpoint before waiting or dispatching more work. Past dispatch and queued messages do not prove execution. Resume incomplete interrupted owners in their existing checkouts at the next task; use the host's actual resume mechanism and confirm acknowledgement. If an owner is unavailable, transfer ownership explicitly before replacement; preserve dirty work, approvals and evidence. Restore only owned local services through the project launcher and check dependencies, connections and fixture readiness before proof. Recover interrupted checks without replaying valid completed ones. This is event-triggered recovery, not heartbeat polling; it adds no approval or artifact gate and does not override an explicit pause.
 
 Use Conventional Commits (`type(scope): imperative summary`, optional scope), a blank line, and a sentence on why; mark breaking changes with `!` or `BREAKING CHANGE:`.
 

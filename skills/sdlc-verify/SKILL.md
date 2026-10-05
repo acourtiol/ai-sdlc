@@ -8,7 +8,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.15"
+  version: "2.16"
 ---
 
 # sdlc-verify
@@ -64,6 +64,8 @@ Before expensive integration proof, cheaply check candidate identity, dependenci
 For a changed shared invariant or command, independently identify affected existing callers/writers and exercise their important retained behavior and success/error acknowledgements. Check this against intent and source even if the plan covers only the new path. A missing material compatibility scenario is a design/plan gap to reconcile, not grounds for a pass. For schema changes, inspect migration identity/order and require evidence that upgrade over the applicable existing migration history actually applies the change and preserves data. A fresh-database pass or successful build is not equivalent. Existing matched receipts may cover these checks under the reuse rule above; do not add a duplicate full gate.
 
 ## Report and verdict
+
+For inputs carried through a pipeline, inspect evidence at the actual consumer or outgoing request, not only saved values or hashes. Printed booleans and a zero exit do not establish acceptance unless critical conditions are asserted. Check that a capture/probe identifies the actual contract/schema or task; an invented or language-specific text marker can create false negatives. Distinguish repeated browser/driver capability errors from product defects, retaining valid matched receipts while restoring the required targeted UI coverage or reporting it blocked.
 
 Use `assets/report.md` and retain its headings. Before judging spec compliance, check that its requirements and the delivered behavior still satisfy the accepted intent and material constraints. Flag a spec that missed or changed the user's outcome rather than passing an implementation merely because it matches that spec. A material spec gap returns to `sdlc-design` for draft/reapproval, then `sdlc-apply` for dependent plan reconciliation/reapproval before implementation resumes; the verifier writes only its report. Under each Verification subsection write at least one `- PASS | action: ... | observed: ... | evidence: ...` entry (or `FAIL`/`BLOCKED`). Include each requirement name verbatim in the `action:` of a Completeness entry and each scenario name verbatim in the `action:` of a Correctness entry; entries may reference shared receipts/checks. Coherence covers the entire change, trust boundaries, regressions, error handling, existing patterns, and each applicable spec Gotcha's plan check. All plan boxes must be ticked. Cite exact commands/actions and inspectable output, record skipped checks, and pin CRITICAL/WARNING/SUGGESTION findings to `file:line`. Record relevant rollout, migration, recovery, and observation under Release handoff; otherwise `None.`
 
