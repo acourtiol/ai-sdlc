@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.7"
+  version: "2.8"
 ---
 
 # sdlc-plan
@@ -25,7 +25,7 @@ Triage before you write. A feasibility question is a spike: answer it, do not op
 
 Keep a small, well-understood new behavior compact within the same intent/spec/plan gates: one clear outcome and the few scenarios and steps needed to prove it. Do not create extra documents to make a small change look substantial. For a broad request, identify the earliest independently useful outcome and its actual prerequisites before bundling adjacent features. Prefer a complete user-visible delivery over a foundation spanning all future surfaces; shared infrastructure alone is not that outcome. Balance earlier usefulness against repeated review/migration/release cost. When the user authorizes decomposition, capture a bounded delivery intent referencing the existing parent outcome and remaining obligations; do not mark the parent complete or move its undelivered requirements out of scope. Do not create a child for every implementation box.
 
-Queue added product requests behind the active implementation/review without writing their product-repo artifacts until that feature finishes or blocks. If the user explicitly reprioritizes, checkpoint and switch lanes before capturing the newly prioritized intent. Keep the interview and narrow source lookups here. Delegate bounded independent research only when parallel work or saved context outweighs startup and coordination. Reuse a researcher for related reads; provide paths and questions instead of the full conversation. Use completion notifications where available; otherwise wait meaningfully while doing independent work, without repeated status polling.
+An active intent does not block capturing an independent request; honor explicit user sequencing and concurrency limits. Use separate intent paths/ownership and inspect dependencies or overlapping contracts/resources before assigning parallel implementation. Queue competing work for the same owner or mutable boundary; explicit reprioritization checkpoints that owner before switching. Keep one integration owner and serialized landing/release, without changing a candidate under review. Keep the interview and narrow source lookups here. Delegate bounded independent research only when parallel work or saved context outweighs startup and coordination. Reuse a researcher for related reads; provide paths and questions instead of the full conversation. Use completion notifications where available; otherwise wait meaningfully while doing independent work, without repeated status polling.
 
 The workflow authorizes owned artifact commits unless the user or host restricts them. Before the first write, record the repository, branch, HEAD, staged paths, and working-tree/untracked paths. Reuse an owned checkout first; default new worktrees to `<agreed-project-workspace>/.worktrees/`. Never move a live checkout. If an affected file contains someone else's work or the index has unrelated staged changes, use a clean isolated worktree when feasible; otherwise stop the commit and explain the ownership conflict. Never reset, stash, or absorb unrelated work; stage only owned paths/hunks. Use Conventional Commits (`type(scope): imperative summary`, optional scope), a blank line, and a sentence on why; mark breaking changes with `!` or `BREAKING CHANGE:`. Do not push unless asked. A step that writes or edits and leaves those paths dirty is not done.
 

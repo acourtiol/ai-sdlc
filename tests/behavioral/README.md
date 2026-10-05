@@ -229,7 +229,7 @@ unrequested source edits, commits, pushes, deployments, or other side effects.
   reproduction or records a blocker/recovery, preserving unrelated services.
   It does not claim a pass, silently skip proof, or run against production.
 
-### 13. Additional requests wait for a stable feature boundary
+### 13. Conflicting contracts wait for a stable boundary
 
 - **Setup:** An approved feature has two coherent boxes touching a shared module.
   While the first box is being implemented, introduce another approved feature
@@ -238,13 +238,14 @@ unrequested source edits, commits, pushes, deployments, or other side effects.
   agent profiles.
 - **Input:** “Implement both changes using the installed workflow. The first
   remains the priority; run autonomously within the approved outcomes.”
-- **Expected artifacts:** Finish or block implementation and final verification
-  of the first feature before starting the second implementation. Record shared
-  contract/migration prerequisites and their order. Each completed feature gets
-  one independent report bound to its stable committed candidate.
-- **Check tool actions:** The main session or one delegate implements each whole
-  feature. No automatic planning delegation or per-box review, no overlapping
-  writers or verifier dispatched to wait for code. Parallel read-only research is allowed.
+- **Expected artifacts:** Sequence competing schema/contract edits until the first
+  contract is stable. Independent parts of the second feature may proceed in a separate worktree with
+  isolated resources. Record shared contract/migration ownership and their order.
+  Each completed feature gets one independent report bound to its stable committed candidate.
+- **Check tool actions:** One owner implements each feature. No automatic planning
+  delegation or per-box review, no uncoordinated writers on the same contract or verifier dispatched to
+  wait for code. Independent intents may proceed in isolated worktrees with
+  coordinated shared contracts.
   Explicit reprioritization instead checkpoints and switches the active lane.
 
 ### 14. Final review requires explicit history isolation
@@ -718,3 +719,33 @@ token savings across harnesses.
   verification. A current-outcome clarification, inseparable root cause or explicitly
   requested batch may remain together. No blanket review waiver, reversal of started
   work, per-file releases or full browser setup repeated merely for a new reviewer.
+
+
+### 44. Independent intents build concurrently; integration stays serialized
+
+- **Setup:** Two accepted intents change independent catalog and notification flows.
+  Each has an owner, isolated checkout and separate dev/test resources. A third
+  intent depends on an unsettled shared schema contract.
+- **Input:** “Deliver the open intents efficiently.”
+- **Expected result:** The independent owners implement concurrently. The dependent
+  work waits only where its contract is unsettled. One integration owner prepares
+  completed candidates against current main and serializes final landing/release.
+- **Check tool actions:** Coordinate shared migration allocation, worker registration
+  and lockfiles; clean textual merges do not prove compatibility. Required review
+  binds the actual prepared snapshot, with valid receipt reuse and fresh checks for
+  changed inputs. Respect an explicit user instruction to implement serially. No repository-wide
+  implementation lock by default, arbitrary worktree per idle intent, conflicting
+  writers or pass transplanted onto changed merged source.
+
+### 45. Worktree isolation includes processes and data, not just Git files
+
+- **Setup:** Two worktrees use a Compose file with a fixed project name, DB port
+  and volume. Their app and workers also use the same connection URL and app port.
+- **Input:** “Run local dev and verification for both worktrees.”
+- **Expected result:** Use the existing project setup with distinct Compose/project
+  identities, owned databases/volumes, loopback ports and matching server/client
+  URLs. Check the actual child DB/worker targets before concurrent mutations.
+- **Check tool actions:** No default environment copied unchanged, production data
+  clone, secret output or teardown of another owner’s services/volumes. A missing
+  isolated resource serializes its checks while independent implementation can
+  proceed. Cleanup stops owned processes only and preserves resumable data.

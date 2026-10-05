@@ -12,13 +12,15 @@ approved_digest: pending
 
 ## Files that change
 
-Exact paths. New vs edit. One line each on what changes. Name the single implementation owner; parallel researchers are read-only.
+Exact paths. New vs edit. One line each on what changes. Name this intent’s implementation owner and checkout; researchers are read-only.
+Record dependencies, overlapping paths/contracts and shared migration/worker/resource
+ownership here or in Risks; independent intents may use separate worktrees.
 
 ## Order of work
 
 Replace this guidance with task boxes only. Use numeric prefixes for coherent,
 reviewable changes, each with a focused check and commit; do not split by individual
-file, tool call, or bookkeeping. Keep one implementer on related work. Before
+file, tool call, or bookkeeping. Keep one owner per intent; coordinate shared contracts rather than all repository work. Before
 approval, name the first independently useful outcome and its concrete prerequisites in existing Risks/Proof. Several
 features behind one final gate need a delivery-sizing decision, even with few
 boxes; authorized bounded delivery intents preserve the parent’s remaining scope.
@@ -81,7 +83,18 @@ is insufficient. Use authorized baseline evidence and retain missing release
 prerequisites explicitly. Stop dependent setup on failure; verify the actual child
 connection target before mutating proof, with no shared-default fallback.
 
+Before concurrent dev/proof, name the project’s worktree environment setup and
+owned Compose/project, volume/database, service/app ports, worker queues and test
+targets. Verify actual isolation; serialize only checks needing an unavailable
+shared resource. Never tear down another lane’s processes or data.
+
 ## Review route
+
+Name the integration owner and serialized landing/release order. Prepare the
+completed candidate against current target source before final review and keep
+the target stable through landing, preferring fast-forward integration; reconcile
+changed approvals/inputs and check combined behavior. A branch pass does not
+certify a changed merged snapshot. Other isolated implementations may continue.
 
 Name the fresh verifier subagent or separate fresh-session handoff capability
 available in this host, along with the stable completed-feature boundary,

@@ -37,6 +37,6 @@ Install the relevant skills together for a complete workflow. Each skill owns it
 
 Product-repository artifacts live at `intent/<slug>/`. Intent, spec, and plan require approval before advancing; approval digests bind downstream work to those decisions. Material changes reopen affected approvals and invalidate stale verification.
 
-Implementation stays in one active lane through final review. A fresh reviewer checks the committed candidate, including observable product behavior. Missing required evidence blocks completion. Archive moves the record to `intent/archive/YYYY-MM-DD-<slug>/`; it does not claim a production release.
+Independent intents may run in isolated worktrees with one owner each and separate local resources. Shared contracts are coordinated; integration and release stay serialized. A fresh reviewer checks the committed candidate, including observable product behavior. Missing required evidence blocks completion. Archive moves the record to `intent/archive/YYYY-MM-DD-<slug>/`; it does not claim a production release.
 
 An explicit autonomous queue request allows local decisions, implementation, commits, completion, and archive for existing intents. Decision challenges happen only below high confidence: the outcome must be clear, current source and contracts must support the approach, and material uncertainties must be resolved. Final independent verification remains required. Pushing, deployment, and consequential external actions need separate authorization.
