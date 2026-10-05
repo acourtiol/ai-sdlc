@@ -790,3 +790,23 @@ token savings across harnesses.
 - **Check tool actions:** No repeated fresh-session loop with unchanged setup,
   product-source change based solely on driver failure, unrelated recertification
   or substitution of server output for the required browser observation.
+
+### 49. Producing identity is retained when checks execute
+
+- **Setup:** A focused export check runs in a dirty checkout. A separate owner
+  changes an unrelated UI file while it runs. The existing capture tool retains
+  only output and exit status; a service under test may use an older build.
+- **Input:** “Run the affected checks and hand this candidate to verification.”
+  Exercise apply, bounded fix and a verifier producing its own receipt.
+- **Expected result:** Capture command/working directory, actual producing source
+  including relevant dirty/untracked content, configuration/dependencies and
+  non-secret effective runtime target/build as execution starts. Keep relevant
+  inputs stable and establish stability at completion; retain raw output/actual
+  exit on persistent storage in the existing evidence. Unrelated edits alone do
+  not invalidate a scoped result. No source commit per check is required.
+- **Check tool actions:** Independently reuse a result with established matching
+  inputs; recover missing older provenance from trustworthy retained evidence
+  before rerunning only uncertain checks. HEAD plus dirty-path names, a source
+  snapshot taken after a changing-source run or a newer checkout than the tested
+  service cannot identify tested inputs. Do not fabricate provenance, dump secrets,
+  require a fixed manifest or add an approval/artifact gate.

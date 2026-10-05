@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.19"
+  version: "2.20"
 ---
 
 # sdlc-apply
@@ -75,7 +75,9 @@ Bound behavioral verification to the accepted intent and the impact of the compl
 
 The fresh final verifier owns complete intent-scoped verification on the completed snapshot; complete verification does not mean a full project suite or whole-product recertification. Run a broad suite only for a binding repository/user requirement or concrete integration risk, with one owner and valid receipt reuse. Earlier checks stay focused unless that requirement/risk needs more. Record each command’s scope and owner in Proof; map requirements/scenarios to shared checks and consolidate overlapping gates before approval.
 
-When retaining check output, capture the actual check process terminal status with stdout/stderr and command provenance in that receipt or linked evidence. Wait for asynchronous completion. A logging pipeline or wrapper must preserve the check process status rather than report only the logger’s success; verify a new capture mechanism with a harmless failing command before trusting it. Do not infer an exit from green counters or fabricate a missing status. Recover missing required proof with the smallest check that establishes the required result, rerunning the required command when its terminal result cannot otherwise be recovered.
+When retaining a check for handoff/reuse, record its producing inputs as execution starts, in the existing receipt or linked Proof/fix evidence: checkout/working directory, exact command/scope, HEAD and relevant dirty/untracked source identity, configuration/lockfiles/dependencies, and effective non-secret environment/target. A clean immutable commit can identify source; dirty inputs need a retained patch/content snapshot or other independently inspectable identity, not HEAD or a dirty-path list alone. Include relevant running service/build identity when it differs from checkout source. Keep relevant inputs stable during execution; a later snapshot cannot identify earlier tested inputs. At completion retain stdout/stderr and the actual check process terminal status, and establish that relevant inputs stayed stable. Capture only check-relevant provenance, never credentials or a full environment dump. Use persistent, non-cache storage and existing project capture tools; no fixed manifest, extra document or commit per check is required.
+
+Wait for asynchronous completion. A logging pipeline or wrapper must preserve the check process status rather than report only the logger’s success; verify a new capture mechanism with a harmless failing command before trusting it. Do not infer an exit from green counters or fabricate a missing status. Recover missing required proof from trustworthy retained evidence where possible; rerun only checks whose required result or producing inputs remain uncertain.
 
 Before repeating retained proof, compare the check’s actual producing source/tests, configuration, transitive/runtime dependencies, command and environment with current relevant inputs. If immutable source and retained raw evidence establish equivalence, keep that receipt for the final verifier to inspect rather than rerunning for an unrelated commit difference or absent special pre-run manifest. Unknown earlier working-tree inputs cannot be assigned current hashes; uncertain or changed relevant inputs need fresh proof.
 

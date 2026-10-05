@@ -62,11 +62,18 @@ environment demonstrably match, including transitive/runtime dependencies. A
 specific pre-run manifest format is unnecessary if immutable source and retained
 evidence establish provenance; unknown earlier working-tree inputs cannot be
 assigned today’s hashes.
-Retained raw receipts and provenance use persistent, non-cache
-storage; temporary scratch is not their sole copy. Retain the actual check process
-terminal exit with stdout/stderr and command provenance; wrappers and loggers
-must not replace it with their own status. Consolidate overlapping gates
-before approval; map shared checks to requirements/scenarios. Record cheap prerequisites before expensive integration
+Capture producing checkout/command, source identity (including relevant dirty or
+untracked content), configuration/dependencies and effective non-secret runtime
+target when the check starts, in the existing receipt or linked Proof evidence.
+Keep relevant inputs stable through execution and establish that stability at
+completion; a later source snapshot cannot identify an earlier changing-source run.
+A clean immutable commit or inspectable dirty snapshot suffices without a fixed
+manifest or commit per check. Retained raw receipts and provenance use persistent,
+non-cache storage; temporary scratch is not their sole copy. Retain the actual check
+process terminal exit with stdout/stderr; wrappers and loggers must not replace it
+with their own status. Recover missing provenance from trustworthy retained
+evidence before rerunning only checks whose inputs/result remain uncertain.
+Consolidate overlapping gates before approval; map shared checks to requirements/scenarios. Record cheap prerequisites before expensive integration
 proof and the focused reassessment after two failures of the same class. An earlier
 full gate needs a repository requirement or concrete integration risk. Name an early
 probe of the affected real action through the normal launcher. Ground provider/driver

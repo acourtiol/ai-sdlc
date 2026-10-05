@@ -8,7 +8,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.17"
+  version: "1.18"
 ---
 
 # sdlc-fix
@@ -56,7 +56,9 @@ Before the first implementation check, inspect the configured runner/discovery r
 
 Bound checks to the reported behavior, complete fix diff and concretely affected contracts/callers. For adjacent flows, name the changed dependency/invariant and use its smallest meaningful regression or smoke; do not recertify a whole earlier feature. Broader checks need a binding repository/user requirement, concrete integration risk or observed failure.
 
-When retaining check output, capture the actual check process terminal status with stdout/stderr and command provenance in that receipt or linked evidence. Wait for asynchronous completion. A logging pipeline or wrapper must preserve the check process status rather than report only the logger’s success; verify a new capture mechanism with a harmless failing command before trusting it. Do not infer an exit from green counters or fabricate a missing status. Recover missing required proof with the smallest check that establishes the required result, rerunning the required command when its terminal result cannot otherwise be recovered.
+When retaining a check for handoff/reuse, record its producing inputs as execution starts, in the existing receipt or linked Proof/fix evidence: checkout/working directory, exact command/scope, HEAD and relevant dirty/untracked source identity, configuration/lockfiles/dependencies, and effective non-secret environment/target. A clean immutable commit can identify source; dirty inputs need a retained patch/content snapshot or other independently inspectable identity, not HEAD or a dirty-path list alone. Include relevant running service/build identity when it differs from checkout source. Keep relevant inputs stable during execution; a later snapshot cannot identify earlier tested inputs. At completion retain stdout/stderr and the actual check process terminal status, and establish that relevant inputs stayed stable. Capture only check-relevant provenance, never credentials or a full environment dump. Use persistent, non-cache storage and existing project capture tools; no fixed manifest, extra document or commit per check is required.
+
+Wait for asynchronous completion. A logging pipeline or wrapper must preserve the check process status rather than report only the logger’s success; verify a new capture mechanism with a harmless failing command before trusting it. Do not infer an exit from green counters or fabricate a missing status. Recover missing required proof from trustworthy retained evidence where possible; rerun only checks whose required result or producing inputs remain uncertain.
 
 Use either a focused file command or the affected-test runner for the same tests on equivalent inputs, rather than running both solely to confirm selection. Inspect discovery and supplement omitted tests/callers. A duplicate run needs changed relevant inputs, uncertain evidence, additional required coverage or a binding rule. Independently inspect valid retained receipts during review; do not recreate the entire test/browser setup merely because the reviewer changed. Keep required fresh targeted evidence for material behavior and important failures, and fresh isolation, without replaying already-proven adjacent journeys.
 
