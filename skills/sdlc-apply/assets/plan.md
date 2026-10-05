@@ -30,7 +30,9 @@ affected integration or stateful flow, put the first actual route/runtime slice
 early: verify the risky contract and response plus committed state before building
 all adjacent surfaces. For asynchronous or revision-bound UI, include pending
 reload/recovery, completion, relevant source/version invalidation, stale authority
-controls and retry together. Choose applicable cases from the spec.
+controls and retry together. Choose applicable cases from the spec. Each verify
+condition needs an observed assertion/action before the box is ticked; a passing
+test name alone does not establish unexercised branches.
 
 - [ ] 1.1 What changes — verify: command, test, or observable behavior
 - [ ] 1.2 Next step in this area — verify: ...
@@ -59,7 +61,9 @@ specific pre-run manifest format is unnecessary if immutable source and retained
 evidence establish provenance; unknown earlier working-tree inputs cannot be
 assigned today’s hashes.
 Retained raw receipts and provenance use persistent, non-cache
-storage; temporary scratch is not their sole copy. Consolidate overlapping gates
+storage; temporary scratch is not their sole copy. Retain the actual check process
+terminal exit with stdout/stderr and command provenance; wrappers and loggers
+must not replace it with their own status. Consolidate overlapping gates
 before approval; map shared checks to requirements/scenarios. Record cheap prerequisites before expensive integration
 proof and the focused reassessment after two failures of the same class. An earlier
 full gate needs a repository requirement or concrete integration risk. Name an early

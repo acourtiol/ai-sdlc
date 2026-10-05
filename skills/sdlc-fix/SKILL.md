@@ -8,7 +8,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "1.14"
+  version: "1.15"
 ---
 
 # sdlc-fix
@@ -42,9 +42,13 @@ Use the current owning checkout by default; create another only to isolate concr
 
 Keep one active implementation lane per product repo through its final review; implement here by default or retain one delegated owner. Parallel research is read-only. Queue other fixes/features unless explicitly reprioritized, checkpointing before a switch. A separate decision challenger is needed only when confidence is below high: the outcome/constraints, current-source support, evidence for relevant contracts and important failure modes, and absence of unresolved material assumptions must all hold for high confidence. Consequential behavior needs stronger evidence. A missing preference or authority needs the user. Challenge the strongest uncertainty with bounded inputs; reuse resolved evidence and avoid repeated agent polling. Required consequential independent verification remains in place regardless of confidence.
 
+Before declaring the repair locally checked, match every required acceptance condition to an observed assertion or action and its result in existing Proof/receipts. A test name or green suite does not establish a condition its assertions never exercise. For a changed request/state contract, choose the applicable distinct branches from the spec and source, including same-identity changed payload versus changed identity when replay/conflict behavior matters; assert rejection and unchanged persisted state where required. Missing evidence keeps the repair incomplete. Share checks across conditions where they genuinely prove them; do not add a universal input matrix, new artifact or per-box reviewer.
+
 Before the first implementation check, inspect the configured runner/discovery rules for affected tests, including component tests and distinct file extensions. In existing Proof or the fix record, name relevant tests omitted by the normal command and their explicit runner. Run those focused tests early; a green broad receipt cannot cover files it excludes. Classify failures against the baseline without changing assertions to hide them; unavailable required coverage remains blocked.
 
 Bound checks to the reported behavior, complete fix diff and concretely affected contracts/callers. For adjacent flows, name the changed dependency/invariant and use its smallest meaningful regression or smoke; do not recertify a whole earlier feature. Broader checks need a binding repository/user requirement, concrete integration risk or observed failure.
+
+When retaining check output, capture the actual check process terminal status with stdout/stderr and command provenance in that receipt or linked evidence. Wait for asynchronous completion. A logging pipeline or wrapper must preserve the check process status rather than report only the logger’s success; verify a new capture mechanism with a harmless failing command before trusting it. Do not infer an exit from green counters or fabricate a missing status. Recover missing required proof with the smallest check that establishes the required result, rerunning the required command when its terminal result cannot otherwise be recovered.
 
 Use focused affected checks in the local loop. Run a full suite when repository instructions or the change's integration risk require it; give final validation one owner rather than repeat it in both implementation and review. Before expensive isolated checks, verify candidate identity and relevant dependencies, ports, fixtures/schema, and probes cheaply. Use the smallest meaningful probe of the actual launcher and child environment, rather than parent configuration alone. After a failure, retain actionable phase/cause evidence and use the narrowest feasible reproduction before another full run; explain when that requires the full check. Reconcile a changed source candidate and pinned proof inputs under the existing approval policy; a diagnostic repair is not proof of the originally pinned candidate. After two failures of the same class, reassess with a focused reproduction before retrying the full gate.
 

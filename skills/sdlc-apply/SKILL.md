@@ -6,7 +6,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.15"
+  version: "2.16"
 ---
 
 # sdlc-apply
@@ -59,11 +59,15 @@ Record confidence and evidence under Decision review for autonomous approval. At
 
 Boxes cover implementation, implementer-owned checks, and the committed handoff. Final independent verification, its report, completion and archive belong in Review route, outside Order of work; no box may require that final report to become tickable. Reconcile/reapprove an existing circular dependency before dispatch, preserving completed work, the original base and the independent review requirement. Make each box a coherent change with a meaningful observable check; do not make boxes for individual tool calls, files, or bookkeeping. Keep ordered dependencies and a verified commit per box. Use focused affected tests, typechecks, and relevant browser checks within boxes. Do not require independent reviews merely to tick each box; use the implementer's observed focused checks unless the approved plan or a concrete unresolved risk requires an interim review.
 
+Before moving to another implementation box, match every condition in the current verify clause to an observed assertion or action and its result in existing Proof/receipts. A test name or green suite does not establish a condition its assertions never exercise. For a changed request/state contract, choose the applicable distinct branches from the spec and source, including same-identity changed payload versus changed identity when replay/conflict behavior matters; assert rejection and unchanged persisted state where required. Missing evidence keeps the box unticked. Share checks across conditions where they genuinely prove them; do not add a universal input matrix, new artifact or per-box reviewer.
+
 Before the first implementation check, inspect the configured runner/discovery rules for affected tests, including component tests and distinct file extensions. In existing Proof or the fix record, name relevant tests omitted by the normal command and their explicit runner. Run those focused tests early; a green broad receipt cannot cover files it excludes. Classify failures against the baseline without changing assertions to hide them; unavailable required coverage remains blocked.
 
 Bound behavioral verification to the accepted intent and the impact of the complete candidate diff, including unreviewed prerequisite changes. Identify affected contracts/callers, not just edited filenames. For each adjacent flow included in Proof, name the changed dependency or invariant that warrants it and choose the smallest regression or smoke establishing that behavior. Do not replay an unrelated feature’s entire acceptance journey, clipboard, responsive or lifecycle matrix merely because it was delivered earlier. Broaden only for a concrete impact, observed failure or binding repository/user requirement; record that reason in existing Proof. Reconcile/reapprove excessive approved proof instead of silently omitting it; preserve requested outcomes and material compatibility coverage.
 
 The fresh final verifier owns complete intent-scoped verification on the completed snapshot; complete verification does not mean a full project suite or whole-product recertification. Run a broad suite only for a binding repository/user requirement or concrete integration risk, with one owner and valid receipt reuse. Earlier checks stay focused unless that requirement/risk needs more. Record each command’s scope and owner in Proof; map requirements/scenarios to shared checks and consolidate overlapping gates before approval.
+
+When retaining check output, capture the actual check process terminal status with stdout/stderr and command provenance in that receipt or linked evidence. Wait for asynchronous completion. A logging pipeline or wrapper must preserve the check process status rather than report only the logger’s success; verify a new capture mechanism with a harmless failing command before trusting it. Do not infer an exit from green counters or fabricate a missing status. Recover missing required proof with the smallest check that establishes the required result, rerunning the required command when its terminal result cannot otherwise be recovered.
 
 Before repeating retained proof, compare the check’s actual producing source/tests, configuration, transitive/runtime dependencies, command and environment with current relevant inputs. If immutable source and retained raw evidence establish equivalence, keep that receipt for the final verifier to inspect rather than rerunning for an unrelated commit difference or absent special pre-run manifest. Unknown earlier working-tree inputs cannot be assigned current hashes; uncertain or changed relevant inputs need fresh proof.
 

@@ -8,7 +8,7 @@ description: >-
 license: MIT
 metadata:
   author: acourtiol
-  version: "2.12"
+  version: "2.13"
 ---
 
 # sdlc-verify
@@ -48,6 +48,8 @@ Own one complete intent-scoped verification on the stable completed feature snap
 Bound behavioral verification to the accepted intent and the impact of the complete candidate diff, including unreviewed prerequisite changes. Identify affected contracts/callers, not just edited filenames. For each adjacent flow included in verification, name the changed dependency or invariant that warrants it and choose the smallest regression or smoke establishing that behavior. Do not replay an unrelated feature’s entire acceptance journey, clipboard, responsive or lifecycle matrix merely because it was delivered earlier. Broaden only for a concrete impact, observed failure or binding repository/user requirement; record that reason in the report. Return excessive approved proof to apply for reconciliation/reapproval instead of silently omitting it; preserve requested outcomes and material compatibility coverage.
 
 Reuse an earlier check receipt only if you independently inspect raw output and provenance and establish that the code, tests, configuration/lockfiles, dependencies, command scope, and environment relevant to that check match this snapshot. Relevant inputs include affected transitive/runtime dependencies, not merely the test file. A different commit may qualify for a focused check when those inputs are demonstrably equivalent; unrelated changes alone do not require repeating it. Record the producing commit, identity of those inputs, command, result, and evidence path. A report/status-only commit need not rerun the suite when those inputs are unchanged. A specific pre-run manifest format is not required when the producing commit/inputs, command and environment are otherwise verifiable from immutable source and retained evidence. Never assign current hashes to unknown earlier working-tree inputs. A claim, stale/missing output, changed relevant input, or uncertain equivalence requires a rerun. Never reuse a prior verdict as the current verdict. Keep retained raw receipts/provenance on persistent, non-cache storage and cite those copies; temporary/cache paths alone are insufficient. Write retained evidence there as it is produced, so restart or scratch cleanup does not erase it.
+
+For a required process-based check, inspect its actual terminal result as well as output; a logger’s success or green counters cannot substitute for the check process exit. Missing terminal evidence requires recovery or a rerun, not an inferred pass. Inspect whether assertions exercise the named acceptance conditions, especially distinct identity/payload branches of changed replay contracts; test names and suite totals alone are insufficient.
 
 Check the runner/discovery scope of reused or new receipts against affected tests, including component tests and distinct extensions. Explicitly run required relevant tests excluded by the broad command unless a matching focused receipt’s command and output establish that those tests actually ran under the same reuse rule. Do not report an excluded test as passed; distinguish baseline fixture defects from candidate regressions and record unavailable required coverage.
 

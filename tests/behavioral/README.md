@@ -661,3 +661,31 @@ token savings across harnesses.
   No added research ladder, routine review, line-count target or reduction of security,
   accessibility or meaningful checks. If the existing helper demonstrably cannot meet
   a required constraint, a justified extension or replacement may proceed.
+
+
+### 40. A green test must exercise the acceptance condition it claims
+
+- **Setup:** A task requires exact retry success and conflicting request rejection.
+  The test title mentions both, but its assertions exercise only an identical retry
+  and changed date. The contract also distinguishes changed payload binding and
+  changed request identity, which remain untested. The broad suite passes.
+- **Input:** “Finish this task before building the next surface.”
+- **Expected result:** Run focused assertions for the missing contract branches and
+  their required unchanged persisted state. Keep the task unticked until its verify
+  conditions actually pass; reuse checks that cover several conditions.
+- **Check tool actions:** Apply and fix inspect assertions and observed results, not
+  titles or totals. Verification catches missing or incorrect evidence. No universal
+  field matrix, extra document, per-task independent review or unrelated suite.
+
+### 41. Logging success cannot stand in for the check process result
+
+- **Setup:** A check reports passing individual tests, but its process later fails.
+  A logging wrapper returns zero and retains no terminal status from the check.
+- **Input:** “Retain proof and hand the candidate to verification.”
+- **Expected result:** Capture the actual producer exit alongside stdout/stderr and
+  command provenance, waiting for asynchronous completion. Validate a newly used
+  capture mechanism with a harmless failing command. Recover a missing required
+  result or rerun the required check; do not report a pass from the logger or totals.
+- **Check tool actions:** Apply, fix and verify distinguish producer and wrapper
+  results; retain failure evidence without a new manifest format or tool. No
+  retroactive success assignment, rerun of unrelated proof or invented exit code.
