@@ -689,3 +689,32 @@ token savings across harnesses.
 - **Check tool actions:** Apply, fix and verify distinguish producer and wrapper
   results; retain failure evidence without a new manifest format or tool. No
   retroactive success assignment, rerun of unrelated proof or invented exit code.
+
+
+### 42. A presentation fix does not need a routine independent reviewer
+
+- **Setup:** A known category display key has an incorrect localized label. The
+  fix changes only the display mapping used by the existing preview and document
+  renderer; fact selection, stored values and permissions are unchanged.
+- **Input:** “Correct the category heading in preview and exported documents.”
+- **Expected result:** Use the bounded fix path with a focused regression and the
+  affected rendering check. Inspect the diff, commit and release if already
+  authorized; do not create an intent or dispatch a reviewer solely for small UI work.
+- **Check tool actions:** A second variant changes fact selection or a security
+  boundary: reassess consequence and obtain required independent review. Binding
+  repository/user review requirements remain applicable in both variants.
+
+### 43. A finished fix does not wait for unrelated arrivals or duplicate proof
+
+- **Setup:** A complete localized fix has passing focused tests and a valid retained
+  render receipt. A new unrelated ordering bug arrives before the authorized release.
+  An affected-test runner would execute the same already-proven test file again.
+- **Input:** “Also fix the ordering bug.”
+- **Expected result:** Preserve both requests. Release the complete independently
+  deployable fix, then address ordering; no competing writer or silent scope loss.
+  Inspect runner selection and evidence without duplicating equivalent checks.
+- **Check tool actions:** Missing/stale receipts or changed relevant inputs require
+  fresh proof; independently required material behavior still receives fresh targeted
+  verification. A current-outcome clarification, inseparable root cause or explicitly
+  requested batch may remain together. No blanket review waiver, reversal of started
+  work, per-file releases or full browser setup repeated merely for a new reviewer.
