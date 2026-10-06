@@ -1,42 +1,36 @@
 # ai-sdlc
 
-Agent skills for turning a product idea into a specified, implemented, independently verified change. Based on the [Anthropic AI-native SDLC playbook](https://claude.com/blog/the-ai-native-sdlc-playbook), with ideas from [OpenSpec](https://github.com/Fission-AI/OpenSpec) and [spec-kit](https://github.com/github/spec-kit).
+Agent skills for delivering product changes fast, with evidence that the result is what you asked for. Based on the [Anthropic AI-native SDLC playbook](https://claude.com/blog/the-ai-native-sdlc-playbook), with ideas from [OpenSpec](https://github.com/Fission-AI/OpenSpec) and [spec-kit](https://github.com/github/spec-kit).
 
-The skills use the [Agent Skills format](https://agentskills.io/specification). They require no named agent profiles or harness-specific delegation API.
+The skills use the [Agent Skills format](https://agentskills.io/specification). They need no named agent profiles or harness-specific delegation API.
 
 ## Install
-
-Install all skills globally, then choose your target agents in the installer:
 
 ```bash
 npx skills add acourtiol/ai-sdlc -g -s '*'
 ```
 
-List skills from a local checkout with `npx skills add . -l`. Update installed copies with `npx skills update`. Artifact validation requires Python 3.8+ and uses only the standard library.
+List skills from a local checkout with `npx skills add . -l`. Update with `npx skills update`. The status script needs only POSIX `sh` and `awk`.
 
-## Workflow
+## Three paths, chosen by consequence
+
+| Path | For | Artifacts | Gates |
+| --- | --- | --- | --- |
+| Fix (`sdlc-fix`) | Bug, tweak, small behavior change in an existing flow | none, evidence in the commit | none |
+| Change (`sdlc-plan`, `sdlc-apply`, `sdlc-verify`) | New capability | `intent/<slug>/intent.md` (one page), `report.md` | you accept the intent, a fresh-context review, you accept the result |
+| Critical | Migrations on populated data, auth, secrets, privacy, destructive or external-send behavior, LLM prompts or gates | adds a `## Spec` section | one acceptance covers intent and Spec; a missing independent reviewer blocks |
 
 ```text
-sdlc-explore → sdlc-plan → sdlc-design → sdlc-apply → sdlc-verify → sdlc-archive
+sdlc-explore -> sdlc-plan -> sdlc-apply -> sdlc-verify -> user accepts -> close (last step of sdlc-apply)
 ```
 
-| Skill | Purpose |
-| --- | --- |
-| `sdlc-explore` | Shape an idea and decide whether it needs an intent. |
-| `sdlc-plan` | Capture the problem, desired outcome, and constraints in `intent.md`. |
-| `sdlc-design` | Write testable requirements and design together in `spec.md`. |
-| `sdlc-apply` | Write `plan.md`, then implement the approved change. |
-| `sdlc-verify` | Independently check behavior against the accepted outcome; write `report.md`. |
-| `sdlc-archive` | Validate completion and move the change record into the archive. |
-| `sdlc-continue` | Resume at the next gate, or process existing open intents when explicitly asked. |
-| `sdlc-fix` | Fix a bounded bug or make a behavior-preserving refactor without an intent folder. |
-
-Install the relevant skills together for a complete workflow. Each skill owns its instructions and artifact templates.
+`sdlc-continue` shows what is in flight and the next gate. Asked to "work the queue", it becomes an orchestrator: it schedules accepted intents by overlap, runs independent ones in parallel worktrees with one worker and one fresh verifier each, uses short research workers for hard decisions, lands passing work one at a time, and stops an intent after one failed repair round. When unsure of the tier, take the heavier one.
 
 ## Working agreements
 
-Product-repository artifacts live at `intent/<slug>/`. Intent, spec, and plan require approval before advancing; approval digests bind downstream work to those decisions. Material changes reopen affected approvals and invalidate stale verification.
-
-Independent intents may run in isolated worktrees with one owner each and separate local resources. Shared contracts are coordinated; integration and release stay serialized. A fresh reviewer checks the committed candidate, including observable product behavior. Missing required evidence blocks completion. Archive moves the record to `intent/archive/YYYY-MM-DD-<slug>/`; it does not claim a production release.
-
-An explicit autonomous queue request allows local decisions, implementation, commits, completion, and archive for existing intents. Decision challenges happen only below high confidence: the outcome must be clear, current source and contracts must support the approach, and material uncertainties must be resolved. Final independent verification remains required. Pushing, deployment, and consequential external actions need separate authorization.
+- The intent is one page: problem, outcome in your words, acceptance scenarios, steps, and a Result filled at the end. You accept the intent before building and the result before it is closed.
+- The implementer proves each acceptance item against the real path (consumer, persisted state after failure, populated-database upgrade for migrations). It does not grade itself: a fresh-context reviewer does, lite for a change and strict for critical work.
+- One lane by default: current checkout, one intent at a time. Independent intents may run in parallel in `.worktrees/<slug>` with their own database and ports, merged by fast-forward or rebase; no integration branches.
+- Confidence-gated challenge: at high confidence go on; otherwise one fresh read-only reviewer attacks the strongest unresolved assumption.
+- Evidence lives in the commit and the intent's Result, not in extra documents. No docs-only commits that merely record verification.
+- No push, deploy or external action without separate authorization. Closing an intent does not claim a release.
